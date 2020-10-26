@@ -16,6 +16,7 @@ public class DashboardController {
     @GetMapping("/index.html")
     public String dashboard1(){
         System.out.println("dashboard1");
+
         return "index";
     }
 
