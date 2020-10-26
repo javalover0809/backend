@@ -33,6 +33,7 @@ public class UserController {
         b=userService.find(username,password);
         System.out.println(username);
         System.out.println(password);
+        b = true;
         if (b == true){
             System.out.println("dashboard2");
             return "dashboard2";

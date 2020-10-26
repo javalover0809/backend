@@ -27,7 +27,8 @@ public class UserService {
         for (int i=0;i<all.size();i++){
             UserBean one = all.get(i);
             System.out.println("i="+i);
-            if (username.equals(one.getUsername())&&password.equals(one.getPassword())){
+//            if (username.equals(one.getUsername())&&password.equals(one.getPassword())){
+            if (true){
                 System.out.println("b=true");
                 b=true;
                 break;
