@@ -1,0 +1,28 @@
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.bootcss.com/vue/2.3.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.16.2/axios.js"></script>
+</head>
+
+<body>
+<form>
+    <input type="text" value="" v-model="name" placeholder="请输入用户名">
+    <input type="text" value="" v-model="age" placeholder="请输入年龄">
+    <input type="file" @change="getFile($event)">
+    <button @click="submitForm($event)">提交</button>
+</form>
+<script>
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', 'http://localhost:8080/tools/addUser1') // 设置请求行
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.send('username=zhangsan&password=123') // 以 urlencoded 格式设置请求体
+    xhr.onload=function(){
+      if(xhr.readyState!==4) return
+      console.log(xhr.responseText)
+    }
+</script>
+</body>
+
+</html>
