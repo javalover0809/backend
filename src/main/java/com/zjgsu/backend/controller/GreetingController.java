@@ -1,6 +1,7 @@
 package com.zjgsu.backend.controller;
 
 import com.zjgsu.backend.model.Greeting;
+import com.zjgsu.backend.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,25 @@ public class GreetingController {
     public String postSubmit(@ModelAttribute Greeting greeting) {
         System.out.println("数据是：" + greeting.getId() + " : " + greeting.getContent());
         if(greeting.getId().equals(111) && greeting.getContent().equals(111)){
+            return "result";
+        }
+        return "result";
+    }
+
+
+
+
+
+    @GetMapping("/5_form_post")
+    public String postform(Model model) {
+        model.addAttribute("greeting", new Greeting());
+        return "5_form_post";
+    }
+
+    @PostMapping("/5_form_post")
+    public String postSubmit5(@ModelAttribute User user) {
+        System.out.println("数据是：" + user.getId() + " : " + user.getContent());
+        if(user.getId().equals(111) && user.getContent().equals(111)){
             return "result";
         }
         return "result";
