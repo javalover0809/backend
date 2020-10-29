@@ -105,6 +105,12 @@ public class UserController {
     }
 
 
+    @RequestMapping("/profile")
+    public String profile(){
+        return "profile";
+    }
+
+
     @RequestMapping("/logins")
     public String logins(){
         return "logins";

@@ -2,15 +2,15 @@ package com.zjgsu.backend.model;
 
 public class PublishContent {
 
-    private String publish;
+    private String content;
 
 
-    public void setPublish(String publish) {
-        this.publish = publish;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getPublish() {
-        return publish;
+    public String getContent() {
+        return content;
     }
 
 }

@@ -15,8 +15,13 @@ public class GreetingController {
     @GetMapping("/greeting")
     public String greetingForm(Model model) {
         model.addAttribute("greets", new Greeting());
-        model.addAttribute("greetings", new PublishContent());
         return "greeting";
+    }
+
+    @GetMapping("/home")
+    public String greethome(Model model) {
+        model.addAttribute("greetings", new PublishContent());
+        return "home";
     }
 
     @PostMapping("/greet")
@@ -27,8 +32,8 @@ public class GreetingController {
 
     @PostMapping("/publish_content")
     public String publish(@ModelAttribute PublishContent greetings) {
-        System.out.println("发布的内容是：" + greetings.getPublish());
-        return "greeting";
+        System.out.println("发布的内容是：" + greetings.getContent());
+        return "result_content";
     }
 
 

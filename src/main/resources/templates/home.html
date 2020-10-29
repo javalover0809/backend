@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>FaceClone</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <style>
-
-
-    /*!
+  <title>FaceClone</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+  <style>
+/*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -20,9 +19,7 @@
 
 
 
-
-
-        /* styles */
+/* styles */
 
 a {
   color: #3b5998;
@@ -56,107 +53,181 @@ a {
 .navbar-default .navbar-nav>li>a:hover {
   color: #fff;
 }
-    </style>
+
+
+
+  </style>
 </head>
 <body>
-<!-- nav -->
-<nav class="navbar navbar-default">
+  <!-- nav -->
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">FaceClone</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="home.html">主页</a></li>
-            <li><a href="profile.html">资料</a></li>
-            <li><a href="#">退出</a></li>
-        </ul>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">在线英语角</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="home.html">主页</a></li>
+        <li><a href="profile.html">资料</a></li>
+        <li><a href="wwww.baidu.com">退出</a></li>
+      </ul>
     </div>
-</nav>
-<!-- ./nav -->
+  </nav>
+  <!-- ./nav -->
 
-<!-- main -->
-<main class="container">
+  <!-- main -->
+  <main class="container">
     <div class="row">
-        <div class="col-md-3">
-            <!-- edit profile -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4>编辑个人资料</h4>
-                    <form method="post" action="">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="status" placeholder="感情状态" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="location" placeholder="城市" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="update_profile" value="保存">
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- ./edit profile -->
+      <div class="col-md-3">
+        <!-- profile brief -->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>连续登陆188天</h4>
+          </div>
         </div>
-        <div class="col-md-6">
-            <!-- user profile -->
-            <div class="media">
-                <div class="media-left">
-                    <img src="img/my_avatar.png" class="media-object" style="width: 128px; height: 128px;">
-                </div>
-                <div class="media-body">
-                    <h2 class="media-heading">唐国洁</h2>
-                    <p>感情状态: 单身, 城市: 北京</p>
-                </div>
-            </div>
-            <!-- user profile -->
+        <!-- ./profile brief -->
 
-            <hr>
+        <!-- friend requests -->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>好友请求</h4>
+            <ul>
+              <li>
+                <a href="#">王晶晶</a>
+                <a class="text-success" href="#">[接收]</a>
+                <a class="text-danger" href="#">[拒绝]</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- ./friend requests -->
+      </div>
+      <div class="col-md-6">
+        <!-- post form -->
+        <form method="post" action="">
+          <div class="input-group">
+            <form action="#" th:action="@{/publish_content}" th:object="${greetings}" method="post">
+              <input class="form-control" type="text" th:field="*{content}" placeholder="发布房间ID...">
+              <span class="input-group-btn">
+              <button class="btn btn-success" type="submit" name="post">发布</button>
+              </span>
+            </form>
+          </div>
+        </form><hr>
+        <!-- ./post form -->
 
-            <!-- timeline -->
-            <div>
-                <!-- post -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <p>腾讯会议id 12876</p>
-                    </div>
-                    <div class="panel-footer">
-                        <span>2017-5-27 20:45:01 唐国洁</span>
-                        <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-                    </div>
-                </div>
-                <!-- ./post -->
+        <!-- feed -->
+        <div>
+          <!-- post -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>腾讯会议id：11223112</p>
+              <P>时间：7:00-7:30</p>
             </div>
-            <!-- ./timeline -->
-        </div>
-        <div class="col-md-3">
-            <!-- friends -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4>好友</h4>
-                    <ul>
-                        <li>
-                            <a href="#">李娜娜</a>
-                            <a class="text-danger" href="#"></a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="panel-footer">
+              <span>2017-5-27 20:45:01 李娜</span><span> 热度：</span>
+              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
             </div>
-            <!-- ./friends -->
+          </div>
+
+          <!-- post -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>腾讯会议id：11223112</p>
+            </div>
+            <div class="panel-footer">
+              <span>2017-5-27 20:45:01     李娜</span>
+              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+            </div>
+          </div>
+
+          <!-- post -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>腾讯会议id：11223112</p>
+            </div>
+            <div class="panel-footer">
+              <span>2017-5-27 20:45:01 李娜</span>
+              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+            </div>
+          </div>
+
+          <!-- post -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>腾讯会议id：11223112</p>
+            </div>
+            <div class="panel-footer">
+              <span>2017-5-27 20:45:01     李娜</span>
+              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+            </div>
+          </div>
+
+
+          <!-- post -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>腾讯会议id：11223112</p>
+            </div>
+            <div class="panel-footer">
+              <span>2017-5-27 20:45:01     李娜</span>
+              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+            </div>
+          </div>
+
+          <!-- post -->
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>腾讯会议id：11223112</p>
+            </div>
+            <div class="panel-footer">
+              <span>2017-5-27 20:45:01     李娜</span>
+              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+            </div>
+          </div>
         </div>
+        <!-- ./feed -->
+      </div>
+      <div class="col-md-3">
+      <!-- add friend -->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>添加好友</h4>
+            <ul>
+              <li>
+                <a href="#">李娜娜</a>
+                <a href="#">添加</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- ./add friend -->
+
+        <!-- friends -->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>好友</h4>
+            <ul>
+              <li>
+                <a href="#">李娜娜</a>
+                <a class="text-danger" href="#">已关注</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- ./friends -->
+      </div>
     </div>
-</main>
-<!-- ./main -->
+  </main>
+  <!-- ./main -->
 
-<!-- footer -->
-<footer class="container text-center">
+  <!-- footer -->
+  <footer class="container text-center">
     <ul class="nav nav-pills pull-right">
-        <li>对话框</li>
+      <li>FaceClone - Made by [your name here]</li>
     </ul>
-</footer>
-<!-- ./footer -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+  </footer>
+  <!-- ./footer -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
