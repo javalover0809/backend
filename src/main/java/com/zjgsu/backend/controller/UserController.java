@@ -76,9 +76,38 @@ public class UserController {
     public String h5_2(){
         return "2_h5";
     }
+
+    @RequestMapping("/first_page")
+    public String first_page(){
+        return "first_page";
+    }
+
+
     @RequestMapping("/1_download")
     public String download_1(){
         return "1_download";
+    }
+    @RequestMapping("/1_js")
+    public String js_1(){
+        return "1_js";
+    }
+
+
+    @RequestMapping("/five_page")
+    public String five_page(){
+        return "five_page";
+    }
+
+
+    @RequestMapping("/1_jsdemo")
+    public String jsdemo_1(){
+        return "1_jsdemo";
+    }
+
+
+    @RequestMapping("/logins")
+    public String logins(){
+        return "logins";
     }
 
     @RequestMapping("/login")

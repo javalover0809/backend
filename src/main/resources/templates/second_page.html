@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body,html{
+            height: 100%;
+        }
+        #contain{
+            display: flex;
+            flex-direction: column;/*列  垂直方向*/
+            height: 100%;/*全屏效果  该元素及其父元素及html、body height：100%*/
+        }
+        #top{
+           height: 100px;
+            background: red;
+        }
+        #center {
+            flex: 1;
+            background: blue;
+        }
+        #bottom{
+            height: 100px;
+            background: green;
+        }
+    </style>
+
+</head>
+<body>
+<div id="contain">
+    <div id="top">你好</div>
+    <div id="center">你好
+    <p>css实现宽高成比例的自适应盒子,且垂直居中一个元素的 padding,如果值是一个百分比,那这个百分比是相对其父元素的宽度而言的,而不是高度,对于,
+        css实现宽高成比例的自适应盒子,且垂直居中一个元素的 padding,如果值是一个百分比,那这个百分比是相对其父元素的宽度而言的,而不是高度,对于,
+        css实现宽高成比例的自适应盒子,且垂直居中一个元素的 padding,如果值是一个百分比,那这个百分比是相对其父元素的宽度而言的,而不是高度,对于,
+        css实现宽高成比例的自适应盒子,且垂直居中一个元素的 padding,如果值是一个百分比,那这个百分比是相对其父元素的宽度而言的,而不是高度,对于,
+        css实现宽高成比例的自适应盒子,且垂直居中一个元素的 padding,如果值是一个百分比,那这个百分比是相对其父元素的宽度而言的,而不是高度,对于
+    </p>
+    </div>
+<!--    <div id="bottom">你也好</div>-->
+</div>
+</body>
+</html>

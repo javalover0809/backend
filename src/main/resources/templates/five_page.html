@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <title>为 HTML 添加新元素</title>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
     <style>
         .container{
             padding: 10px;
@@ -116,12 +116,8 @@
             grid-column:2;
         }
     </style>
-
 </head>
 <body>
-<p>
-    这里面的东西是非常重要的！
-</p>
 <div class="container container1">
     <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
     <div class="right">
@@ -133,9 +129,57 @@
         </form>
     </div>
     <div class="middle">这里是用户登陆的头部界面
-        2009年11月12日，百度知道文档分享平台测试版上线；当时称为“百度知道文档分享平台”，使用百度知道的积分系统。 [5]
-        2009年12月8日，百度知道文档分享更名为“百度文库”，并且升级了部分功能。
+            2009年11月12日，百度知道文档分享平台测试版上线；当时称为“百度知道文档分享平台”，使用百度知道的积分系统。 [5]
+            2009年12月8日，百度知道文档分享更名为“百度文库”，并且升级了部分功能。
     </div>
 </div>
+<div class="container container2">
+    <div class="left">百度文库，自2009年上线以来，百度文库已走过8年，截止2014年底拥有超过1亿份文档，内容涵盖基础教育、资格考试、人文社科、IT计算机、自然科学等53个行业，超过2600家机构入驻，每天吸引4000万用户，全国近六成800余万教师通过百度文库分享教育资源，百度文库已经与多省、市、校已有的信息平台融合。 [4]
+        2009</div>
+    <div class="middle">
+        这个事简单的事情
+        <div id="app">
+            <p>{{ info }}</p>
+        </div>
+    </div>
+</div>
+<div class="container container3">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container4">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container5">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container6">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container7">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<script> new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .get('/nihao')
+      .then(response => (this.info = response.data))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+}) </script>
+
+
 </body>
 </html>

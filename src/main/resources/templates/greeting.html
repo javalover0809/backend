@@ -1,18 +1,209 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>登陆首页</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <style>
+        .container{
+            padding: 10px;
+            border: 1px solid #ffa200;
+            margin-bottom: 40px;
+        }
+        .container .left{
+            background-color: #4b83e2;
+        }
+        .container .right {
+            background-color: #ff3b30;
+        }
+        /*左浮动固定宽度，右边盒子overflow:hidden触发bfc，使其不与浮动盒子区域重叠，因此会重新计算宽度。*/
+        .container1 .left{
+            float: left;
+            width:middle2 100px;
+            background-color: #4b83e2;
+        }
+        .container1 .middle {
+            overflow: hidden;
+            background-color: #ff3b30;
+        }
+        .container1 .right{
+            float: right;
+            width: 150px;
+            background-color: #4b83e2;
+        }
+        /*清除浮动*/
+        .container1:after{
+            content: "";
+            height: 0;
+            line-height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+        /*左浮动固定宽度,右边margin-left*/
+        .container2 .left{
+            float: left;
+            width: 100px;
+        }
+        .container2 .middle {
+            overflow: hidden;
+            background-color: #ff3b30;
+        }
+
+        .container2 .right{
+            float: right;
+            width: 1380px;
+            background-color: #4b83e2;
+        }
+        /*清除浮动*/
+        .container2:after{
+            content: "";
+            height: 0;
+            line-height: 0;
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+        /*左边绝对定位，右边设置margin-left，缺点：当左边高于右边时，左边会超出父元素，需要使用js补救。*/
+        .container3 {
+            position: relative;
+        }
+        .container3 .left{
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 100px;
+        }
+        .container3 .right{
+            margin-left: 100px;
+        }
+        /*双display:inline-block*/
+        .container4{
+            font-size: 0;
+        }
+        .container4 .left{
+            width: 100px;
+        }
+        .container4 .left,.container4 .right{
+            display: inline-block;
+            font-size: 16px;
+            vertical-align: top;
+        }
+        .container4 .right{
+            width: calc(100% - 100px);
+        }
+        /*table*/
+        .container5{
+            display: table;
+        }
+        .container5 .left,.container5 .right{
+            display: table-cell;
+        }
+        /*flex*/
+        .container6{
+            display: flex;
+        }
+        .container6 .right{
+            flex-grow: 1;
+        }
+        /*grid*/
+        .container7{
+            display: grid;
+        }
+        .container7 .left{
+            grid-column:1;
+        }
+        .container7 .right{
+            grid-column:2;
+        }
+    </style>
 </head>
 <body>
-<h1>Form</h1>
-<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
-    <p>这个是输入的id: <textarea type="text" th:field="*{id}" size="100"/></p>
-    <p>这个是需要输入的信息: <textarea type="text" th:field="*{content}"/></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-    <a href="/greeting">Submit another message</a>
-    <a href="/greeting">Submit another message</a>
-    <a href="/greeting">Submit another message</a>
-</form>
+<div class="container container1">
+    <div class="left">连续登陆天数</div>
+    <div class="right">
+        <form action="#" th:action="@{/greet}" th:object="${greets}" method="post">
+            用户:<input type="text" th:field="*{id}" size="5px"/>
+            <br>密码:<input type="text" th:field="*{content}" size="5px"/>
+            <input type="submit" value="登陆" />
+            <input type="reset" value="重置" />
+        </form>
+    </div>
+    <div class="middle"> 分享学习房间链接：
+        <form action="#" th:action="@{/publish_content}" th:object="${greetings}" method="post">
+            <textarea th:field="*{publish}" cols="130" rows="10" wrap="hard"></textarea>
+            <input type="submit" value="发布" />
+        </form>
+    </div>
+</div>
+
+<div class="container container2">
+    <div class="left">
+        <a href="http://www.baidu.com" target="_blank">个人主页</a>
+        <br><a href="http://www.baidu.com" target="_blank">学习状态</a>
+        <br><a href="http://www.baidu.com" target="_blank">查看好友</a>
+        <br><a href="http://www.baidu.com" target="_blank">学习资料</a>
+    </div>
+    <div class="middle">
+        <div id="app">
+            <div class="zgk-textarea z-s">
+                <textarea class="zgk-advice-text" placeholder="留下你的建议，说点儿什么吧" resize="none" style="height: 70px;"></textarea><div class="text-btns" style="display: none;">
+                <p class="zgk-text-num">0/240</p>
+                <button class="zgk-cancel">取消</button>
+                <button class="zgk-ok">发布</button>
+            </div>
+            </div>
+            <p>这是第三条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+            <p>这是第四条内容: {{ info }}</p>
+
+        </div>
+    </div>
+</div>
+<div class="container container3">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container4">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container5">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container6">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+<div class="container container7">
+    <div class="left">左边左边左边左边左边左边左边左边左边左边</div>
+    <div class="right">右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边右边</div>
+</div>
+
+<script> new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .get('/nihao')
+      .then(response => (this.info = response.data))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+}) </script>
+
 </body>
 </html>

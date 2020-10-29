@@ -1,6 +1,7 @@
 package com.zjgsu.backend.controller;
 
 import com.zjgsu.backend.model.Greeting;
+import com.zjgsu.backend.model.PublishContent;
 import com.zjgsu.backend.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,18 +14,27 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public String greetingForm(Model model) {
-        model.addAttribute("greeting", new Greeting());
+        model.addAttribute("greets", new Greeting());
+        model.addAttribute("greetings", new PublishContent());
         return "greeting";
     }
 
-    @PostMapping("/greeting")
-    public String greetingSubmit(@ModelAttribute Greeting greeting) {
-        System.out.println("数据是：" + greeting.getId() + " : " + greeting.getContent());
-        if(greeting.getId().equals(111) && greeting.getContent().equals(111)){
-            return "result";
-        }
-        return "result";
+    @PostMapping("/greet")
+    public String grepublishetingSubmit(@ModelAttribute Greeting greets) {
+        System.out.println("数据是：" +greets.getId() + " 内容是 : " + greets.getContent());
+        return "greeting";
     }
+
+    @PostMapping("/publish_content")
+    public String publish(@ModelAttribute PublishContent greetings) {
+        System.out.println("发布的内容是：" + greetings.getPublish());
+        return "greeting";
+    }
+
+
+
+
+
 
     @GetMapping("/4_post")
     public String post4form(Model model) {
@@ -50,6 +60,7 @@ public class GreetingController {
         model.addAttribute("greeting", new Greeting());
         return "5_form_post";
     }
+
 
     @PostMapping("/5_form_post")
     public String postSubmit5(@ModelAttribute User user) {
