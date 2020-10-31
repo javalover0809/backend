@@ -130,8 +130,8 @@ a {
         </form>
         <li><a href="home">首页</a></li>
         <li><a href="profile">个人主页</a></li>
-        <li><a href="logins">登陆</a></li>
-        <li><a href="wwww.baidu.com">退出</a></li>
+        <li><a href="login">登陆</a></li>
+        <li><a href="login_out">退出</a></li>
       </ul>
     </div>
   </nav>
@@ -168,22 +168,20 @@ a {
         <!-- post form -->
         <form method="post" action="">
           <div class="panel-body">
-            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html" style="color:#F00">随机时段</a>
-            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">固定时段</a>
+            <a href="home" style="color:#F00">随机时段</a>
+            <a href="home2">固定时段</a>
             <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">找学伴</a>
             <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">操场</a>
             <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">立目标</a>
           </div>
         </form>
 
-        <form action="#" th:action="@{/publish_random}" th:object="${random}" method="post">
-
+        <form method="post" action="publish_content">
           <div class="input-group">
-              <input class="form-control" type="text" th:field="*{random}" placeholder="发布...">
-              <span class="input-group-btn">
-              <button class="btn btn-success" type="submit" name="post">发布</button>
-              </span>
-<!--            </form>-->
+            <input class="form-control" type="text" name="content" placeholder="发布...">
+            <span class="input-group-btn">
+            <input class="btn btn-primary" type="submit" name="login" value="发布">
+            </span>
           </div>
         </form><hr>
         <div>

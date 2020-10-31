@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 1 接口的全类名,使得接口和配置文件绑定
+     2 以前我们是：dao -> daoImpl
+               现在我们采用面向接口编程：dao下的UserMapper.java对应配置一个UserMapperxml文件,
+           具体的实现放在UserMapperxml文件中-->
+<mapper namespace="com.TTEnglish.backend.dao.UserMapper">
+    <!-- 1 resultType：返回值类型,值为对应实体类的类路径
+         2 id:对应类的方法，使得接口和配置文件（具体到方法）绑定
+    -->
+    <select id="getUserByUsername"  resultType="com.TTEnglish.backend.model.User">
+        <!-- 	1 #{id}：从传递过来的参数中取出id值 ，  以前是 where id = ？
+                2 以前用hibernate的方法是
+                String hql = "select * from userTable where id = ?";
+                getSession().createQuery(hql).setInteger(0, id).executeUpdate();
+        -->
+        select * from user where username = #{usernname}
+    </select>
+</mapper>
+
