@@ -54,7 +54,67 @@ a {
   color: #fff;
 }
 
-
+      .talk_con{
+            width:600px;
+            height:500px;
+            border:1px solid #666;
+            margin:50px auto 0;
+            background:#f9f9f9;
+        }
+        .talk_show{
+            width:580px;
+            height:420px;
+            border:1px solid #666;
+            background:#fff;
+            margin:10px auto 0;
+            overflow:auto;
+        }
+        .talk_input{
+            width:580px;
+            margin:10px auto 0;
+        }
+        .whotalk{
+            width:80px;
+            height:30px;
+            float:left;
+            outline:none;
+        }
+        .talk_word{
+            width:420px;
+            height:26px;
+            padding:0px;
+            float:left;
+            margin-left:10px;
+            outline:none;
+            text-indent:10px;
+        }
+        .talk_sub{
+            width:56px;
+            height:30px;
+            float:left;
+            margin-left:10px;
+        }
+        .atalk{
+           margin:10px;
+        }
+        .atalk span{
+            display:inline-block;
+            background:#0181cc;
+            border-radius:10px;
+            color:#fff;
+            padding:5px 10px;
+        }
+        .btalk{
+            margin:10px;
+            text-align:right;
+        }
+        .btalk span{
+            display:inline-block;
+            background:#ef8201;
+            border-radius:10px;
+            color:#fff;
+            padding:5px 10px;
+        }
 
   </style>
 </head>
@@ -63,11 +123,14 @@ a {
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">在线英语角</a>
+        <a class="navbar-brand" href="index.html">TT英语角</a>
+
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="home.html">主页</a></li>
-        <li><a href="profile.html">资料</a></li>
+        </form>
+        <li><a href="home">首页</a></li>
+        <li><a href="profile">个人主页</a></li>
+        <li><a href="logins">登陆</a></li>
         <li><a href="wwww.baidu.com">退出</a></li>
       </ul>
     </div>
@@ -104,38 +167,44 @@ a {
       <div class="col-md-6">
         <!-- post form -->
         <form method="post" action="">
+          <div class="panel-body">
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html" style="color:#F00">随机时段</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">固定时段</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">找学伴</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">操场</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">立目标</a>
+          </div>
+        </form>
+
+        <form action="#" th:action="@{/publish_random}" th:object="${random}" method="post">
+
           <div class="input-group">
-            <form action="#" th:action="@{/publish_content}" th:object="${greetings}" method="post">
-              <input class="form-control" type="text" th:field="*{content}" placeholder="发布房间ID...">
+              <input class="form-control" type="text" th:field="*{random}" placeholder="发布...">
               <span class="input-group-btn">
               <button class="btn btn-success" type="submit" name="post">发布</button>
               </span>
-            </form>
+<!--            </form>-->
           </div>
         </form><hr>
-        <!-- ./post form -->
-
-        <!-- feed -->
         <div>
           <!-- post -->
           <div class="panel panel-default">
             <div class="panel-body">
-              <p>腾讯会议id：11223112</p>
-              <P>时间：7:00-7:30</p>
-            </div>
-            <div class="panel-footer">
-              <span>2017-5-27 20:45:01 李娜</span><span> 热度：</span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+              <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">随机时段</a>
+              <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">固定时段</a>
+              <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">找学伴</a>
+              <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">操场</a>
+              <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">立目标</a>
             </div>
           </div>
 
           <!-- post -->
           <div class="panel panel-default">
             <div class="panel-body">
-              <p>腾讯会议id：11223112</p>
+              <p>腾讯会议id：11223112 主题</p>
             </div>
             <div class="panel-footer">
-              <span>2017-5-27 20:45:01     李娜</span>
+              <span>2017-5-27 20:45:01     李娜  浏览数</span>
               <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
             </div>
           </div>
@@ -191,11 +260,10 @@ a {
       <!-- add friend -->
         <div class="panel panel-default">
           <div class="panel-body">
-            <h4>添加好友</h4>
+            <h4>好友推荐</h4>
             <ul>
               <li>
-                <a href="#">李娜娜</a>
-                <a href="#">添加</a>
+                <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html">李娜娜 添加</a>
               </li>
             </ul>
           </div>
@@ -205,11 +273,20 @@ a {
         <!-- friends -->
         <div class="panel panel-default">
           <div class="panel-body">
-            <h4>好友</h4>
+            <h4>我的好友</h4>
             <ul>
               <li>
-                <a href="#">李娜娜</a>
-                <a class="text-danger" href="#">已关注</a>
+                <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html" target="_blank">李娜娜</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h4>最近访客</h4>
+            <ul>
+              <li>
+                <a href="#">李丽</a>
               </li>
             </ul>
           </div>
@@ -219,13 +296,6 @@ a {
     </div>
   </main>
   <!-- ./main -->
-
-  <!-- footer -->
-  <footer class="container text-center">
-    <ul class="nav nav-pills pull-right">
-      <li>FaceClone - Made by [your name here]</li>
-    </ul>
-  </footer>
   <!-- ./footer -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>

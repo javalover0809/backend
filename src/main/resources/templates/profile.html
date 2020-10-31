@@ -63,11 +63,20 @@ a {
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">FaceClone</a>
+            <a class="navbar-brand" href="index.html">在线英语角</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">打卡天数</a>
+        </div>
+        <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">学习分享</a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">学习小组</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="home.html">主页</a></li>
-            <li><a href="profile.html">资料</a></li>
+            <li><a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/personal_info.html">编辑资料</a></li>
             <li><a href="#">退出</a></li>
         </ul>
     </div>
@@ -81,29 +90,23 @@ a {
             <!-- edit profile -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4>编辑个人资料</h4>
-                    <form method="post" action="">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="status" placeholder="感情状态" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="location" placeholder="城市" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <input class="btn btn-primary" type="submit" name="update_profile" value="保存">
-                        </div>
+                    <h4>资料卡</h4>
+                    <p>个人介绍: 喜欢摇滚乐</p>
+                    <p>感情状态: 单身</p>
+                    <p>城市: 北京</p>
+                    <p>高中: 广西</p>
+                    <p>本科: 成都理工大学</p>
+                    <p>硕士: 中国地质大学</p>
+                    <p>博士: 北京交通大学</p>
                     </form>
                 </div>
             </div>
-            <!-- ./edit profile -->
         </div>
         <div class="col-md-6">
             <!-- user profile -->
             <div class="media">
                 <div class="media-left">
-                    <img src="img/my_avatar.png" class="media-object" style="width: 128px; height: 128px;">
+                    <img src="D:/Downloads/自拍.jpg" class="media-object" style="width: 128px; height: 128px;">
                 </div>
                 <div class="media-body">
                     <h2 class="media-heading">唐国洁</h2>
@@ -119,6 +122,29 @@ a {
                 <!-- post -->
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <div class="col-md-6">
+                            <!-- post form -->
+                            <form method="post" action="">
+                                <div class="input-group">
+                                    <form action="#" th:action="@{/publish_content}" th:object="${greetings}" method="post">
+                                        <input class="form-control" type="text" th:field="*{content}" placeholder="发布房间ID...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success" type="submit" name="post">发布</button>
+                                        </span>
+                                    </form>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ./post -->
+            </div>
+
+            <div>
+                <!-- post -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
                         <p>腾讯会议id 12876</p>
                     </div>
                     <div class="panel-footer">
@@ -128,16 +154,57 @@ a {
                 </div>
                 <!-- ./post -->
             </div>
+
+            <div>
+                <!-- post -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>腾讯会议id 12876</p>
+                    </div>
+                    <div class="panel-footer">
+                        <span>2017-5-27 20:45:01 唐国洁</span>
+                        <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+                    </div>
+                </div>
+                <!-- ./post -->
+            </div>
+
+            <div>
+                <!-- post -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>腾讯会议id 12876</p>
+                    </div>
+                    <div class="panel-footer">
+                        <span>2017-5-27 20:45:01 唐国洁</span>
+                        <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+                    </div>
+                </div>
+                <!-- ./post -->
+            </div>
+
+
             <!-- ./timeline -->
         </div>
         <div class="col-md-3">
             <!-- friends -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4>好友</h4>
+                    <h4>好友列表</h4>
                     <ul>
                         <li>
-                            <a href="#">李娜娜</a>
+                            <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html" target="_blank">李娜娜</a>
+                            <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/chattings.html" target="_blank">私信</a>
+                            <a class="text-danger" href="#"></a>
+                        </li>
+                        <li>
+                            <a href="#">王晶晶</a>
+                            <a href="#">私信</a>
+                            <a class="text-danger" href="#"></a>
+                        </li>
+                        <li>
+                            <a href="#">丽丽</a>
+                            <a href="#">私信</a>
                             <a class="text-danger" href="#"></a>
                         </li>
                     </ul>
