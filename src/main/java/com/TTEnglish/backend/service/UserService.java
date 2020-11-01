@@ -4,9 +4,11 @@ import com.TTEnglish.backend.dao.UserDao;
 import com.TTEnglish.backend.model.ReqDto;
 import com.TTEnglish.backend.model.UserBean;
 import com.TTEnglish.backend.util.CheckPermission;
+import com.TTEnglish.backend.util.UseContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,10 +24,23 @@ public class UserService {
     private UserDao userDao;
 
     private CheckPermission permission = new CheckPermission();
+    private UseContent useContent = new UseContent();
 
 
-    public String input_content(ReqDto reqDto){
+    public String input_content(ReqDto reqDto) throws IOException {
+        if(reqDto.session.getAttribute("username")==null){
+            System.out.println("please login in");
+            return "login";
 
+        }
+        String username=reqDto.session.getAttribute("username").toString();
+        String password=reqDto.session.getAttribute("password").toString();
+        if(permission.check(username,password)){
+            System.out.println("input the data");
+            useContent.write(username,reqDto.title ,reqDto.content);
+            return "home";
+        }
+        System.out.println("input the data two");
         String resPage = "home";
         return resPage;
     }

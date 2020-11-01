@@ -31,7 +31,7 @@ public class LoginController {
     public ReqDto reqDto = new ReqDto();
 
     @PostMapping("/login_verify")
-    public String getLogin(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
+    public String LoginVerify(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
         session.setAttribute("username", username);
         session.setAttribute("password", password);
         System.out.println("checkpermission: " + permission.check(username, password));
@@ -53,10 +53,12 @@ public class LoginController {
 
 
     @PostMapping("/publish_content")
-    public String getLogin(HttpSession session,@RequestParam("content") String content){
+    public String getLogin(HttpSession session, @RequestParam("title") String title, @RequestParam("content") String content) throws IOException {
+
         System.out.println("publish_content_is_number");
         System.out.println(content);
-        reqDto.username = session.getAttribute("username").toString();
+        reqDto.session = session;
+        reqDto.title = title;
         reqDto.content = content;
         String resPage = userService.input_content(reqDto);
 

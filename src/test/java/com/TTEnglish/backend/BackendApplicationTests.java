@@ -2,7 +2,9 @@ package com.TTEnglish.backend;
 
 import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.User;
+import com.TTEnglish.backend.util.CheckPermission;
 import com.TTEnglish.backend.util.MySessionFactory;
+import com.TTEnglish.backend.util.UseContent;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
@@ -17,23 +19,29 @@ import java.sql.*;
 @SpringBootTest
 public class BackendApplicationTests {
 
+	public UseContent write = new UseContent();
+	private CheckPermission permission = new CheckPermission();
+
 	@Test
 	public void contextLoads() {
 	}
+	@Test
+	public void writes() throws IOException {
+		write.write("tangguojie","testtile","thos data is test");
+
+
+	}
+	@Test
+	public void chek() throws IOException {
+		System.out.println("this is the check program");
+		System.out.println(permission.check("tangguojie", "123456"));
+		write.write("tangguojie","test","这个是测试数据");
+	}
 
 	@Test
-	public void mytest() {
+	public void mytest() throws IOException {
 
-		try {
-			//下面四行是获取 SqlSessionFactory的方式,其目的是为了获取 SqlSession
-//			String resource = "mybatis-config.xml";
-//			InputStream inputStream;
-//			inputStream = Resources.getResourceAsStream(resource);
-//			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			/*  SqlSession 是非线程安全的，所以不能把它设成一个成型变量
-			 *  SqlSession 代表与数据库的一次会话，相当于Connection
-			 *  SqlSession 使用完成后记得关闭
-			 * */
+
 			SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
 			SqlSession session = sqlSessionFactory.openSession();
 			//获取dao接口的代理类
@@ -41,10 +49,6 @@ public class BackendApplicationTests {
 			User user = userMapper.getUserById(1);
 			System.out.println(user);
 			session.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 
