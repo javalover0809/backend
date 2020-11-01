@@ -1,10 +1,12 @@
 package com.TTEnglish.backend.service;
 
 import com.TTEnglish.backend.dao.UserDao;
+import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
 import com.TTEnglish.backend.model.UserBean;
 import com.TTEnglish.backend.util.CheckPermission;
 import com.TTEnglish.backend.util.UseContent;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +28,13 @@ public class UserService {
     private CheckPermission permission = new CheckPermission();
     private UseContent useContent = new UseContent();
 
+    public JSON selectAll(ReqDto reqDto) throws IOException {
+        Content content= useContent.selectAll();
+        JSON json= (JSON) JSON.toJSON(content);
+        return json;
+    }
 
-    public String input_content(ReqDto reqDto) throws IOException {
+    public String insert_content(ReqDto reqDto) throws IOException {
         if(reqDto.session.getAttribute("username")==null){
             System.out.println("please login in");
             return "login";
@@ -37,7 +44,7 @@ public class UserService {
         String password=reqDto.session.getAttribute("password").toString();
         if(permission.check(username,password)){
             System.out.println("input the data");
-            useContent.write(username,reqDto.title ,reqDto.content);
+            useContent.insert(username,reqDto.title ,reqDto.content);
             return "home";
         }
         System.out.println("input the data two");

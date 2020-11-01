@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,10 +59,13 @@ public class LoginController {
 
         System.out.println("publish_content_is_number");
         System.out.println(content);
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        String time= formatter.format(date);
         reqDto.session = session;
         reqDto.title = title;
         reqDto.content = content;
-        String resPage = userService.input_content(reqDto);
+        String resPage = userService.insert_content(reqDto);
 
         return "redirect:" + resPage;
     }

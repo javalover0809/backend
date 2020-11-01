@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.TTEnglish.backend.dao.ContentMapper">
     <insert id="inputContent">
-    insert into publish_content(username,title,content) value('tangguojie',#{1},#{2})
+        insert into publish_content(username,title,content) value(#{0}, #{1} ,#{2})
     </insert>
     <select id="selectContent" resultType="com.TTEnglish.backend.model.Content">
-        select * from publish_content where id = 16
+        select * from publish_content order by id desc limit 2
     </select>
 </mapper>
 

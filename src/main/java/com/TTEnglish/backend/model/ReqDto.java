@@ -8,4 +8,5 @@ public class ReqDto {
     public String password;
     public String title;
     public String content;
+    public String time;
 }

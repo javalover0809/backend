@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import java.io.IOException;
 
 public class UseContent {
-    public void write(String username,String title ,String content) throws IOException {
+    public void insert(String username,String title ,String content) throws IOException {
 
             SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
             SqlSession session = sqlSessionFactory.openSession();
@@ -20,7 +20,7 @@ public class UseContent {
             session.close();
     }
 
-    public Content read() throws IOException {
+    public Content selectAll() throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();

@@ -1,7 +1,10 @@
 package com.TTEnglish.backend;
 
 import com.TTEnglish.backend.dao.UserMapper;
+import com.TTEnglish.backend.model.Content;
+import com.TTEnglish.backend.model.ReqDto;
 import com.TTEnglish.backend.model.User;
+import com.TTEnglish.backend.service.UserService;
 import com.TTEnglish.backend.util.CheckPermission;
 import com.TTEnglish.backend.util.MySessionFactory;
 import com.TTEnglish.backend.util.UseContent;
@@ -18,24 +21,23 @@ import java.sql.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BackendApplicationTests {
-
+	public Content content = new Content();
 	public UseContent write = new UseContent();
 	private CheckPermission permission = new CheckPermission();
+	private UserService  service = new UserService();
+	private ReqDto reqDto = new ReqDto();
 
 	@Test
 	public void contextLoads() {
 	}
 	@Test
-	public void writes() throws IOException {
-		write.write("tangguojie","testtile","thos data is test");
+	public void selectall() throws IOException {
 
-
+		System.out.println(service.selectAll(reqDto));
 	}
 	@Test
-	public void chek() throws IOException {
-		System.out.println("this is the check program");
-		System.out.println(permission.check("tangguojie", "123456"));
-		write.write("tangguojie","test","这个是测试数据");
+	public void writes() throws IOException {
+		write.insert("唐国洁","这个是标题的内容","这些内容真的很重要");
 	}
 
 	@Test
