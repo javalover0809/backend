@@ -3,11 +3,9 @@
 <head>
     <title>FaceClone</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <style>
-
-
     /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -63,16 +61,16 @@ a {
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">在线英语角</a>
+            <a class="navbar-brand" href="index.html">TT英语角</a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">打卡天数</a>
+            <a class="navbar-brand" href="index.html"></a>
         </div>
         <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">学习分享</a>
+        <a class="navbar-brand" href="index.html"></a>
         </div>
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">学习小组</a>
+            <a class="navbar-brand" href="index.html"></a>
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="home.html">主页</a></li>
@@ -96,7 +94,7 @@ a {
                     <p>城市: 北京</p>
                     <p>高中: 广西</p>
                     <p>本科: 成都理工大学</p>
-                    <p>硕士: 中国地质大学</p>
+                    <p>硕士: 中国地质大学&北京交通大学</p>
                     <p>博士: 北京交通大学</p>
                     </form>
                 </div>
@@ -117,70 +115,52 @@ a {
 
             <hr>
 
-            <!-- timeline -->
-            <div>
-                <!-- post -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="col-md-6">
-                            <!-- post form -->
-                            <form method="post" action="">
-                                <div class="input-group">
-                                    <form action="#" th:action="@{/publish_content}" th:object="${greetings}" method="post">
-                                        <input class="form-control" type="text" th:field="*{content}" placeholder="发布房间ID...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-success" type="submit" name="post">发布</button>
-                                        </span>
-                                    </form>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
+            <!-- post -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">心情</a>
+                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">日志</a>
+                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">找学伴</a>
+                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">操场</a>
+                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">立目标</a>
                 </div>
-                <!-- ./post -->
             </div>
+            <!-- post -->
+            <div class="panel panel-default">
+                <form method="post" action="publish_comment">
+                    <div class="input-group">
+                        <input class="form-control" type="textarea" name="private_content" placeholder="发布..." size="80px">
+                        <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
+                    </div>
+                </form>
 
-            <div>
+            </div>
+            <div class="front_content" id="app">
                 <!-- post -->
-                <div class="panel panel-default">
+                <div class="panel panel-default" v-for = "content in infos">
+                    <div class="panel-footer">
+                        <span><a> {{  content.title }}</a></span>
+                        <span class="pull-right"></span>
+                    </div>
                     <div class="panel-body">
-                        <p>腾讯会议id 12876</p>
+                        <p>    {{ content.content }}</p>
                     </div>
                     <div class="panel-footer">
-                        <span>2017-5-27 20:45:01 唐国洁</span>
-                        <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-                    </div>
-                </div>
-                <!-- ./post -->
-            </div>
+                        <span>{{content.username}} 发布于 {{content.time }}</span>
+                        <span class="pull-right"><a class="text-danger" href="#"></a></span>
+                        <br/><br/>
+                        <p v-for = "comment in content.comment">{{ comment.comment_username }}  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
 
-            <div>
-                <!-- post -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <p>腾讯会议id 12876</p>
-                    </div>
-                    <div class="panel-footer">
-                        <span>2017-5-27 20:45:01 唐国洁</span>
-                        <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
+                        <form method="post" action="publish_comment">
+                            <div class="input-group">
+                                <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
+                                <input class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
+                                <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论">
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <!-- ./post -->
-            </div>
 
-            <div>
-                <!-- post -->
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <p>腾讯会议id 12876</p>
-                    </div>
-                    <div class="panel-footer">
-                        <span>2017-5-27 20:45:01 唐国洁</span>
-                        <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-                    </div>
-                </div>
-                <!-- ./post -->
             </div>
 
 
@@ -214,16 +194,27 @@ a {
         </div>
     </div>
 </main>
-<!-- ./main -->
-
+<script> new Vue({
+  el: '#app',
+  data () {
+    return {
+    infos: null
+    }
+  },
+  mounted () {
+    axios
+      .get('/get_profile')
+      .then(response => (this.infos = response.data))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+}) </script>
 <!-- footer -->
 <footer class="container text-center">
     <ul class="nav nav-pills pull-right">
-        <li>对话框</li>
+        <li></li>
     </ul>
 </footer>
-<!-- ./footer -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

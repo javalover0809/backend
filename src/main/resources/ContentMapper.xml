@@ -6,8 +6,38 @@
     <insert id="inputContent">
         insert into publish_content(username,title,content) value(#{0}, #{1} ,#{2})
     </insert>
-    <select id="selectContent" resultType="com.TTEnglish.backend.model.Content">
-        select * from publish_content order by id desc limit 2
+
+    <select id="SelectCommentContent" resultMap="getClassesMap">
+        select
+        u.id
+        ,u.username
+        ,u.title
+        ,u.content
+        ,u.time
+        ,p.comment_content_id
+        ,p.comment_username
+        ,p.comment_content
+        ,p.comment_time
+
+        from publish_content u
+        left join publish_comment p
+        on u.id = p.comment_content_id
+        where if(#{0}=2, u.username=#{1} ,1=1)
+        order by coalesce(p.comment_time ,u.time) desc
     </select>
+
+    <resultMap type="com.TTEnglish.backend.model.Content" id="getClassesMap">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="time" property="time"/>
+        <collection property="comment" ofType="com.TTEnglish.backend.model.Comment">
+            <result column="comment_content_id" property="comment_content_id"/>
+            <result column="comment_username" property="comment_username"/>
+            <result column="comment_content" property="comment_content"/>
+            <result column="comment_time" property="comment_time"/>
+        </collection>
+    </resultMap>
 </mapper>
 

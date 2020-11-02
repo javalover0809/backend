@@ -17,7 +17,7 @@
     <!-- 注册sql映射文件（UserMapper.xml） -->
     <mappers>
         <mapper resource="UserMapper.xml" />
-        <mapper resource="UseMapper.xml" />
         <mapper resource="ContentMapper.xml" />
+        <mapper resource="CommentMapper.xml" />
     </mappers>
 </configuration>

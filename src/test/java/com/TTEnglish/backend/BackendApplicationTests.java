@@ -1,13 +1,15 @@
 package com.TTEnglish.backend;
 
+import com.TTEnglish.backend.controller.PublishController;
 import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
 import com.TTEnglish.backend.model.User;
-import com.TTEnglish.backend.service.UserService;
+import com.TTEnglish.backend.service.AllService;
 import com.TTEnglish.backend.util.CheckPermission;
+import com.TTEnglish.backend.util.ManipulateMysql;
 import com.TTEnglish.backend.util.MySessionFactory;
-import com.TTEnglish.backend.util.UseContent;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
@@ -17,27 +19,57 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BackendApplicationTests {
+	public PublishController PublishController = new PublishController();
 	public Content content = new Content();
-	public UseContent write = new UseContent();
+	public ManipulateMysql manipulateMysql = new ManipulateMysql();
 	private CheckPermission permission = new CheckPermission();
-	private UserService  service = new UserService();
+	private AllService service = new AllService();
 	private ReqDto reqDto = new ReqDto();
 
 	@Test
-	public void contextLoads() {
+	public void select() throws IOException {
+		List<Content> contents = service.SelectContent(reqDto);
+		System.out.println(contents.get(0));
+		System.out.println(contents.get(0).getComment());
+		System.out.println(contents.get(0).getComment().get(0));
+		System.out.println(contents.get(0).getComment().get(0).getComment_content());
+
+}
+
+
+	@Test
+	public void publish_comment() throws IOException {
+		PublishController.PublishComment(reqDto.getSession(),"5","测试数据");
 	}
+
+
+	@Test
+	public void selectContent() throws IOException {
+	}
+
+
 	@Test
 	public void selectall() throws IOException {
-
-		System.out.println(service.selectAll(reqDto));
+		String json = "{\"abc\":1,\"hahah\":2}";
+		String result = "{\"title\":\"这些是查询的结果\"}";
+		String restult2 = "{\"title\": \"会议id:1887\"}";
+		String result3 = "{\"first\":\"{\"title\": \"会议id:1887\"}\"\"second\":\"{\"content\": \"每天一起学习英语吧\"}\"}";
+		JSONObject jsonObject = JSONObject.parseObject(result3);
+		System.out.println(jsonObject);
+//		System.out.println(jsonObject.getJSONObject("first"));
+//		System.out.println(service.selectString(reqDto));
 	}
+
+
+
 	@Test
 	public void writes() throws IOException {
-		write.insert("唐国洁","这个是标题的内容","这些内容真的很重要");
+		manipulateMysql.insert("唐国洁","这个是标题的内容","这些内容真的很重要");
 	}
 
 	@Test

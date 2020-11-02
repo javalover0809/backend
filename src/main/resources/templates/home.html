@@ -5,7 +5,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
-<!--  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>-->
   <style>
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -232,7 +231,7 @@ a {
 }
 
 </style>
-  </style>
+
 
 </head>
 <body>
@@ -312,83 +311,32 @@ a {
             </div>
           </div>
           <div class="front_content" id="app">
-          <!-- post -->
-          <div class="panel panel-default">
-              <div class="panel-footer">
-              <span><p> {{  info.title }}</p></span>
-              <span class="pull-right"></span>
-            </div>
-            <div class="panel-body">
-              <p>    {{ info.content }}</p>
-            </div>
-            <div class="panel-footer">
-              <span>2017-5-27 20:45:01     李娜  浏览数</span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
+               <!-- post -->
+               <div class="panel panel-default" v-for = "content in infos">
+                   <div class="panel-footer">
+                   <span><a> {{  content.title }}</a></span>
+                   <span class="pull-right"></span>
+                 </div>
+                 <div class="panel-body">
+                   <p>    {{ content.content }}</p>
+                 </div>
+                   <div class="panel-footer">
+                   <span>{{content.username}} 发布于 {{content.time }}</span>
+                   <span class="pull-right"><a class="text-danger" href="#"></a></span>
+                   <br/><br/>
+ <p v-for = "comment in content.comment">{{ comment.comment_username }}  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
+
+                   <form method="post" action="publish_comment">
+                       <div class="input-group">
+                         <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
+                         <input class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
+                         <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论">
+                       </div>
+                   </form>
+                 </div>
+               </div>
+
           </div>
-
-          <!-- post -->
-          <div class="panel panel-default">
-              <div class="panel-footer">
-              <span><p> {{ info }}</p></span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-            <div class="panel-body">
-              <p>    {{ info }}</p>
-            </div>
-            <div class="panel-footer">
-              <span>2017-5-27 20:45:01     李娜  浏览数</span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-          </div>
-
-          <!-- post -->
-          <div class="panel panel-default">
-              <div class="panel-footer">
-              <span><p> {{ info }}</p></span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-            <div class="panel-body">
-              <p>    {{ info }}</p>
-            </div>
-            <div class="panel-footer">
-              <span>2017-5-27 20:45:01     李娜  浏览数</span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-          </div>
-
-
-          <!-- post -->
-         <div class="panel panel-default">
-              <div class="panel-footer">
-              <span><p> {{ info }}</p></span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-            <div class="panel-body">
-              <p>    {{ info }}</p>
-            </div>
-            <div class="panel-footer">
-              <span>2017-5-27 20:45:01     李娜  浏览数</span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-          </div>
-
-          <!-- post -->
-          <div class="panel panel-default">
-              <div class="panel-footer">
-              <span><p> {{ info }}</p></span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-            <div class="panel-body">
-              <p>    {{ info }}</p>
-            </div>
-            <div class="panel-footer">
-              <span>2017-5-27 20:45:01     李娜  浏览数</span>
-              <span class="pull-right"><a class="text-danger" href="#">[删除]</a></span>
-            </div>
-          </div>
-</div>
-
           <div class="container large">
             <div class="pagination">
               <ul>
@@ -460,12 +408,14 @@ a {
   <script> new Vue({
   el: '#app',
   data () {
-    return { info: null }
+    return {
+    infos: null
+    }
   },
   mounted () {
     axios
       .get('/get_content')
-      .then(response => (this.info = response.data))
+      .then(response => (this.infos = response.data))
       .catch(function (error) { // 请求失败处理
         console.log(error);
       });

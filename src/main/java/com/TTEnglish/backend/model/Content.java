@@ -1,11 +1,17 @@
 package com.TTEnglish.backend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Content {
 	private String  id;
 	private String  username;
 	private String  title;
 	private String  content;
 	private String  time;
+	private String  content_id;
+	private List<Comment>   comment = new ArrayList<Comment>();
+
 
 	public String getId() {
 		return id;
@@ -47,7 +53,19 @@ public class Content {
 		this.time = time;
 	}
 
+	public String getContent_id() {
+		return content_id;
+	}
 
+	public void setContent_id(String content_id) {
+		this.content_id = content_id;
+	}
 
+	public List<Comment> getComment() {
+		return comment;
+	}
 
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 }

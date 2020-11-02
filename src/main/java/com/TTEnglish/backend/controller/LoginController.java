@@ -2,7 +2,7 @@ package com.TTEnglish.backend.controller;
 
 
 import com.TTEnglish.backend.model.ReqDto;
-import com.TTEnglish.backend.service.UserService;
+import com.TTEnglish.backend.service.AllService;
 import com.TTEnglish.backend.util.CheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,7 +24,7 @@ import java.text.SimpleDateFormat;
 public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private AllService allService;
 
     private CheckPermission permission = new CheckPermission();
 
@@ -36,7 +34,7 @@ public class LoginController {
     public String LoginVerify(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
         session.setAttribute("username", username);
         session.setAttribute("password", password);
-        System.out.println("checkpermission: " + permission.check(username, password));
+        System.out.println("登陆的权限是: " + permission.check(username, password));
         if(permission.check(username, password)){
             return "redirect:home";
         }
@@ -54,21 +52,7 @@ public class LoginController {
     }
 
 
-    @PostMapping("/publish_content")
-    public String getLogin(HttpSession session, @RequestParam("title") String title, @RequestParam("content") String content) throws IOException {
 
-        System.out.println("publish_content_is_number");
-        System.out.println(content);
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-        Date date = new Date(System.currentTimeMillis());
-        String time= formatter.format(date);
-        reqDto.session = session;
-        reqDto.title = title;
-        reqDto.content = content;
-        String resPage = userService.insert_content(reqDto);
-
-        return "redirect:" + resPage;
-    }
 
     @RequestMapping("/profile")
     public String profile(){
