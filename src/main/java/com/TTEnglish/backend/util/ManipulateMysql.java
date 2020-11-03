@@ -2,6 +2,7 @@ package com.TTEnglish.backend.util;
 
 import com.TTEnglish.backend.dao.CommentMapper;
 import com.TTEnglish.backend.dao.ContentMapper;
+import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,37 @@ import java.io.IOException;
 import java.util.List;
 
 public class ManipulateMysql {
+
+
+    public String SelectMaxTopicId() throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
+        Content content = contentMapper.SelectContent();
+        String maxTopicId = content.getTopic_id();
+        session.close();
+        return maxTopicId;
+    }
+
+
+
+
+
+
+
+
+
+    public void registerMysql(String username ,String password) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        userMapper.registerMapper(username,password);
+        session.commit();
+        session.close();
+    }
+
 
     public void insert_comment(String cotent_id ,String comment_username ,String comment_content) throws IOException {
 
@@ -23,14 +55,12 @@ public class ManipulateMysql {
     }
 
 
-    public void insert(String username,String title ,String content) throws IOException {
+    public void insert(ReqDto reqDto) throws IOException {
 
             SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
             SqlSession session = sqlSessionFactory.openSession();
-            System.out.println("this is two");
             ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-            contentMapper.inputContent(username,title,content);
-            System.out.println("this is one");
+            contentMapper.inputContent(reqDto.getTopic_id(),reqDto.getTopic_name(),reqDto.getSession().getAttribute("username").toString() ,reqDto.getTitle() ,reqDto.getContent());
             session.commit();
             session.close();
     }
@@ -44,23 +74,13 @@ public class ManipulateMysql {
         session.close();
         return result;
     }
-    public Content SelectContent() throws IOException {
-
-        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
-        SqlSession session = sqlSessionFactory.openSession();
-//        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-//        Content content = contentMapper.SelectContent();
-        Content content = session.selectOne("com.TTEnglish.backend.dao.ContentMapper.SelectContent", 1);
-        session.close();
-        return content;
-    }
 
     public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-        List<Content> listcontent = contentMapper.SelectCommentContent(reqDto.getContent_flag(),reqDto.getSession().getAttribute("username").toString());
+        List<Content> listcontent = contentMapper.SelectCommentContent(reqDto.getContent_flag(),reqDto.getSession().getAttribute("username").toString(), reqDto.getSession().getAttribute("topic_id").toString());
         session.close();
         return listcontent;
     }

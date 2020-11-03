@@ -4,7 +4,6 @@ package com.TTEnglish.backend.controller;
 import com.TTEnglish.backend.model.ReqDto;
 import com.TTEnglish.backend.service.AllService;
 import com.TTEnglish.backend.util.CheckPermission;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +22,7 @@ import java.io.IOException;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private AllService allService;
+    private AllService service = new AllService();
 
     private CheckPermission permission = new CheckPermission();
 
@@ -62,6 +60,18 @@ public class LoginController {
     @RequestMapping("/login")
     public String Login(){
         return "login";
+    }
+
+    @PostMapping("/register")
+    public String Register(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
+
+        System.out.println("用户名是: "+username);
+        System.out.println("密码是: "+password);
+        reqDto.setSession(session);
+        reqDto.setUsername(username);
+        reqDto.setPassword(password);
+
+        return service.RegisterService(reqDto);
     }
 
 

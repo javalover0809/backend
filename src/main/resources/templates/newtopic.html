@@ -230,7 +230,15 @@ a {
   content: "...";
 }
 
+span{
+        background: lightcoral;
+        display: inline-block;
+        padding: 10px;
+        color: #fff;
+        margin: 10px 0;
+    }
 
+.changeColor {background: lightgreen;}
 </style>
 
 
@@ -281,49 +289,37 @@ a {
         </div>
         <!-- ./friend requests -->
       </div>
-      <div class="col-md-6" id="app">
+      <div class="col-md-6"  id="app">
         <!-- post form -->
-        <form method="post" action="change_topic">
+        <form method="post" action="">
           <div class="panel-body">
-
-            <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
-            <a  href="topic1" v-else >随机时段</a>
-
-            <a  href="topic2" style="background: lightgreen;" v-if="back_topic_id === '2'">固定时段</a>
-            <a  href="topic2" v-else>固定时段</a>
-
-            <a  href="topic3" style="background: lightgreen;" v-if="back_topic_id === '3'">找学伴</a>
-            <a  href="topic3" v-else>找学伴</a>
-
-            <a  href="topic4" style="background: lightgreen;" v-if="back_topic_id === '4'">立目标</a>
-            <a  href="topic4" v-else>立目标</a>
-              <a  href="topic113" style="background: lightgreen;" v-if="back_topic_id === '113'">英语晨读</a>
-              <a  href="topic113" v-else>英语晨读</a>
-            <a  href="topic5" style="background: lightgreen;" v-if="back_topic_id === '5'">新建主题</a>
-            <a  href="topic5" v-else>新建主题</a>
-
+            <a :class="{infos}" href="home">随机时段</a>
+            <a href="home2">固定时段</a>
+            <a href="find_friend" >找学伴</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">操场</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">立目标</a>
+            <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/newtopic.html" target="_blank">新建主题</a>
+            <a :class="{infos}">时间</a>
           </div>
         </form>
 
-        <form method="post" action="publish_content">
-            <div class="input-group">
-       <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-if="back_topic_id === '5'" style="display:none">
-              <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-else  style="display:none">
 
-  <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..."  v-if="back_topic_id === '5'">
-<input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..." v-model="back_topic_name"  v-else style="display:none">
-            <input class="form-control" type="text" name="title" placeholder="标题...">
+        <form method="post" action="publish_new_topic">
+          <div class="input-group">
+            <input class="form-control" type="text" name="newtopic" placeholder="新主题名称..."size="35px">
+            <input class="form-control" type="textarea" name="title" placeholder="标题...">
             <input class="form-control" type="textarea" name="content" placeholder="内容...">
             <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
         <div>
+
           <div class="front_content">
                <!-- post -->
                <div class="panel panel-default" v-for = "content in infos">
                    <div class="panel-footer">
                    <span><a> {{  content.title }}</a></span>
-                   <pan class="pull-right"></pan>
+                   <span class="pull-right"></span>
                  </div>
                  <div class="panel-body">
                    <p>    {{ content.content }}</p>
@@ -345,26 +341,7 @@ a {
                </div>
 
           </div>
-          <div class="container large">
-            <div class="pagination">
-              <ul>
-                <li> <a href="javascript:void(0)"></a> </li>
-                <li> <a href="page1"></a> </li>
-                <li> <a href="page2"></a> </li>
-                <li> <a href="page3"></a> </li>
-                <li> <a href="page3"></a> </li>
-                <li> <a href="home5"></a> </li>
-                <li> <a href="home6"></a> </li>
-                <li> <a href="home7"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="javascript:void(0)"></a> </li>
-              </ul>
-            </div>
-          </div>
+
 
         </div>
         <!-- ./feed -->
@@ -414,33 +391,29 @@ a {
   <script type="text/javascript" src="js/script.js"></script>
 
   <script>
-
   new Vue({
   el: '#app',
   data () {
     return {
-    back_topic_id: null,
-    back_topic_name: null,
     infos: null
     }
   },
   mounted () {
     axios
       .get('/get_content')
-      .then(response => (
-
-       this.infos = response.data
-      ,this.back_topic_id   = response.data[0].topic_id
-      ,this.back_topic_name = response.data[0].topic_id
-
-      ))
+      .then(response => (this.infos = response.data))
       .catch(function (error) { // 请求失败处理
         console.log(error);
       });
-  },
-
-
+  }
 })
+  new Vue({
+                 el:"#change",
+                 data:{
+                     changeColor: true
+                 }
+             })
+
 </script>
 </body>
 </html>

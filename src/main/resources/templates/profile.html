@@ -106,9 +106,14 @@ a {
                 <div class="media-left">
                     <img src="D:/Downloads/自拍.jpg" class="media-object" style="width: 128px; height: 128px;">
                 </div>
-                <div class="media-body">
-                    <h2 class="media-heading">唐国洁</h2>
-                    <p>感情状态: 单身, 城市: 北京</p>
+                <div class="media-body" id="app2">
+                    <h2 class="media-heading" >唐国洁</h2>
+                    <div class="panel panel-default" v-for = "content in infos2">
+                        <div class="panel-footer">
+                            <span><a> {{  content.title }}</a></span>
+                            <span class="pull-right"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- user profile -->
@@ -127,9 +132,10 @@ a {
             </div>
             <!-- post -->
             <div class="panel panel-default">
-                <form method="post" action="publish_comment">
+                <form method="post" action="publish_content">
                     <div class="input-group">
-                        <input class="form-control" type="textarea" name="private_content" placeholder="发布..." size="80px">
+                        <input class="form-control" type="text" name="title" placeholder="标题..."size="35px">
+                        <input class="form-control" type="textarea" name="content" placeholder="发布..." size="80px">
                         <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
                     </div>
                 </form>
@@ -194,7 +200,10 @@ a {
         </div>
     </div>
 </main>
-<script> new Vue({
+<script>
+
+
+new Vue({
   el: '#app',
   data () {
     return {
@@ -209,7 +218,26 @@ a {
         console.log(error);
       });
   }
-}) </script>
+})
+
+new Vue({
+  el: '#app2',
+  data () {
+    return {
+    infos2: null
+    }
+  },
+  mounted () {
+    axios
+      .get('/get_profile')
+      .then(response => (this.infos2 = response.data))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+})
+
+</script>
 <!-- footer -->
 <footer class="container text-center">
     <ul class="nav nav-pills pull-right">

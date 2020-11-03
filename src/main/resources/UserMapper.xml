@@ -10,6 +10,9 @@
     <!-- 1 resultType：返回值类型,值为对应实体类的类路径
          2 id:对应类的方法，使得接口和配置文件（具体到方法）绑定
     -->
+    <insert id="registerMapper">
+        insert into user(username,password) value(#{0}, #{1})
+    </insert>
     <select id="getUserByUsername"  resultType="com.TTEnglish.backend.model.User">
         select * from user where username = #{usernname}
     </select>

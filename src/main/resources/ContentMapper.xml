@@ -3,13 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.TTEnglish.backend.dao.ContentMapper">
+
+    <select id="SelectContent"  resultType="com.TTEnglish.backend.model.Content">
+       select al.topic_id  from ( select (max(topic_id)+1)  as topic_id from publish_content ) al
+    </select>
+
+
+
     <insert id="inputContent">
-        insert into publish_content(username,title,content) value(#{0}, #{1} ,#{2})
+        insert into publish_content(topic_id, topic_name,username,title,content) value(#{0}, #{1} ,#{2} ,#{3} ,#{4})
     </insert>
 
     <select id="SelectCommentContent" resultMap="getClassesMap">
         select
-        u.id
+         u.id
+        ,u.topic_id
         ,u.username
         ,u.title
         ,u.content
@@ -23,11 +31,13 @@
         left join publish_comment p
         on u.id = p.comment_content_id
         where if(#{0}=2, u.username=#{1} ,1=1)
+        and topic_id = #{2}
         order by coalesce(p.comment_time ,u.time) desc
     </select>
 
     <resultMap type="com.TTEnglish.backend.model.Content" id="getClassesMap">
         <id column="id" property="id"></id>
+        <result column="topic_id" property="topic_id"/>
         <result column="username" property="username"/>
         <result column="title" property="title"/>
         <result column="content" property="content"/>

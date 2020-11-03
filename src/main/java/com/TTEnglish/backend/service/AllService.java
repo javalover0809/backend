@@ -24,6 +24,10 @@ public class AllService {
     private CheckPermission permission = new CheckPermission();
     private ManipulateMysql manipulateMysql = new ManipulateMysql();
 
+    public String RegisterService(ReqDto reqDto) throws IOException {
+        manipulateMysql.registerMysql(reqDto.getUsername(),reqDto.getPassword());
+        return "login";
+    }
 
     public List<Content> selecAll(ReqDto reqDto) throws IOException {
         List<Content> content = manipulateMysql.SelectAllContent();
@@ -38,6 +42,9 @@ public class AllService {
         if(reqDto.getSession().getAttribute("username")==null){
             reqDto.getSession().setAttribute("username","supermanager");
         }
+        if(reqDto.getSession().getAttribute("topic_id")==null){
+            reqDto.getSession().setAttribute("topic_id","1");
+        }
 
         return  manipulateMysql.SelectCommentContent(reqDto);
     }
@@ -51,7 +58,7 @@ public class AllService {
     }
 
     public String insert_content(ReqDto reqDto) throws IOException {
-        if(reqDto.getSession().getAttribute("username")==null){
+        if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
             System.out.println("please login in");
             return "login";
 
@@ -63,7 +70,13 @@ public class AllService {
         String password=reqDto.getSession().getAttribute("password").toString();
         if(permission.check(username,password)){
             System.out.println("input the data");
-            manipulateMysql.insert(username,reqDto.getTitle() ,reqDto.getContent());
+
+            //如果新建主题，从数据库读取最新的topic_id，在这里添加上
+            if(reqDto.getTopic_id().equals("5")){
+                reqDto.setTopic_id(manipulateMysql.SelectMaxTopicId());
+            }
+
+            manipulateMysql.insert(reqDto);
             return "home";
         }
         System.out.println("input the data two");
@@ -72,7 +85,7 @@ public class AllService {
     }
 
     public String insert_comment(ReqDto reqDto) throws IOException {
-        if(reqDto.getSession().getAttribute("username")==null){
+        if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
             System.out.println("please login in");
             return "login";
         }

@@ -67,10 +67,7 @@ public class BackendApplicationTests {
 
 
 
-	@Test
-	public void writes() throws IOException {
-		manipulateMysql.insert("唐国洁","这个是标题的内容","这些内容真的很重要");
-	}
+
 
 	@Test
 	public void mytest() throws IOException {

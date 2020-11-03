@@ -17,10 +17,19 @@ public class ContentController {
     private AllService service = new AllService();
     private VisitFlag visitFlag = new VisitFlag();
 
+    @GetMapping("/get_pattern_flag")
+    public String get_pattern_flag(String result) throws IOException {
+        System.out.println("这是第三条数据");
+        System.out.println("临时变量的值是:"+reqDto.getTempvalue());
+        return result;
+    }
+
     @GetMapping("/get_content")
     public List<Content> SelectCommentContent(HttpSession session) throws IOException {
         reqDto.setContent_flag(visitFlag.all_content);
         reqDto.setSession(session);
+        System.out.println("session中保存的topicid是:");
+        System.out.println(reqDto.getSession().getAttribute("topic_id"));
         return service.SelectCommentContent(reqDto);
     }
 

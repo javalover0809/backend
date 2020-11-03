@@ -30,13 +30,26 @@ public class PublishController {
     }
 
     @PostMapping("/publish_content")
-    public String PublishContent(HttpSession session, @RequestParam("title") String title, @RequestParam("content") String content) throws IOException {
+    public String PublishContent(HttpSession session
+            ,@RequestParam("topic_id") String topic_id
+            ,@RequestParam("topic_name") String topic_name
+            ,@RequestParam("title") String title
+            ,@RequestParam("content") String content) throws IOException {
         reqDto.setSession(session);
+        reqDto.setTopic_id(topic_id);
+        reqDto.setTopic_name(topic_name);
         reqDto.setTitle(title);
         reqDto.setContent(content);
         String resPage = allService.insert_content(reqDto);
         return "redirect:" + resPage;
     }
-
-
+    @PostMapping("/publish_new_content")
+    public String PublishNewContent(HttpSession session, @RequestParam("newtopic") String newtopic, @RequestParam("title") String title, @RequestParam("content") String content) throws IOException {
+        reqDto.setSession(session);
+        reqDto.setTitle(title);
+        reqDto.setContent(content);
+        reqDto.setNewtopic(newtopic);
+        String resPage = allService.insert_content(reqDto);
+        return "redirect:" + resPage;
+    }
 }

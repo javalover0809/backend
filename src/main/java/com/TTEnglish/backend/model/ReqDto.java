@@ -13,6 +13,11 @@ public class ReqDto {
     private String comment_content_id;
     private String comment_content;
     private String content_flag;
+    private String topic_id;
+    private String topic_name;
+    private String newtopic;
+    private String tempvalue;
+
 
     public HttpSession getSession() {
         return session;
@@ -92,5 +97,37 @@ public class ReqDto {
 
     public void setContent_flag(String content_flag) {
         this.content_flag = content_flag;
+    }
+
+    public String getTopic_id() {
+        return topic_id;
+    }
+
+    public void setTopic_id(String topic_id) {
+        this.topic_id = topic_id;
+    }
+
+    public String getTopic_name() {
+        return topic_name;
+    }
+
+    public void setTopic_name(String topic_name) {
+        this.topic_name = topic_name;
+    }
+
+    public String getNewtopic() {
+        return newtopic;
+    }
+
+    public void setNewtopic(String newtopic) {
+        this.newtopic = newtopic;
+    }
+
+    public String getTempvalue() {
+        return tempvalue;
+    }
+
+    public void setTempvalue(String tempvalue) {
+        this.tempvalue = tempvalue;
     }
 }
