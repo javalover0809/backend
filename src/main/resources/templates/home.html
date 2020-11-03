@@ -286,59 +286,82 @@ a {
         <form method="post" action="change_topic">
           <div class="panel-body">
 
-            <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
-            <a  href="topic1" v-else >随机时段</a>
+              <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
+              <a  href="topic1" v-else >随机时段</a>
 
-            <a  href="topic2" style="background: lightgreen;" v-if="back_topic_id === '2'">固定时段</a>
-            <a  href="topic2" v-else>固定时段</a>
+              <a  href="topic2" style="background: lightgreen;" v-if="back_topic_id === '2'">固定时段</a>
+              <a  href="topic2" v-else>固定时段</a>
 
-            <a  href="topic3" style="background: lightgreen;" v-if="back_topic_id === '3'">找学伴</a>
-            <a  href="topic3" v-else>找学伴</a>
+              <a  href="topic3" style="background: lightgreen;" v-if="back_topic_id === '3'">找学伴</a>
+              <a  href="topic3" v-else>找学伴</a>
 
-            <a  href="topic4" style="background: lightgreen;" v-if="back_topic_id === '4'">立目标</a>
-            <a  href="topic4" v-else>立目标</a>
-              <a  href="topic113" style="background: lightgreen;" v-if="back_topic_id === '113'">英语晨读</a>
-              <a  href="topic113" v-else>英语晨读</a>
-            <a  href="topic5" style="background: lightgreen;" v-if="back_topic_id === '5'">新建主题</a>
-            <a  href="topic5" v-else>新建主题</a>
+              <a  href="topic4" style="background: lightgreen;" v-if="back_topic_id === '4'">立目标</a>
+              <a  href="topic4" v-else>立目标</a>
+
+              <a  href="topic5" style="background: lightgreen;" v-if="back_topic_id === '5'">好文章好句子</a>
+              <a  href="topic5" v-else>好文章好句子</a>
+
+              <a  href="topic6" style="background: lightgreen;" v-if="back_topic_id === '6'">单词速背</a>
+              <a  href="topic6" v-else>单词速背</a>
+
+              <a  href="topic0" style="background: lightgreen;" v-if="back_topic_id === '0'">新建主题</a>
+              <a  href="topic0" v-else>新建主题</a>
 
           </div>
         </form>
 
         <form method="post" action="publish_content">
             <div class="input-group">
-       <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-if="back_topic_id === '5'" style="display:none">
+                <p  v-if="back_topic_id === '0'">创建新话题，管理员审核通过后，可以展示讨论</p>
+                <p  v-else style="display:none">创建新话题，管理员审核通过后，可以展示讨论</p>
+<!--                <input class="form-control" type="text" name="topic_id" placeholder="主题id...">-->
+              <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-if="back_topic_id === '0'" style="display:none">
               <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-else  style="display:none">
+<!--                <input class="form-control" type="textarea" name="topic_name">-->
+              <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..."  v-if="back_topic_id === '0'">
+              <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..." v-model="back_topic_name"  v-else style="display:none">
 
-  <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..."  v-if="back_topic_id === '5'">
-<input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..." v-model="back_topic_name"  v-else style="display:none">
-            <input class="form-control" type="text" name="title" placeholder="标题...">
-            <input class="form-control" type="textarea" name="content" placeholder="内容...">
-            <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
+                <input class="form-control" type="text" name="title" placeholder="标题..." v-model="back_topic_id" v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none">
+                <input class="form-control" type="text" name="title" placeholder="标题..." v-else>
+
+                <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
+                <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
+
+
           </div>
         </form><hr>
         <div>
           <div class="front_content">
                <!-- post -->
                <div class="panel panel-default" v-for = "content in infos">
-                   <div class="panel-footer">
-                   <span><a> {{  content.title }}</a></span>
-                   <pan class="pull-right"></pan>
-                 </div>
+                   <div class="panel-body" >
+<!--                     <div class="panel-footer" v-if="content.topic_id === '3'" style="display:none">-->
+<!--                     <div class="panel-footer" v-if="content.topic_id === '3'" style="display:none">-->
+                     <span>
+  <a v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none"> {{  content.title }}</a>
+  <a v-else style="color:red;font-weight:bold"> {{  content.title }}</a>
+                     </span>
+                     <pan class="pull-right"></pan>
+<!--                    </div>-->
+
+                   </div>
                  <div class="panel-body">
                    <p>    {{ content.content }}</p>
                  </div>
                    <div class="panel-footer">
-                   <span>{{content.username}} 发布于 {{content.time }}</span>
+                       <span>{{content.username}} 发布于 {{content.time }}</span>
+<!--                       <input  type="button" x style="display:none"/>-->
+<!--                       <input type="button" v-model="content.username" onclick="add()"/>-->
                    <span class="pull-right"><a class="text-danger" href="#"></a></span>
                    <br/><br/>
- <p v-for = "comment in content.comment">{{ comment.comment_username }}  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
+ <p v-for = "comment in content.comment">
+ <a id="comment_username" onclick="add()">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
 
                    <form method="post" action="publish_comment">
                        <div class="input-group">
                          <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
-                         <input class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
-                         <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论">
+                         <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
+                         <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论"/>
                        </div>
                    </form>
                  </div>
@@ -441,6 +464,14 @@ a {
 
 
 })
+
+
+function add() {
+            var x = document.getElementById("input_content").value;
+            var topic_id = document.getElementById("comment_username").innerHTML ;
+            document.getElementById("input_content").value ="@" + x + topic_id + "："  ;
+            }
+
 </script>
 </body>
 </html>

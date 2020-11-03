@@ -72,7 +72,7 @@ public class AllService {
             System.out.println("input the data");
 
             //如果新建主题，从数据库读取最新的topic_id，在这里添加上
-            if(reqDto.getTopic_id().equals("5")){
+            if(reqDto.getTopic_id().equals("0")){
                 reqDto.setTopic_id(manipulateMysql.SelectMaxTopicId());
             }
 

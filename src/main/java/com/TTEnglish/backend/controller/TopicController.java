@@ -10,12 +10,23 @@ import javax.servlet.http.HttpSession;
 public class TopicController {
 
     public ReqDto reqDto = new ReqDto();
+
+    @GetMapping("/topic0")
+    public String topic0(HttpSession session) {
+        session.setAttribute("topic_id","0");
+        reqDto.setSession(session);
+        return "redirect:home";
+    }
+
+
     @GetMapping("/topic1")
     public String topic1(HttpSession session) {
         session.setAttribute("topic_id","1");
         reqDto.setSession(session);
         return "redirect:home";
     }
+
+
     @GetMapping("/topic2")
     public String topic2(HttpSession session) {
         session.setAttribute("topic_id","2");
@@ -45,9 +56,9 @@ public class TopicController {
         return "redirect:home";
     }
 
-    @GetMapping("/topic113")
-    public String topic113(HttpSession session) {
-        session.setAttribute("topic_id","113");
+    @GetMapping("/topic6")
+    public String topic6(HttpSession session) {
+        session.setAttribute("topic_id","6");
         reqDto.setSession(session);
         return "redirect:home";
     }

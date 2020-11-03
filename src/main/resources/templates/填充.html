@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/form.js"></script>
+<script type="text/javascript">
+			function add() {
+            var x = document.getElementById("test").value;
+            document.getElementById("test").value = x+" content";
+            }
+		</script>
+<body>
+<textarea id="test">Example of</textarea>
+<!--I want to say "content" in the textarea's value, so ultimately it will say
+Example of content. Pressing the "Add String To Value" button again will add another "content" string onto the value.-->
+<input type="button" value="Add String To Value" onclick="add()"/>
+<!--The above will call the function that'll add a string to the textarea's value-->
+
+</body>
+</html>
