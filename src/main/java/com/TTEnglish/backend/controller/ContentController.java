@@ -6,6 +6,7 @@ import com.TTEnglish.backend.model.ReqDto;
 import com.TTEnglish.backend.model.User;
 import com.TTEnglish.backend.service.AllService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -26,13 +27,21 @@ public class ContentController {
         return result;
     }
 
+//    @GetMapping(value = "/home/{username}")
+//    public String visit_profile(HttpSession session, @PathVariable("username") String username) throws IOException {
+//        System.out.println("前端的get方法的username是："+username);
+//
+//        return "home";
+//    }
+
     @GetMapping("/get_content")
-    public List<Content> SelectCommentContent(HttpSession session) throws IOException {
+    public List<Content> SelectCommentContent(HttpSession session, @RequestParam("usernam") String usernam) throws IOException {
         //all_content = 1 在后面sql中 if(#{0}=2, u.username=#{1} ,1=1) 表示看所有的数据
         reqDto.setContent_flag(visitFlag.all_content);
         reqDto.setSession(session);
         System.out.println("session中保存的topicid是:");
         System.out.println(reqDto.getSession().getAttribute("topic_id"));
+        System.out.println("/get_content/{username}:"+usernam);
         return service.SelectCommentContent(reqDto);
     }
 

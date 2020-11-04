@@ -3,6 +3,7 @@ package com.TTEnglish.backend.controller;
 import com.TTEnglish.backend.model.ReqDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,13 @@ public class PageController {
         System.out.println("这是第一条数据");
         new ContentController().get_pattern_flag("1");
         System.out.println("这是第二条数据");
+        return "home";
+    }
+
+    @GetMapping(value = "/home/{username}")
+    public String visit_profile(HttpSession session, @PathVariable("username") String username) throws IOException {
+        System.out.println("前端的get方法的username是："+username);
+
         return "home";
     }
 }

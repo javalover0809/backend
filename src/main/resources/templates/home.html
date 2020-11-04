@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
-  <title>FaceClone</title>
+  <title>TT英语角</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
@@ -110,7 +110,7 @@
         </div>
         <!-- ./friend requests -->
       </div>
-      <div class="col-md-6" id="app">
+      <div class="col-md-6" id="content_app">
           <div class="panel-body">
 
               <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
@@ -175,13 +175,15 @@
                    <p>    {{ content.content }}</p>
                  </div>
                    <div class="panel-footer">
-                       <span>{{content.username}} 发布于 {{content.time }}</span>
+                       <span>
+                           <a  v-bind:href="['home/'+content.username]" target="_blank">  {{content.username}}</a>
+                          发布于 {{content.time }}</span>
 <!--                       <input  type="button" x style="display:none"/>-->
 <!--                       <input type="button" v-model="content.username" onclick="add()"/>-->
                    <span class="pull-right"><a class="text-danger" href="#"></a></span>
                    <br/><br/>
- <p v-for = "comment in content.comment">
- <a id="comment_username" onclick="add()">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
+ <p v-for = "comment in content.comment"   onclick="add()">
+     <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
 
                    <form method="post" action="publish_comment">
                        <div class="input-group">
@@ -286,7 +288,7 @@
   <script>
 
   new Vue({
-  el: '#app',
+  el: '#content_app',
   data () {
     return {
     back_topic_id: null,
@@ -295,10 +297,8 @@
     }
   },
   mounted () {
-    axios
-      .get('/get_content')
+    axios.get('/get_content?usernam=tangguojie2333')
       .then(response => (
-
        this.infos = response.data
       ,this.back_topic_id   = response.data[0].topic_id
       ,this.back_topic_name = response.data[0].topic_id
@@ -336,11 +336,18 @@
   },
 })
 
+var flag = true;
 function add() {
 
             var x = document.getElementById("input_content").value;
             var topic_id = document.getElementById("comment_username").innerHTML ;
-            document.getElementById("input_content").value ="@" + x + topic_id + "："  ;
+            var result = "@" + x + topic_id + ":"  ;
+
+            if (flag)
+             {
+                 document.getElementById("input_content").value = result;
+             }
+            flag = false;
             }
 <!--function add_profile_form() {-->
 <!--var i=''-->
