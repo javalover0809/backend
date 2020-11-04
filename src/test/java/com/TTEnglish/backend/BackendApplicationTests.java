@@ -1,5 +1,6 @@
 package com.TTEnglish.backend;
 
+import com.TTEnglish.backend.controller.ContentController;
 import com.TTEnglish.backend.controller.PublishController;
 import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.Content;
@@ -30,6 +31,20 @@ public class BackendApplicationTests {
 	private CheckPermission permission = new CheckPermission();
 	private AllService service = new AllService();
 	private ReqDto reqDto = new ReqDto();
+	private ContentController ContentController = new ContentController();
+
+
+
+	@Test
+	public void setPublishController() throws IOException {
+		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+		SqlSession session = sqlSessionFactory.openSession();
+		UserMapper userMapper = session.getMapper(UserMapper.class);
+		User user = userMapper.getUserByUsername("tangguojie");
+		System.out.println(user);
+		System.out.println(user.getUser_bachelor_period());
+		session.close();
+	}
 
 	@Test
 	public void select() throws IOException {

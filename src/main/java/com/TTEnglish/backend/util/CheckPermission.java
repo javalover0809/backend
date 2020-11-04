@@ -16,7 +16,7 @@ public class CheckPermission {
             User user = userMapper.getUserByUsername(username);
             System.out.println(user);
             session.close();
-            if(!user.getUserName().equals(null)){
+            if(!user.getUsername().equals(null)){
                 return true;
             }
             return false;

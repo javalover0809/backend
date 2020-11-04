@@ -3,6 +3,7 @@ package com.TTEnglish.backend.controller;
 import com.TTEnglish.backend.constant.VisitFlag;
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
+import com.TTEnglish.backend.model.User;
 import com.TTEnglish.backend.service.AllService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 public class ContentController {
     public ReqDto reqDto = new ReqDto();
+    public User user = new User();
     private AllService service = new AllService();
     private VisitFlag visitFlag = new VisitFlag();
 
@@ -34,9 +36,19 @@ public class ContentController {
     }
 
     @GetMapping("/get_profile")
-    public List<Content> get_profile(HttpSession session) throws IOException {
-        reqDto.setContent_flag(visitFlag.profile_content);
+    public User get_profile(HttpSession session) throws IOException {
         reqDto.setSession(session);
-        return service.SelectCommentContent(reqDto);
+        if(reqDto.getSession().getAttribute("username")!=null&&reqDto.getSession().getAttribute("profile_edit_flag").equals("2")){
+            user = service.SelectUser(reqDto);
+            user.setProfile_flag("2");
+        }
+        if(reqDto.getSession().getAttribute("username")!=null&&!reqDto.getSession().getAttribute("profile_edit_flag").equals("2")){
+            user.setProfile_flag("1");
+        }
+        if(reqDto.getSession().getAttribute("username")==null){
+            user.setProfile_flag("0");
+        }
+
+        return user;
     }
 }

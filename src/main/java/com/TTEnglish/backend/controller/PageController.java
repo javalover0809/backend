@@ -12,6 +12,8 @@ import java.io.IOException;
 public class PageController {
 
     public ReqDto reqDto = new ReqDto();
+
+
     @RequestMapping("/page1")
     public String page1() {
         System.out.println("page1_is");

@@ -2,6 +2,7 @@ package com.TTEnglish.backend.service;
 
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
+import com.TTEnglish.backend.model.User;
 import com.TTEnglish.backend.util.CheckPermission;
 import com.TTEnglish.backend.util.ManipulateMysql;
 import com.alibaba.fastjson.JSONObject;
@@ -38,6 +39,11 @@ public class AllService {
         return content;
     }
 
+    public User SelectUser(ReqDto reqDto) throws IOException {
+
+        return  manipulateMysql.SelectUser(reqDto);
+    }
+
     public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
         if(reqDto.getSession().getAttribute("username")==null){
             reqDto.getSession().setAttribute("username","supermanager");
@@ -57,6 +63,7 @@ public class AllService {
         return result;
     }
 
+
     public String insert_content(ReqDto reqDto) throws IOException {
         if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
             System.out.println("please login in");
@@ -64,6 +71,7 @@ public class AllService {
 
         }
         if(reqDto.getSession().getAttribute("username")!=null&&reqDto.getTitle()==""||reqDto.getContent()==""){
+            System.out.println("这里进行数据的写入工作3");
             return "redirect:home";
         }
         String username=reqDto.getSession().getAttribute("username").toString();
@@ -72,11 +80,18 @@ public class AllService {
             System.out.println("input the data");
 
             //如果新建主题，从数据库读取最新的topic_id，在这里添加上
-            if(reqDto.getTopic_id().equals("0")){
+            if(reqDto.getTopic_id()!=null&&reqDto.getTopic_id().equals("0")){
+                System.out.println("这里进行数据的写入工作5");
                 reqDto.setTopic_id(manipulateMysql.SelectMaxTopicId());
             }
-
+            //is_publishcontent不是1表示不是前台发布内容，is_insertprofile表示是更改个人信息
+            if(!reqDto.is_publishcontent.equals("1")&&reqDto.is_insertprofile!=null&&reqDto.is_insertprofile.equals("1")){
+                System.out.println("这里进行数据的写入工作6");
+                manipulateMysql.insert_profile(reqDto);
+                return "home";
+            }
             manipulateMysql.insert(reqDto);
+
             return "home";
         }
         System.out.println("input the data two");

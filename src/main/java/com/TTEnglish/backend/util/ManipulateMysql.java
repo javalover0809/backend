@@ -5,6 +5,7 @@ import com.TTEnglish.backend.dao.ContentMapper;
 import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
+import com.TTEnglish.backend.model.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -53,7 +54,35 @@ public class ManipulateMysql {
         session.commit();
         session.close();
     }
+    public void insert_profile(ReqDto reqDto) throws IOException {
 
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        userMapper.inserProfileMapper( reqDto.getSession().getAttribute("username").toString()
+                                      ,reqDto.getSession().getAttribute("password").toString()
+                                      ,reqDto.personal_intro
+                                      ,reqDto.love_status
+                                      ,reqDto.user_job
+                                      ,reqDto.user_company
+                                      ,reqDto.user_country
+                                      ,reqDto.user_province
+                                      ,reqDto.user_city
+                                      ,reqDto.user_junior_school
+                                      ,reqDto.user_junior_period
+                                      ,reqDto.user_senior_school
+                                      ,reqDto.user_senior_period
+                                      ,reqDto.user_bachelor_school
+                                      ,reqDto.user_bachelor_period
+                                      ,reqDto.user_master_school
+                                      ,reqDto.user_master_period
+                                      ,reqDto.user_phd_school
+                                      ,reqDto.user_phd_period
+                                      ,reqDto.user_postphd_shcool
+                                      ,reqDto.user_postphd_period);
+        session.commit();
+        session.close();
+    }
 
     public void insert(ReqDto reqDto) throws IOException {
 
@@ -74,6 +103,17 @@ public class ManipulateMysql {
         session.close();
         return result;
     }
+
+    public User SelectUser(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserByUsername(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+        return user;
+    }
+
 
     public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
 

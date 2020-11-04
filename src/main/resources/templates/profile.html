@@ -88,7 +88,7 @@ a {
             <!-- edit profile -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4>资料卡</h4>
+                    <h4></h4>
                     <p>个人介绍: 喜欢摇滚乐</p>
                     <p>感情状态: 单身</p>
                     <p>城市: 北京</p>
@@ -96,7 +96,6 @@ a {
                     <p>本科: 成都理工大学</p>
                     <p>硕士: 中国地质大学&北京交通大学</p>
                     <p>博士: 北京交通大学</p>
-                    </form>
                 </div>
             </div>
         </div>
@@ -123,11 +122,28 @@ a {
             <!-- post -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">心情</a>
-                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">日志</a>
-                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">找学伴</a>
-                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">操场</a>
-                    <a href="file:///C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html">立目标</a>
+
+                    <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
+                    <a  href="topic1" v-else >随机时段</a>
+
+                    <a  href="topic2" style="background: lightgreen;" v-if="back_topic_id === '2'">固定时段</a>
+                    <a  href="topic2" v-else>固定时段</a>
+
+                    <a  href="topic3" style="background: lightgreen;" v-if="back_topic_id === '3'">找学伴</a>
+                    <a  href="topic3" v-else>找学伴</a>
+
+                    <a  href="topic4" style="background: lightgreen;" v-if="back_topic_id === '4'">立目标</a>
+                    <a  href="topic4" v-else>立目标</a>
+
+                    <a  href="topic5" style="background: lightgreen;" v-if="back_topic_id === '5'">好文章好句子</a>
+                    <a  href="topic5" v-else>好文章好句子</a>
+
+                    <a  href="topic6" style="background: lightgreen;" v-if="back_topic_id === '6'">单词速背</a>
+                    <a  href="topic6" v-else>单词速背</a>
+
+                    <a  href="topic0" style="background: lightgreen;" v-if="back_topic_id === '0'">新建主题</a>
+                    <a  href="topic0" v-else>新建主题</a>
+
                 </div>
             </div>
             <!-- post -->

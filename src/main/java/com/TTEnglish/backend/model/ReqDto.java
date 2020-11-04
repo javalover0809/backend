@@ -18,6 +18,27 @@ public class ReqDto {
     private String newtopic;
     private String tempvalue;
 
+    public String personal_intro;
+    public String love_status;
+    public String user_job;
+    public String user_company;
+    public String user_country;
+    public String user_province;
+    public String user_city;
+    public String user_junior_school;
+    public String user_junior_period;
+    public String user_senior_school;
+    public String user_senior_period;
+    public String user_bachelor_school;
+    public String user_bachelor_period;
+    public String user_master_school;
+    public String user_master_period;
+    public String user_phd_school;
+    public String user_phd_period;
+    public String user_postphd_shcool;
+    public String user_postphd_period;
+    public String is_insertprofile;
+    public String is_publishcontent;
 
     public HttpSession getSession() {
         return session;

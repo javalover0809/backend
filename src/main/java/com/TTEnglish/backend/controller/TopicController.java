@@ -5,11 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class TopicController {
 
     public ReqDto reqDto = new ReqDto();
+
+    @GetMapping("/profile_edit")
+    public String profile_edit(HttpSession session) throws IOException {
+        session.setAttribute("profile_edit_flag","2");
+        reqDto.setSession(session);
+        return "redirect:home";
+    }
 
     @GetMapping("/topic0")
     public String topic0(HttpSession session) {

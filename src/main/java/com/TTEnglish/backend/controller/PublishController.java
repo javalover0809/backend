@@ -20,6 +20,56 @@ public class PublishController {
 
     public ReqDto reqDto = new ReqDto();
 
+    @PostMapping("/publish_profile")
+    public String PublishProfile(HttpSession session
+            ,@RequestParam("personal_intro")       String personal_intro
+            ,@RequestParam("love_status")          String love_status
+            ,@RequestParam("user_job")             String user_job
+            ,@RequestParam("user_company")         String user_company
+            ,@RequestParam("user_country")         String user_country
+            ,@RequestParam("user_province")        String user_province
+            ,@RequestParam("user_city")            String user_city
+            ,@RequestParam("user_junior_school")   String user_junior_school
+            ,@RequestParam("user_junior_period")   String user_junior_period
+            ,@RequestParam("user_senior_school")   String user_senior_school
+            ,@RequestParam("user_senior_period")   String user_senior_period
+            ,@RequestParam("user_bachelor_school") String user_bachelor_school
+            ,@RequestParam("user_bachelor_period") String user_bachelor_period
+            ,@RequestParam("user_master_school")   String user_master_school
+            ,@RequestParam("user_master_period")   String user_master_period
+            ,@RequestParam("user_phd_school")      String user_phd_school
+            ,@RequestParam("user_phd_period")      String user_phd_period
+            ,@RequestParam("user_postphd_shcool")  String user_postphd_shcool
+            ,@RequestParam("user_postphd_period")  String user_postphd_period
+    ) throws IOException {
+        session.setAttribute("profile_edit_flag", "1");
+        reqDto.setSession(session);
+        reqDto.personal_intro       = personal_intro;
+        reqDto.love_status          = love_status;
+        reqDto.user_job             = user_job;
+        reqDto.user_company         = user_company;
+        reqDto.user_country         = user_country;
+        reqDto.user_province        = user_province;
+        reqDto.user_city            = user_city;
+        reqDto.user_junior_school   = user_junior_school;
+        reqDto.user_junior_period   = user_junior_period;
+        reqDto.user_senior_school   = user_senior_school;
+        reqDto.user_senior_period   = user_senior_period;
+        reqDto.user_bachelor_school = user_bachelor_school;
+        reqDto.user_bachelor_period = user_bachelor_period;
+        reqDto.user_master_school   = user_master_school;
+        reqDto.user_master_period   = user_master_period;
+        reqDto.user_phd_school      = user_phd_school;
+        reqDto.user_phd_period      = user_phd_period;
+        reqDto.user_postphd_shcool  = user_postphd_shcool;
+        reqDto.user_postphd_period  = user_postphd_period;
+        reqDto.is_insertprofile = "1";
+
+        String resPage = allService.insert_content(reqDto);
+        return "redirect:" + resPage;
+    }
+
+
     @PostMapping("/publish_comment")
     public String PublishComment(HttpSession session, @RequestParam("id") String comment_content_id, @RequestParam("comment_content") String comment_content) throws IOException {
         reqDto.setSession(session);
@@ -40,16 +90,10 @@ public class PublishController {
         reqDto.setTopic_name(topic_name);
         reqDto.setTitle(title);
         reqDto.setContent(content);
+        reqDto.is_publishcontent = "1";
+        System.out.println("这里进行数据的写入工作");
         String resPage = allService.insert_content(reqDto);
-        return "redirect:" + resPage;
-    }
-    @PostMapping("/publish_new_content")
-    public String PublishNewContent(HttpSession session, @RequestParam("newtopic") String newtopic, @RequestParam("title") String title, @RequestParam("content") String content) throws IOException {
-        reqDto.setSession(session);
-        reqDto.setTitle(title);
-        reqDto.setContent(content);
-        reqDto.setNewtopic(newtopic);
-        String resPage = allService.insert_content(reqDto);
+        System.out.println("这里进行数据的写入工作2");
         return "redirect:" + resPage;
     }
 }
