@@ -22,12 +22,13 @@ public class ContentController {
     @GetMapping("/get_pattern_flag")
     public String get_pattern_flag(String result) throws IOException {
         System.out.println("这是第三条数据");
-        System.out.println("临时变量的值是:"+reqDto.getTempvalue());
+        System.out.println("临时变量的值是:" + reqDto.getTempvalue());
         return result;
     }
 
     @GetMapping("/get_content")
     public List<Content> SelectCommentContent(HttpSession session) throws IOException {
+        //all_content = 1 在后面sql中 if(#{0}=2, u.username=#{1} ,1=1) 表示看所有的数据
         reqDto.setContent_flag(visitFlag.all_content);
         reqDto.setSession(session);
         System.out.println("session中保存的topicid是:");
@@ -37,18 +38,32 @@ public class ContentController {
 
     @GetMapping("/get_profile")
     public User get_profile(HttpSession session) throws IOException {
+        //先查询获取user对象，最后再进行profile_flag的赋值操作
         reqDto.setSession(session);
-        if(reqDto.getSession().getAttribute("username")!=null&&reqDto.getSession().getAttribute("profile_edit_flag").equals("2")){
-            user = service.SelectUser(reqDto);
-            user.setProfile_flag("2");
+        user = service.SelectUser(reqDto);
+        //用户没有登录，直接返回user
+        if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
+            System.out.println("用户没有登录，直接返回user");
+            return user;
         }
-        if(reqDto.getSession().getAttribute("username")!=null&&!reqDto.getSession().getAttribute("profile_edit_flag").equals("2")){
-            user.setProfile_flag("1");
-        }
-        if(reqDto.getSession().getAttribute("username")==null){
-            user.setProfile_flag("0");
+            //判断GetMapping("/profile_edit") 是否设置了profile_edit_flag=2
+            try {
+                System.out.println("进入到了这里");
+                //获取到前端 profile_flage编辑的指令，直接给user赋值profile_flag=2后，返回
+                if (session.getAttribute("profile_edit_flag") == "2") {
+                    System.out.println("进入到这里最终");
+                    user.setProfile_flag("2");
+                    return user;
+                }
+                user.setProfile_flag("1");
+            }
+            catch(Exception e){
+                System.out.println("进入到了异常");
+            }
+
+
+        System.out.println("最后出来了");
+            return user;
         }
 
-        return user;
-    }
 }

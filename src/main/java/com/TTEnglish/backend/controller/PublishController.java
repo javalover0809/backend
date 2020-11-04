@@ -41,7 +41,10 @@ public class PublishController {
             ,@RequestParam("user_phd_period")      String user_phd_period
             ,@RequestParam("user_postphd_shcool")  String user_postphd_shcool
             ,@RequestParam("user_postphd_period")  String user_postphd_period
+            ,@RequestParam("confirm")  String confirm
     ) throws IOException {
+        // 这里设置成1 表示，个人资料输入到mysql之后，当页面调用"/get_profile"
+        // 可以不走 if (session.getAttribute("profile_edit_flag") == "2")里面的条件
         session.setAttribute("profile_edit_flag", "1");
         reqDto.setSession(session);
         reqDto.personal_intro       = personal_intro;
@@ -63,10 +66,13 @@ public class PublishController {
         reqDto.user_phd_period      = user_phd_period;
         reqDto.user_postphd_shcool  = user_postphd_shcool;
         reqDto.user_postphd_period  = user_postphd_period;
-        reqDto.is_insertprofile = "1";
-
-        String resPage = allService.insert_content(reqDto);
-        return "redirect:" + resPage;
+        System.out.println("publish_profile中confirm的value是："+confirm);
+        //只有前端点击确认才写入数据库，点击取消则直接返回home
+        if(confirm.equals("确定")){
+            String resPage = allService.insert_profile(reqDto);
+            return "redirect:" + resPage;
+        }
+        return "redirect:home";
     }
 
 

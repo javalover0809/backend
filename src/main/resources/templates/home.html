@@ -17,7 +17,7 @@
       <ul class="nav navbar-nav navbar-right">
         </form>
         <li><a href="home">首页</a></li>
-        <li><a href="profile">个人主页</a></li>
+        <li><a href="profile_show">显示资料</a></li>
         <li><a href="login">登陆</a></li>
         <li><a href="login_out">退出</a></li>
       </ul>
@@ -37,14 +37,27 @@
           </div>
           <div class="panel panel-default"  v-if="profile_flag === '1'">
               <div class="panel-body">
-                  <img src="D:/Downloads/自拍.jpg" class="media-object" style="width: 128px; height: 128px;">
-                  <p>个人介绍: 喜欢摇滚乐</p>
-                  <p>感情状态: 单身</p>
-                  <p>城市: 北京</p>
-                  <p>高中: 广西</p>
-                  <p>本科: 成都理工大学</p>
-                  <p>硕士: 中国地质大学&北京交通大学</p>
-                  <p>博士: 北京交通大学</p>
+                  <img src="" class="media-object" style="width: 128px; height: 128px;">
+
+                  <p>个人介绍：   {{ profile_infos.personal_intro       }}</p>
+                  <p>感情状态：   {{ profile_infos.love_status          }}</p>
+                  <p>职业：      {{ profile_infos.user_job             }}</p>
+                  <p>公司：      {{ profile_infos.user_company         }}</p>
+                  <p>国家：      {{ profile_infos.user_country         }}</p>
+                  <p>省份：      {{ profile_infos.user_province        }}</p>
+                  <p>城市：      {{ profile_infos.user_city            }}</p>
+                  <p>初中：      {{ profile_infos.user_junior_school   }}</p>
+                  <p>初中时间段： {{ profile_infos.user_junior_period   }}</p>
+                  <p>高中：      {{ profile_infos.user_senior_school   }}</p>
+                  <p>高中时间段： {{ profile_infos.user_senior_period   }}</p>
+                  <p>本科：      {{ profile_infos.user_bachelor_school }}</p>
+                  <p>本科时间段：{{ profile_infos.user_bachelor_period }}</p>
+                  <p>硕士：      {{ profile_infos.user_master_school   }}</p>
+                  <p>硕士时间段： {{ profile_infos.user_master_period   }}</p>
+                  <p>博士：      {{ profile_infos.user_phd_school      }}</p>
+                  <p>博士时间段： {{ profile_infos.user_phd_period      }}</p>
+                  <p>博士后：    {{ profile_infos.user_postphd_shcool  }}</p>
+                  <p>博士后时间：{{ profile_infos.user_postphd_period  }}</p>
                   <a href="profile_edit">编辑</a>
               </div>
           </div>
@@ -74,13 +87,9 @@
                      <input class="form-control" type="textarea" name="user_phd_period" placeholder="博士时间段" size="80px">
                      <input class="form-control" type="textarea" name="user_postphd_shcool" placeholder="博士后" size="80px">
                      <input class="form-control" type="textarea" name="user_postphd_period" placeholder="博士后时间" size="80px">
-
-
-                      <form method="post" action="publish_profile_quit">
-                      <input class="btn btn-primary" type="submit" name="login" align="middle" style="background-color: red;" value="取消">
-                      </form>
+<input class="btn btn-primary" type="submit" name="confirm" align="middle" style="background-color: red;" value="取消">
                       <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                      <input class="btn btn-primary" type="submit" name="login" align="middle" value="确定">
+                      <input class="btn btn-primary" type="submit" name="confirm" align="middle" value="确定">
                  </div>
               </form>
           </div>
@@ -177,7 +186,7 @@
                    <form method="post" action="publish_comment">
                        <div class="input-group">
                          <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
-                         <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
+                           <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px"><a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                          <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论"/>
                        </div>
                    </form>
@@ -256,7 +265,7 @@
                   <form method="post" action="publish_chat">
                       <div class="input-group">
                           <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
-                          <input id="input_chat" class="form-control" type="textarea" name="comment_content" placeholder="私信..." size="80px">
+                          <input id="input_chat" class="form-control" type="textarea" name="comment_content" placeholder="私信..." size="80px"><a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                           <input class="btn btn-primary" type="submit" name="login" align="middle" value="私信"/>
                       </div>
                   </form>
@@ -310,7 +319,7 @@
   el: '#profile_app',
   data () {
     return {
-    profile_flag: "2",
+    profile_flag: null,
     profile_infos: null
     }
   },

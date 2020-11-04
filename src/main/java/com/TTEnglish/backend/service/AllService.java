@@ -64,6 +64,15 @@ public class AllService {
     }
 
 
+
+
+    public String insert_profile(ReqDto reqDto) throws IOException {
+        manipulateMysql.insert_profile(reqDto);
+        return "home";
+    }
+
+
+
     public String insert_content(ReqDto reqDto) throws IOException {
         if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
             System.out.println("please login in");
@@ -83,12 +92,6 @@ public class AllService {
             if(reqDto.getTopic_id()!=null&&reqDto.getTopic_id().equals("0")){
                 System.out.println("这里进行数据的写入工作5");
                 reqDto.setTopic_id(manipulateMysql.SelectMaxTopicId());
-            }
-            //is_publishcontent不是1表示不是前台发布内容，is_insertprofile表示是更改个人信息
-            if(!reqDto.is_publishcontent.equals("1")&&reqDto.is_insertprofile!=null&&reqDto.is_insertprofile.equals("1")){
-                System.out.println("这里进行数据的写入工作6");
-                manipulateMysql.insert_profile(reqDto);
-                return "home";
             }
             manipulateMysql.insert(reqDto);
 

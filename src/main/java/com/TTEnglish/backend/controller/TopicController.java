@@ -14,8 +14,8 @@ public class TopicController {
 
     @GetMapping("/profile_edit")
     public String profile_edit(HttpSession session) throws IOException {
+        //前端发送资料请求，把profile_edit_flag设置为2，下一步到 /get_profile 中进行profile_edit_flag是否为2的判断
         session.setAttribute("profile_edit_flag","2");
-        reqDto.setSession(session);
         return "redirect:home";
     }
 
