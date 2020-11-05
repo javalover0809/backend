@@ -10,6 +10,41 @@
     <insert id="insertNewFriend">
         insert into user_friend(username,friend_name) value(#{0}, #{1})
     </insert>
+    <delete id="deleteFriend">
+        DELETE FROM user_friend WHERE username=#{0} and friend_name=#{1};
+    </delete>
+    <select id="SelectRecommendFriendByUsername"  resultType="com.TTEnglish.backend.model.Friend">
+        select
+         #{0} as username
+        ,u.username as friend_name
+
+        from user u
+        where u.username not in
+        (
+        select
+        friend_name
+
+        from user_friend
+        where username = #{0}
+        group by
+        friend_name
+        )
+        group by u.username
+
+    </select>
+
+    <select id="SelectFriendByUsername"  resultType="com.TTEnglish.backend.model.Friend">
+        select
+        username
+        ,friend_name
+
+        from user_friend
+        where username = #{0}
+        group by
+        username
+        ,friend_name
+
+    </select>
 
 </mapper>
 

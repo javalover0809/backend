@@ -1,12 +1,11 @@
 package com.TTEnglish.backend;
 
-import com.TTEnglish.backend.controller.ContentController;
-import com.TTEnglish.backend.controller.PublishController;
+import com.TTEnglish.backend.controller.AxiosController;
+import com.TTEnglish.backend.controller.FormController;
 import com.TTEnglish.backend.dao.FriendMapper;
+import com.TTEnglish.backend.dao.PrivateMessageMapper;
 import com.TTEnglish.backend.dao.UserMapper;
-import com.TTEnglish.backend.model.Content;
-import com.TTEnglish.backend.model.ReqDto;
-import com.TTEnglish.backend.model.User;
+import com.TTEnglish.backend.model.*;
 import com.TTEnglish.backend.service.AllService;
 import com.TTEnglish.backend.util.CheckPermission;
 import com.TTEnglish.backend.util.ManipulateMysql;
@@ -26,13 +25,50 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BackendApplicationTests {
-	public PublishController PublishController = new PublishController();
+	public FormController FormController = new FormController();
 	public Content content = new Content();
 	public ManipulateMysql manipulateMysql = new ManipulateMysql();
 	private CheckPermission permission = new CheckPermission();
 	private AllService service = new AllService();
 	private ReqDto reqDto = new ReqDto();
-	private ContentController ContentController = new ContentController();
+	private AxiosController AxiosController = new AxiosController();
+
+ 	@Test
+	public void seletprivatemessage() throws IOException {
+		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+		SqlSession session = sqlSessionFactory.openSession();
+		PrivateMessageMapper privateMessageMapper = session.getMapper(PrivateMessageMapper.class);
+		List<PrivateMessage> ListprivateMessage = privateMessageMapper.selectPrivateMessageContent("唐国洁", "Elon Musk");
+		System.out.println(ListprivateMessage);
+		session.close();
+	}
+
+	@Test
+	public void selectRecommendfriend() throws IOException {
+		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+		SqlSession session = sqlSessionFactory.openSession();
+		FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+		List<Friend> friends = friendMapper.SelectRecommendFriendByUsername("唐国洁");
+		System.out.println(friends);
+		session.close();
+
+
+	}
+
+	@Test
+	public void selectfriend() throws IOException {
+
+		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+		SqlSession session = sqlSessionFactory.openSession();
+		FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+		List<Friend> friends = friendMapper.SelectFriendByUsername("唐国洁");
+		System.out.println(friends);
+		session.close();
+
+	}
+	
+	
+
 	@Test
 	public void insertfriend() throws IOException {
 		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
@@ -69,7 +105,7 @@ public class BackendApplicationTests {
 
 	@Test
 	public void publish_comment() throws IOException {
-		PublishController.PublishComment(reqDto.getSession(),"5","测试数据");
+		FormController.PublishComment(reqDto.getSession(),"5","测试数据");
 	}
 
 

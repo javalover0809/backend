@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
-public class PublishController {
+public class FormController {
     @Autowired
-    private AllService allService;
+    private AllService service;
 
     private CheckPermission permission = new CheckPermission();
 
@@ -69,7 +69,7 @@ public class PublishController {
         System.out.println("publish_profile中confirm的value是："+confirm);
         //只有前端点击确认才写入数据库，点击取消则直接返回home
         if(confirm.equals("确定")){
-            String resPage = allService.insert_profile(reqDto);
+            String resPage = service.insert_profile(reqDto);
             return "redirect:" + resPage;
         }
         return "redirect:home";
@@ -81,7 +81,7 @@ public class PublishController {
         reqDto.setSession(session);
         reqDto.setComment_content_id(comment_content_id);
         reqDto.setComment_content(comment_content);
-        String resPage = allService.insert_comment(reqDto);
+        String resPage = service.insert_comment(reqDto);
         return "redirect:" + resPage;
     }
 
@@ -98,8 +98,27 @@ public class PublishController {
         reqDto.setContent(content);
         reqDto.is_publishcontent = "1";
         System.out.println("这里进行数据的写入工作");
-        String resPage = allService.insert_content(reqDto);
+        String resPage = service.insert_content(reqDto);
         System.out.println("这里进行数据的写入工作2");
+        return "redirect:" + resPage;
+    }
+
+
+
+
+    @PostMapping("/publish_private_message")
+    public String publishPrivateMessage(HttpSession session
+            ,@RequestParam("private_message_friend_name") String private_message_friend_name
+            ,@RequestParam("to_message_content") String to_message_content) throws IOException {
+        reqDto.setSession(session);
+        reqDto.private_message_friend_name = private_message_friend_name;
+        reqDto.to_message_content = to_message_content;
+        reqDto.from_message_content = "";
+        reqDto.private_message_show_flag = "1";
+        reqDto.private_messages_input_value = "点击发送私信给" + private_message_friend_name;
+        System.out.println("这里进行收到了post的数据");
+        String resPage = service.insertPrivateMessage(reqDto);
+
         return "redirect:" + resPage;
     }
 }

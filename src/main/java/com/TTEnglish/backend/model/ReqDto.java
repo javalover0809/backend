@@ -41,6 +41,14 @@ public class ReqDto {
     public String is_publishcontent;
     public String visit_username;
     public String recommend_friend_name;
+    public String friend_name;
+    public String delete_friend_name;
+    public String private_message_friend_name;
+    public String to_message_content;
+    public String from_message_content;
+    public String private_message_show_flag;
+    public String private_messages_input_value;
+
 
 
 

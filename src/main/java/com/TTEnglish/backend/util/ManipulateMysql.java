@@ -1,12 +1,7 @@
 package com.TTEnglish.backend.util;
 
-import com.TTEnglish.backend.dao.CommentMapper;
-import com.TTEnglish.backend.dao.ContentMapper;
-import com.TTEnglish.backend.dao.FriendMapper;
-import com.TTEnglish.backend.dao.UserMapper;
-import com.TTEnglish.backend.model.Content;
-import com.TTEnglish.backend.model.ReqDto;
-import com.TTEnglish.backend.model.User;
+import com.TTEnglish.backend.dao.*;
+import com.TTEnglish.backend.model.*;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -15,6 +10,50 @@ import java.util.List;
 
 public class ManipulateMysql {
 
+    public List<Friend> selectRecommendFriend(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        List<Friend> friends = friendMapper.SelectRecommendFriendByUsername(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+
+        return friends;
+    }
+
+    public List<Friend> selectFriend(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        List<Friend> friends = friendMapper.SelectFriendByUsername(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+
+        return friends;
+    }
+
+
+    public List<PrivateMessage> selectPrivateMessageContent(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        PrivateMessageMapper privateMessageMapper = session.getMapper(PrivateMessageMapper.class);
+        List<PrivateMessage> ListprivateMessage = privateMessageMapper.selectPrivateMessageContent(reqDto.getSession().getAttribute("username").toString(),reqDto.private_message_friend_name);
+        session.close();
+        return ListprivateMessage;
+    }
+
+
+
+    public void deleteFriend(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        friendMapper.deleteFriend(reqDto.getSession().getAttribute("username").toString(),reqDto.delete_friend_name);
+        session.commit();
+        session.close();
+    }
 
     public void insertNewFriend(ReqDto reqDto) throws IOException {
 
@@ -52,6 +91,22 @@ public class ManipulateMysql {
         SqlSession session = sqlSessionFactory.openSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
         userMapper.registerMapper(username,password);
+        session.commit();
+        session.close();
+    }
+
+    public void insertPrivateMessage(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        PrivateMessageMapper privateMessageMapper = session.getMapper(PrivateMessageMapper.class);
+        privateMessageMapper.insertPrivateMessage(
+                                                  reqDto.getSession().getAttribute("username").toString()
+                                                 ,reqDto.private_message_friend_name
+                                                 ,reqDto.to_message_content
+                                                 ,reqDto.from_message_content
+                                                 ,reqDto.private_message_show_flag
+                                                 ,reqDto.private_messages_input_value);
         session.commit();
         session.close();
     }

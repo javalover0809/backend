@@ -20,5 +20,6 @@
         <mapper resource="ContentMapper.xml" />
         <mapper resource="CommentMapper.xml" />
         <mapper resource="FriendMapper.xml" />
+        <mapper resource="PrivateMessageMapper.xml" />
     </mappers>
 </configuration>

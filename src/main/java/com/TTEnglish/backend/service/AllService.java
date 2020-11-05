@@ -1,8 +1,6 @@
 package com.TTEnglish.backend.service;
 
-import com.TTEnglish.backend.model.Content;
-import com.TTEnglish.backend.model.ReqDto;
-import com.TTEnglish.backend.model.User;
+import com.TTEnglish.backend.model.*;
 import com.TTEnglish.backend.util.CheckPermission;
 import com.TTEnglish.backend.util.ManipulateMysql;
 import com.alibaba.fastjson.JSONObject;
@@ -38,10 +36,31 @@ public class AllService {
         List<Content> content = manipulateMysql.SelectAllContent();
         return content;
     }
+
+    public List<Friend> selectRecommendFriend(ReqDto reqDto) throws IOException {
+        List<Friend> friends = manipulateMysql.selectRecommendFriend(reqDto);
+        return friends;
+    }
+
+    public List<Friend> selectFriend(ReqDto reqDto) throws IOException {
+        List<Friend> friends = manipulateMysql.selectFriend(reqDto);
+        return friends;
+    }
+    public void deleteFriend(ReqDto reqDto) throws IOException {
+        manipulateMysql.deleteFriend(reqDto);
+    }
     public void insertNewFriend(ReqDto reqDto) throws IOException {
         manipulateMysql.insertNewFriend(reqDto);
     }
 
+    public List<PrivateMessage> selectPrivateMessageContent(ReqDto reqDto) throws IOException {
+        if(reqDto.private_message_friend_name!=null){
+            System.out.println("private_message_friend_name!=null" + reqDto.private_message_friend_name);
+            return  manipulateMysql.selectPrivateMessageContent(reqDto);
+        }
+        System.out.println("private_message_friend_name的数据是" + reqDto.private_message_friend_name);
+        return  null;
+    }
 
     public User SelectUser(ReqDto reqDto) throws IOException {
 
@@ -75,6 +94,10 @@ public class AllService {
         return "home";
     }
 
+    public String insertPrivateMessage(ReqDto reqDto) throws IOException {
+        manipulateMysql.insertPrivateMessage(reqDto);
+        return "home";
+    }
 
 
     public String insert_content(ReqDto reqDto) throws IOException {
