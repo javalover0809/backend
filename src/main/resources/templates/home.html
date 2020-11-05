@@ -68,25 +68,25 @@
 <!--                 <div class="panel-body" contentEditable="true" id="test">-->
                      <img src="D:/Downloads/自拍.jpg" class="media-object" style="width: 128px; height: 128px;">
 <!--                     <input class="btn btn-primary" type=button align="middle" onclick="add_profile_form()" value="新增">-->
-                     <input class="form-control" type="textarea" name="personal_intro" placeholder="个人介绍" size="80px">
-                     <input class="form-control" type="textarea" name="love_status" placeholder="感情状态" size="80px">
-                     <input class="form-control" type="textarea" name="user_job" placeholder="职业" size="80px">
-                     <input class="form-control" type="textarea" name="user_company" placeholder="公司" size="80px">
-                     <input class="form-control" type="textarea" name="user_country" placeholder="国家" size="80px">
-                     <input class="form-control" type="textarea" name="user_province" placeholder="省份" size="80px">
-                     <input class="form-control" type="textarea" name="user_city" placeholder="城市" size="80px">
-                     <input class="form-control" type="textarea" name="user_junior_school" placeholder="初中" size="80px">
-                     <input class="form-control" type="textarea" name="user_junior_period" placeholder="初中时间段" size="80px">
-                     <input class="form-control" type="textarea" name="user_senior_school" placeholder="高中" size="80px">
-                     <input class="form-control" type="textarea" name="user_senior_period" placeholder="高中时间段" size="80px">
-                     <input class="form-control" type="textarea" name="user_bachelor_school" placeholder="本科" size="80px">
-                     <input class="form-control" type="textarea" name="user_bachelor_period" placeholder="本科时间段" size="80px">
-                     <input class="form-control" type="textarea" name="user_master_school" placeholder="硕士" size="80px">
-                     <input class="form-control" type="textarea" name="user_master_period" placeholder="硕士时间段" size="80px">
-                     <input class="form-control" type="textarea" name="user_phd_school" placeholder="博士" size="80px">
-                     <input class="form-control" type="textarea" name="user_phd_period" placeholder="博士时间段" size="80px">
-                     <input class="form-control" type="textarea" name="user_postphd_shcool" placeholder="博士后" size="80px">
-                     <input class="form-control" type="textarea" name="user_postphd_period" placeholder="博士后时间" size="80px">
+            <input class="form-control" type="textarea" name="personal_intro" v-model="profile_infos.personal_intro"  placeholder="个人介绍" size="80px">
+<input class="form-control" type="textarea" v-model=" profile_infos.love_status        " name="love_status" placeholder="感情状态" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_job            " name="user_job" placeholder="职业" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_company        " name="user_company" placeholder="公司" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_country        " name="user_country" placeholder="国家" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_province       " name="user_province" placeholder="省份" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_city           " name="user_city" placeholder="城市" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_junior_school  " name="user_junior_school" placeholder="初中" size="80px">
+<input class="form-control" type="textarea" v-model=" profile_infos.user_junior_period  " name="user_junior_period" placeholder="初中时间段" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_senior_school  " name="user_senior_school" placeholder="高中" size="80px">
+<input class="form-control" type="textarea" v-model=" profile_infos.user_senior_period  " name="user_senior_period" placeholder="高中时间段" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_bachelor_school" name="user_bachelor_school" placeholder="本科" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_bachelor_period " name="user_bachelor_period" placeholder="本科时间段" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_master_school  " name="user_master_school" placeholder="硕士" size="80px">
+<input class="form-control" type="textarea" v-model=" profile_infos.user_master_period  " name="user_master_period" placeholder="硕士时间段" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_phd_school     " name="user_phd_school" placeholder="博士" size="80px">
+<input class="form-control" type="textarea" v-model=" profile_infos.user_phd_period     " name="user_phd_period" placeholder="博士时间段" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_postphd_shcool " name="user_postphd_shcool" placeholder="博士后" size="80px">
+<input class="form-control" type="textarea" v-model="profile_infos.user_postphd_period  " name="user_postphd_period" placeholder="博士后时间" size="80px">
 <input class="btn btn-primary" type="submit" name="confirm" align="middle" style="background-color: red;" value="取消">
                       <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                       <input class="btn btn-primary" type="submit" name="confirm" align="middle" value="确定">
@@ -220,15 +220,29 @@
         </div>
         <!-- ./feed -->
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3" >
       <!-- add friend -->
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="recommend_friend_app">
           <div class="panel-body">
             <h4>好友推荐</h4>
             <ul>
               <li>
-                <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html">李娜娜 添加</a>
+                  <a  v-bind:href="['friend_add/' + recommend_friend_name]">添加</a>
+                  <a  v-bind:href="['home/' + recommend_friend_name]">{{recommend_friend_name}}</a>
               </li>
+                <br>
+
+                <li> <a href="#">添加</a>
+                    <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html">Bill Gates</a>
+                </li>
+                <br>
+                <li> <a href="#">添加</a>
+                    <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html">王兴</a>
+                </li>
+                <br>
+                <li> <a href="#">添加</a>
+                    <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html">张一鸣</a>
+                </li>
             </ul>
           </div>
         </div>
@@ -236,13 +250,12 @@
 
         <!-- friends -->
         <div class="panel panel-default">
-          <div class="panel-body">
             <h4>我的好友</h4>
-            <ul>
-              <li>
-                <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/profile.html" target="_blank">李娜娜</a>
-              </li>
-            </ul>
+          <div class="panel-body" id="friend_app" v-for="friends in friend_names">
+                <li>
+                    <a v-bind:href="['home/' +  friends.friend_name]">{{friends.friend_name}}</a>
+                </li>
+                <br>
           </div>
         </div>
         <div class="panel panel-default">
@@ -287,6 +300,54 @@
 
   <script>
 
+
+
+ new Vue({
+  el: '#recommend_friend_app',
+  data () {
+    return {
+    recommend_friend_name: null
+    }
+  },
+  mounted () {
+    axios.get('/friend_recommend')
+      .then(response => (
+       this.recommend_friend_name = 'Elon Musk'
+      ))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  },
+
+
+})
+
+
+
+  new Vue({
+  el: '#friend_app',
+  data () {
+    return {
+    friend_names: null
+    }
+  },
+  mounted () {
+    axios.get('/friend_recommend')
+      .then(response => (
+       this.friend_names = response.data
+      ))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  },
+
+
+})
+
+
+
+
+
   new Vue({
   el: '#content_app',
   data () {
@@ -297,7 +358,7 @@
     }
   },
   mounted () {
-    axios.get('/get_content?usernam=tangguojie2333')
+    axios.get('/get_content?visit_username=""')
       .then(response => (
        this.infos = response.data
       ,this.back_topic_id   = response.data[0].topic_id
@@ -325,7 +386,7 @@
   },
   mounted () {
     axios
-      .get('/get_profile')
+      .get('/get_profile?visit_username=""')
       .then(response => (
        this.profile_infos = response.data,
        this.profile_flag = response.data.profile_flag

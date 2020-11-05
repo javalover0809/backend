@@ -38,6 +38,10 @@ public class AllService {
         List<Content> content = manipulateMysql.SelectAllContent();
         return content;
     }
+    public void insertNewFriend(ReqDto reqDto) throws IOException {
+        manipulateMysql.insertNewFriend(reqDto);
+    }
+
 
     public User SelectUser(ReqDto reqDto) throws IOException {
 

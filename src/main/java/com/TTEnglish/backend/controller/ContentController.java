@@ -27,29 +27,46 @@ public class ContentController {
         return result;
     }
 
-//    @GetMapping(value = "/home/{username}")
-//    public String visit_profile(HttpSession session, @PathVariable("username") String username) throws IOException {
-//        System.out.println("前端的get方法的username是："+username);
-//
-//        return "home";
-//    }
+    @GetMapping("/friend_recommend")
+    public List<Content> SelectFriend(HttpSession session) throws IOException {
 
+        reqDto.setSession(session);
+        System.out.println("寻找friend的接口:");
+//        return service.SelectCommentContent(reqDto);
+        return null;
+    }
     @GetMapping("/get_content")
-    public List<Content> SelectCommentContent(HttpSession session, @RequestParam("usernam") String usernam) throws IOException {
+    public List<Content> SelectCommentContent(HttpSession session, @RequestParam("visit_username") String visit_username) throws IOException {
         //all_content = 1 在后面sql中 if(#{0}=2, u.username=#{1} ,1=1) 表示看所有的数据
-        reqDto.setContent_flag(visitFlag.all_content);
+//        reqDto.setContent_flag(visitFlag.all_content);
         reqDto.setSession(session);
         System.out.println("session中保存的topicid是:");
         System.out.println(reqDto.getSession().getAttribute("topic_id"));
-        System.out.println("/get_content/{username}:"+usernam);
+        System.out.println("/get_content/{username}:"+visit_username);
+        try {
+            reqDto.visit_username = session.getAttribute("visit_username").toString();
+        }
+        catch (Exception e){
+            System.out.println("session.get(visit_username)数据异常");
+        }
+        System.out.println("首先方位get_content");
         return service.SelectCommentContent(reqDto);
     }
 
     @GetMapping("/get_profile")
-    public User get_profile(HttpSession session) throws IOException {
+    public User get_profile(HttpSession session, @RequestParam("visit_username") String visit_username) throws IOException {
+
+        try {
+            reqDto.visit_username = session.getAttribute("visit_username").toString();
+        }
+        catch (Exception e){
+            System.out.println("session.get(visit_username)数据异常");
+        }
+
         //先查询获取user对象，最后再进行profile_flag的赋值操作
         reqDto.setSession(session);
         user = service.SelectUser(reqDto);
+
         //用户没有登录，直接返回user
         if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
             System.out.println("用户没有登录，直接返回user");
@@ -72,6 +89,7 @@ public class ContentController {
 
 
         System.out.println("最后出来了");
+        System.out.println("其次方位get_profile");
             return user;
         }
 

@@ -14,6 +14,28 @@
         insert into publish_content(topic_id, topic_name,username,title,content) value(#{0}, #{1} ,#{2} ,#{3} ,#{4})
     </insert>
 
+
+    <select id="SelectProfileContent" resultMap="getClassesMap">
+        select
+        u.id
+        ,u.topic_id
+        ,u.username
+        ,u.title
+        ,u.content
+        ,u.time
+        ,p.comment_content_id
+        ,p.comment_username
+        ,p.comment_content
+        ,p.comment_time
+
+        from publish_content u
+        left join publish_comment p
+        on u.id = p.comment_content_id
+        where u.username=#{0}
+        and topic_id = #{1}
+        order by coalesce(p.comment_time ,u.time) desc
+    </select>
+
     <select id="SelectCommentContent" resultMap="getClassesMap">
         select
          u.id
@@ -30,8 +52,7 @@
         from publish_content u
         left join publish_comment p
         on u.id = p.comment_content_id
-        where if(#{0}=2, u.username=#{1} ,1=1)
-        and topic_id = #{2}
+        where topic_id = #{0}
         order by coalesce(p.comment_time ,u.time) desc
     </select>
 

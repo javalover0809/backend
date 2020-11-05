@@ -14,7 +14,7 @@
 
         select
 
-        al.id
+         al.id
         ,al.username
         ,al.password
         ,al.personal_intro
@@ -52,6 +52,7 @@
 
         on  al.username = one.username
         and al.user_create_time = one.user_create_time
+        where al.username = #{0}
 
     </select>
 

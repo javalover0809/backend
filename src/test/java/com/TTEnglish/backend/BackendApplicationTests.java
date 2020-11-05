@@ -2,6 +2,7 @@ package com.TTEnglish.backend;
 
 import com.TTEnglish.backend.controller.ContentController;
 import com.TTEnglish.backend.controller.PublishController;
+import com.TTEnglish.backend.dao.FriendMapper;
 import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
@@ -32,6 +33,15 @@ public class BackendApplicationTests {
 	private AllService service = new AllService();
 	private ReqDto reqDto = new ReqDto();
 	private ContentController ContentController = new ContentController();
+	@Test
+	public void insertfriend() throws IOException {
+		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+		SqlSession session = sqlSessionFactory.openSession();
+		FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+		friendMapper.insertNewFriend("唐国洁","史玉柱");
+		session.commit();
+		session.close();
+	}
 
 
 

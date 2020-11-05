@@ -9,6 +9,7 @@ public interface ContentMapper {
     public String selectString();
     public String SelectMaxTopicId();
     public List<Content> SelectAllContent();
-    public List<Content> SelectCommentContent(String visitFlag,String username,String topic_id);
+    public List<Content> SelectProfileContent(String visit_username,String topic_id);
+    public List<Content> SelectCommentContent(String topic_id);
     public Content SelectContent();
 }

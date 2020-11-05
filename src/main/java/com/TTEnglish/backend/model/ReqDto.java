@@ -39,6 +39,10 @@ public class ReqDto {
     public String user_postphd_period;
     public String is_insertprofile;
     public String is_publishcontent;
+    public String visit_username;
+    public String recommend_friend_name;
+
+
 
     public HttpSession getSession() {
         return session;

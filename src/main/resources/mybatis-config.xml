@@ -19,5 +19,6 @@
         <mapper resource="UserMapper.xml" />
         <mapper resource="ContentMapper.xml" />
         <mapper resource="CommentMapper.xml" />
+        <mapper resource="FriendMapper.xml" />
     </mappers>
 </configuration>

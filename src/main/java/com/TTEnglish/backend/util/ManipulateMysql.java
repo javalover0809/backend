@@ -2,6 +2,7 @@ package com.TTEnglish.backend.util;
 
 import com.TTEnglish.backend.dao.CommentMapper;
 import com.TTEnglish.backend.dao.ContentMapper;
+import com.TTEnglish.backend.dao.FriendMapper;
 import com.TTEnglish.backend.dao.UserMapper;
 import com.TTEnglish.backend.model.Content;
 import com.TTEnglish.backend.model.ReqDto;
@@ -13,6 +14,17 @@ import java.io.IOException;
 import java.util.List;
 
 public class ManipulateMysql {
+
+
+    public void insertNewFriend(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        friendMapper.insertNewFriend(reqDto.getSession().getAttribute("username").toString(),reqDto.recommend_friend_name);
+        session.commit();
+        session.close();
+    }
 
 
     public String SelectMaxTopicId() throws IOException {
@@ -109,6 +121,17 @@ public class ManipulateMysql {
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
+
+        //reqDto.visit_username!=null 表示获取 访问人的个人信息卡
+        if(reqDto.visit_username!=null){
+            User user = userMapper.getUserByUsername(reqDto.visit_username);
+            //每次访问完之后，清除此字段
+            reqDto.getSession().removeAttribute("visit_username");
+            reqDto.visit_username = null;
+            session.close();
+            return user;
+        }
+
         User user = userMapper.getUserByUsername(reqDto.getSession().getAttribute("username").toString());
         session.close();
         return user;
@@ -120,7 +143,20 @@ public class ManipulateMysql {
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-        List<Content> listcontent = contentMapper.SelectCommentContent(reqDto.getContent_flag(),reqDto.getSession().getAttribute("username").toString(), reqDto.getSession().getAttribute("topic_id").toString());
+        //reqDto.visit_username!=null 表示获取 访问人发布的信息
+        if(reqDto.visit_username!=null){
+            System.out.println("最终进入到这里，访问人的数据是："+reqDto.visit_username);
+            System.out.println("reqDto.getContent_flag()，访问人的数据是："+reqDto.getContent_flag());
+            List<Content> listcontent = contentMapper.SelectProfileContent(reqDto.visit_username, reqDto.getSession().getAttribute("topic_id").toString());
+            session.close();
+            //每次访问完之后，清除此字段
+            reqDto.getSession().removeAttribute("visit_username");
+            reqDto.visit_username = null;
+
+            return listcontent;
+        }
+        List<Content> listcontent = contentMapper.SelectCommentContent(reqDto.getSession().getAttribute("topic_id").toString());
+
         session.close();
         return listcontent;
     }
