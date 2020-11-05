@@ -46,16 +46,19 @@ public class AxiosController {
     @GetMapping("/get_friend_recommend")
     public List<Friend> selectFriendRecommend(HttpSession session) throws IOException {
         reqDto.setSession(session);
+        if(session.getAttribute("username")==null){
+            return null;
+        }
         List<Friend> friend_name_recommends = service.selectRecommendFriend(reqDto);
-        System.out.println("selectFriendRecommend:");
-        System.out.println("selectFriendRecommendfriends:"+friend_name_recommends);
-        System.out.println("selectFriendRecommendnd的接口friends:"+ friend_name_recommends.get(0).getFriend_name());
         return friend_name_recommends;
     }
 
     @GetMapping("/get_friend")
     public List<Friend> selectFriend(HttpSession session) throws IOException {
         reqDto.setSession(session);
+        if(session.getAttribute("username")==null){
+            return null;
+        }
         List<Friend> friends = service.selectFriend(reqDto);
         System.out.println("寻找friend的接口:");
         System.out.println("寻找friend的接口friends:"+friends);
@@ -84,7 +87,10 @@ public class AxiosController {
 
     @GetMapping("/get_profile")
     public User get_profile(HttpSession session, @RequestParam("visit_username") String visit_username) throws IOException {
-
+        //用户没有登录，直接返回null
+        if(session.getAttribute("username")==null){
+            return null;
+        }
         try {
             reqDto.visit_username = session.getAttribute("visit_username").toString();
         }
@@ -95,12 +101,6 @@ public class AxiosController {
         //先查询获取user对象，最后再进行profile_flag的赋值操作
         reqDto.setSession(session);
         user = service.SelectUser(reqDto);
-
-        //用户没有登录，直接返回user
-        if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
-            System.out.println("用户没有登录，直接返回user");
-            return user;
-        }
             //判断GetMapping("/profile_edit") 是否设置了profile_edit_flag=2
             try {
                 System.out.println("进入到了这里");
