@@ -138,11 +138,23 @@
                 <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
                 <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
-
-
           </div>
         </form><hr>
-        <div>
+
+
+<!--          <form name="fm">-->
+<!--            <input type="hidden" name="toDate" value="" id="toDate"/>-->
+<!--            <input type="button" onclick="changeworld(this)" value="传值"/>-->
+<!--          </form>-->
+
+
+          <a href="javascript:void(0)" onclick="open_private_message_window()" class="text-success">【私信】</a>
+          <form id="private_message_form01" method="post" action="private_message">
+              <input type="textarea" name="friend_name" value="1DFAFA" style="display:none">
+          </form>
+
+
+          <div>
           <div class="front_content">
                <!-- post -->
                <div class="panel panel-default" v-for = "content in infos">
@@ -210,11 +222,50 @@
       <!-- add friend -->
         <div class="panel panel-default" id="get_friend_recommend_app">
             <h4>好友推荐</h4>
-              <li  v-for="friend_name_recommend in friend_name_recommends">
-                  <a  v-bind:href="['friend_add/' + friend_name_recommend.friend_name]" class="text-success">【添加】</a>
-                  <a  v-bind:href="['home/' + friend_name_recommend.friend_name]">{{friend_name_recommend.friend_name}}</a>
-                  <br>
-              </li>
+
+                 <li v-if=" friend_name_recommends[0] !== undefined ">
+                  <a href="javascript:void(0);" onclick="add_friend_message()" class="text-success">【添加】</a>
+                  <a  v-bind:href="['home/' + friend_name_recommends[0].friend_name]">{{friend_name_recommends[0].friend_name}}</a>
+                  <form id="friend_add_form0" method="post" action="friend_add">
+                      <input type="textarea" name="message"     value="" id="message_id0" style="display:none"/>
+                      <input type="textarea" name="friend_name" v-model="friend_name_recommends[0].friend_name" id="message_id1" style="display:none">
+                  </form>
+                 </li>
+
+                  <li v-if=" friend_name_recommends[1] !== undefined ">
+                  <a href="javascript:void(0);" onclick="document.getElementById('friend_add_form1').submit();" class="text-success">【添加】</a>
+                  <a  v-bind:href="['home/' + friend_name_recommends[1].friend_name]">{{friend_name_recommends[1].friend_name}}</a>
+                  <form id="friend_add_form1" method="post" action="friend_add">
+                      <input type="textarea" name="friend_name" v-model="friend_name_recommends[1].friend_name" style="display:none">
+                  </form>
+                  </li>
+
+
+                   <li v-if=" friend_name_recommends[2] !== undefined ">
+                       <a href="javascript:void(0);" onclick="document.getElementById('friend_add_form2').submit();" class="text-success">【添加】</a>
+                       <a  v-bind:href="['home/' + friend_name_recommends[2].friend_name]">{{friend_name_recommends[2].friend_name}}</a>
+                       <form id="friend_add_form2" method="post" action="friend_add">
+                           <input type="textarea" name="friend_name" v-model="friend_name_recommends[2].friend_name" style="display:none">
+                       </form>
+                   </li>
+
+
+                   <li v-if=" friend_name_recommends[3] !== undefined ">
+                       <a href="javascript:void(0);" onclick="document.getElementById('friend_add_form3').submit();" class="text-success">【添加】</a>
+                       <a  v-bind:href="['home/' + friend_name_recommends[3].friend_name]">{{friend_name_recommends[3].friend_name}}</a>
+                       <form id="friend_add_form3" method="post" action="friend_add">
+                           <input type="textarea" name="friend_name" v-model="friend_name_recommends[3].friend_name" style="display:none">
+                       </form>
+                   </li>
+
+                   <li v-if=" friend_name_recommends[4] !== undefined ">
+                       <a href="javascript:void(0);" onclick="document.getElementById('friend_add_form4').submit();" class="text-success">【添加】</a>
+                       <a  v-bind:href="['home/' + friend_name_recommends[4].friend_name]">{{friend_name_recommends[4].friend_name}}</a>
+                       <form id="friend_add_form4" method="post" action="friend_add">
+                           <input type="textarea" name="friend_name" v-model="friend_name_recommends[4].friend_name" style="display:none">
+                       </form>
+                   </li>
+
 
         </div>
 
@@ -239,12 +290,21 @@
         <div class="panel panel-default">
             <h4>我的好友</h4>
           <div class="panel-body" id="get_friend_app">
-                <li  v-for="friends in friend_names">
-                    <a v-bind:href="['private_message/' +  friends.friend_name]" class="text-success">【私信】</a>
-                    <a v-bind:href="['home/' +  friends.friend_name]" target="_blank">{{friends.friend_name}}</a>
-                    <a v-bind:href="['friend_delete/' +  friends.friend_name]" class="text-danger">【删除】</a>
-                    <br>
-                </li>
+
+              <li v-if=" friend_names[0] !== undefined ">
+
+<!--                  <a href="javascript:void(0)" onclick="send_private_message()" class="text-success">【私信】</a>-->
+                  <a :href="getGoodsHref(friend_names[0].friend_name)" target="_blank" class="text-success">【私信】</a>
+                  <a v-bind:href="['home/' +  friend_names[0].friend_name]" target="_blank">{{friend_names[0].friend_name}}</a>
+                  <a href="javascript:void(0);" onclick="document.getElementById('friend_delete_form0').submit();" class="text-danger">【删除】</a>
+<!--                  <form id="private_message_form0" method="post" action="private_message">-->
+<!--                      <input type="textarea" name="message"     value="" id="toDat" style="display:none"/>-->
+                      <input id="get_friend_name" type="textarea" name="friend_name" value="friend_names[0].friend_name" style="display:none">
+<!--                  </form>-->
+                  <form id="friend_delete_form0" method="post" action="friend_delete">
+                      <input id="get_friend_name1" type="textarea" name="friend_name" v-model="friend_names[0].friend_name" style="display:none">
+                  </form>
+              </li>
 
           </div>
         </div>
@@ -284,7 +344,87 @@
   <!-- ./footer -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
+<script>
 
+function open_private_message_window() {
+var friend_name = document.getElementById("get_friend_name1").value
+console.log(friend_name)
+var url = "private_message/" + friend_name + ".html"
+window.open(url, "width=500,height=500")
+}
+
+function add_friend_message(){
+          var result = prompt("申请好友内容")
+          if(result){
+          document.getElementById('message_id0').value = result
+          var res = document.getElementById('message_id1').value
+          alert(res)
+          var url = "private_message/" + res + ".html"
+          window.open(url, "width=500,height=500")
+
+          document.getElementById('friend_add_form0').submit()
+          }
+}
+
+function send_friend_message(){
+
+          var friend_name = document.getElementById('get_friend_name').value
+            console.log(friend_name)
+            var url = "private_message/" + friend_name + ".html"
+            window.open(url, "width=500,height=500")
+
+}
+
+
+
+
+
+function send_private_message(){
+  var http = new XMLHttpRequest()
+  var new_message
+  http.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         var old_message = this.responseText
+         new_message = prompt(old_message)
+
+         var xhttp2 = new XMLHttpRequest();
+         xhttp2.onreadystatechange = function() {}
+         xhttp2.open("POST", "get_fold_message_new_back", true)
+         xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+         send_message = "fname=Bill&lname=" + new_message
+         xhttp2.send(send_message);
+     }
+
+  }
+  http.open("POST", "get_fold_message", true)
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  send_message = "fname=Bill&lname=" + new_message
+  http.send(send_message);
+
+}
+
+function get_old_message() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+     return this.responseText
+  }
+  xhttp.open("GET", "www.baidu.com", true)
+  xhttp.send()
+}
+    function helloworld(){
+            alert('唐国洁，你一定可以改变世界！！！！')
+            var name=prompt("请输入您的名字","xxx")
+            console.log(name)
+    }
+
+    function changeworld(flag) {
+            var toDate=prompt("请输入你要发送的私信信息","xxx")
+            flag.form.toDate.value = toDate;
+
+            alert(flag.form.toDate.value) //打印bai看看时间du
+            }
+
+</script>
   <script>
  new Vue({
   el: '#get_private_message_app',
@@ -343,6 +483,12 @@
         console.log(error);
       });
   },
+
+  methods:{
+	getGoodsHref:function(val){
+	    return 'http://localhost:8080/home/private_message/'+val
+	}
+	}
 
 
 })

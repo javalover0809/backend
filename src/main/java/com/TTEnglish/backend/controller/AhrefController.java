@@ -52,14 +52,23 @@ public class AhrefController {
         return "home";
     }
 
-
     @GetMapping(value = "/private_message/{friend_name}")
-    public String privatemessage(HttpSession session, @PathVariable("friend_name") String private_message_friend_name) throws IOException {
+    public String privateMessageNewWindow(HttpSession session, @PathVariable("friend_name") String private_message_friend_name) throws IOException {
         session.setAttribute("private_message_friend_name",private_message_friend_name);
         reqDto.setSession(session);
-        System.out.println("调用s/private_message/{friend_name}："+private_message_friend_name);
-        return "home";
+        System.out.println("调用s/private_message/{friend_name}daa："+private_message_friend_name);
+        return "private_message";
     }
+
+
+
+//    @GetMapping(value = "/private_message/{friend_name}")
+//    public String privatemessage(HttpSession session, @PathVariable("friend_name") String private_message_friend_name) throws IOException {
+//        session.setAttribute("private_message_friend_name",private_message_friend_name);
+//        reqDto.setSession(session);
+//        System.out.println("调用s/private_message/{friend_name}："+private_message_friend_name);
+//        return "home";
+//    }
 
 
     @GetMapping("/profile_edit")
@@ -68,5 +77,7 @@ public class AhrefController {
         session.setAttribute("profile_edit_flag","2");
         return "redirect:home";
     }
+
+
 
 }

@@ -121,4 +121,40 @@ public class FormController {
 
         return "redirect:" + resPage;
     }
+
+    @PostMapping("/friend_add")
+    public String friendAdd(HttpSession session
+            , @RequestParam("friend_name") String friend_name
+            , @RequestParam("message") String message) throws IOException {
+        reqDto.setSession(session);
+        System.out.println("这里进行收到了post的数据friend_add的名字是s:"+friend_name);
+        System.out.println("这里进行收到了post的数据friend_add的名字是smessage:"+message);
+        return "redirect:home";
+    }
+    @PostMapping("/friend_delete")
+    public String friendDelete(HttpSession session, @RequestParam("friend_name") String friend_name) throws IOException {
+        reqDto.setSession(session);
+        System.out.println("这里进行收friend_delete:"+friend_name);
+        return "redirect:home";
+    }
+
+    @PostMapping("/private_message")
+    public void privateMessage(HttpSession session
+            , @RequestParam("friend_name") String friend_name
+            , @RequestParam("message") String message) throws IOException {
+        reqDto.setSession(session);
+        System.out.println("这里进行收private_message:"+friend_name);
+        System.out.println("这里进行收message:"+message);
+    }
+
+    @PostMapping("/private_message_new_window")
+    public void privateMessageNewWindow(HttpSession session
+            , @RequestParam("friend_name") String friend_name
+            , @RequestParam("message") String message) throws IOException {
+        reqDto.setSession(session);
+        System.out.println("这里进行收private_message:"+friend_name);
+        System.out.println("这里进行收message:"+message);
+    }
+
+
 }

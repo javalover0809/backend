@@ -18,6 +18,7 @@ public class AxiosController {
     private AllService service = new AllService();
     private VisitFlag visitFlag = new VisitFlag();
 
+
     @GetMapping("/get_pattern_flag")
     public String get_pattern_flag(String result) throws IOException {
         System.out.println("这是第三条数据");
@@ -62,7 +63,6 @@ public class AxiosController {
         List<Friend> friends = service.selectFriend(reqDto);
         System.out.println("寻找friend的接口:");
         System.out.println("寻找friend的接口friends:"+friends);
-        System.out.println("寻找friend的接口friends:"+ friends.get(0).getFriend_name());
        return friends;
     }
 

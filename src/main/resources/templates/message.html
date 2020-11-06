@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<title>joylink后台</title>
+<body>
+<div class="container-fluid">
+    <!--富文本编辑框-->
+    <div id="editArea"  >
+        <div style="width:80%; margin-top:50px;">
+            <div id="content" style="height:400px;max-height:500px;">
+                <p>请输入内容...</p>
+            </div>
+            <div style="margin-top:10px;">
+                <button type="button" class="btn btn-success btn_save_content" id="saveContent">保存</button>
+                <div class="error" style="margin-top:15px;margin-left:30px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${rc.contextPath}/resources/js/wangEditor.min.js"></script>
+<script>
+			//---- 初始化富文本编辑框插件 ----
+			window.wangEditor.$body = $('body');
+			var editor = new wangEditor('content');
+			editor.config.uploadImgUrl = '/jlNav/uploadImg';    //controller的请求地址
+		    editor.create();
+		</script>
+</body>
+</html>
