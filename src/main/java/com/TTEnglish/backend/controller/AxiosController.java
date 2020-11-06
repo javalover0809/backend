@@ -26,19 +26,13 @@ public class AxiosController {
     }
 
 
-    @GetMapping("/get_private_message")
-    public List<PrivateMessage> getPrivateMessage(HttpSession session) throws IOException {
+    @GetMapping("/messages")
+    public List<PrivateMessage> getPrivateMessage(HttpSession session
+    , @RequestParam("friend_name") String friend_name) throws IOException {
         reqDto.setSession(session);
-        try {
-            reqDto.private_message_friend_name = session.getAttribute("private_message_friend_name").toString();
-        }
-        catch (Exception e){
-            System.out.println("session.get(private_message_friend_name)数据异常");
-        }
-
+        reqDto.private_message_friend_name = session.getAttribute("friend_name").toString();
+        System.out.println("调用sprivate_messagefriend_nameDFFDAFAfriend_name2121"+friend_name);
         List<PrivateMessage> privateMessages= service.selectPrivateMessageContent(reqDto);
-
-
         return privateMessages;
     }
 

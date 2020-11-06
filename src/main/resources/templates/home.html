@@ -138,6 +138,9 @@
                 <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
                 <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
+                <a href="#" onclick="open_new_window()">弹窗</a>
+                <a href="javascript:void(0)" onclick="open_new_window()" class="text-success">【私信】</a>
+<!--                <a href="#" onclick="openwin()">open</a>-->
 
 
           </div>
@@ -240,8 +243,11 @@
             <h4>我的好友</h4>
           <div class="panel-body" id="get_friend_app">
                 <li  v-for="friends in friend_names">
-                    <a v-bind:href="['private_message/' +  friends.friend_name]" class="text-success">【私信】</a>
-                    <a v-bind:href="['home/' +  friends.friend_name]" target="_blank">{{friends.friend_name}}</a>
+                    <a href="JavaScript:void(0)" onclick="open_new_window()" class="text-success">【私信】</a>
+                    <form id="" method="post" action="">
+                        <input id="get_friend_name" type="textarea" name="friend_name" v-model="friends.friend_name" style="display:none">
+                    </form>
+                    <a v-bind:href="['home/' +  friends.friend_name]" class="get_friend_name" target="_blank">{{friends.friend_name}}</a>
                     <a v-bind:href="['friend_delete/' +  friends.friend_name]" class="text-danger">【删除】</a>
                     <br>
                 </li>
@@ -286,6 +292,18 @@
   <script type="text/javascript" src="js/script.js"></script>
 
   <script>
+
+function open_new_window(){
+        var friend_name =  document.getElementById("get_friend_name").value
+<!--         var friend_name =  document.getElementsByClassName("get_friend_name1").innerHTML-->
+        alert("这个就是我们测试的数据！")
+        alert(friend_name)
+        window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
+}
+
+
+
+
  new Vue({
   el: '#get_private_message_app',
   data () {
