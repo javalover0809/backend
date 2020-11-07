@@ -18,6 +18,7 @@
         </form>
         <li><a href="home">首页</a></li>
         <li><a href="login">登陆</a></li>
+          <li><a href="login">未读消息</a></li>
         <li><a href="login_out">退出</a></li>
       </ul>
     </div>
@@ -138,9 +139,6 @@
                 <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
                 <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
-                <a href="#" onclick="open_new_window()">弹窗</a>
-                <a href="javascript:void(0)" onclick="open_new_window()" class="text-success">【私信】</a>
-<!--                <a href="#" onclick="openwin()">open</a>-->
 
 
           </div>
@@ -214,7 +212,13 @@
         <div class="panel panel-default" id="get_friend_recommend_app">
             <h4>好友推荐</h4>
               <li  v-for="friend_name_recommend in friend_name_recommends">
-                  <a  v-bind:href="['friend_add/' + friend_name_recommend.friend_name]" class="text-success">【添加】</a>
+                  <a href="javascript:void(0);" onclick="add_friend_message()" class="text-success">【添加】</a>
+                  <form id="add_friend" method="post" action="" style="display: inline">
+                      <input id="add_friend_name" type="textarea" name="friend_name" v-model="friend_name_recommend.friend_name" style="display:none">
+                  </form>
+
+
+
                   <a  v-bind:href="['home/' + friend_name_recommend.friend_name]">{{friend_name_recommend.friend_name}}</a>
                   <br>
               </li>
@@ -222,16 +226,21 @@
         </div>
 
           <!-- friend requests -->
-          <div class="panel panel-default">
+          <div class="panel panel-default" id="get_apply_friend_message">
               <div class="panel-body">
                   <h4>好友请求</h4>
-                  <ul>
-                      <li>
-                          <a href="#">马云</a>
-                          <a class="text-success" href="#">【接收】</a>
-                          <a class="text-danger" href="#">【拒绝】</a>
+                      <li v-for="apply_friend_name in apply_friend_names">
+                          <a href="javascript:void(0);" onclick="approve_friend_message()" class="text-success">【接收】</a>
+                          <form id="approve_friend" method="post" action="" style="display: inline">
+                              <input id="approve_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">
+                          </form>
+
+                          <a href="#">{{apply_friend_name.friend_name}}</a>
+                          <a href="javascript:void(0);" onclick="reject_friend_message()" class="text-danger">【拒绝】</a>
+                          <form id="reject_friend" method="post" action="" style="display: inline">
+                              <input id="reject_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">
+                          </form>
                       </li>
-                  </ul>
               </div>
           </div>
 
@@ -243,8 +252,8 @@
             <h4>我的好友</h4>
           <div class="panel-body" id="get_friend_app">
                 <li  v-for="friends in friend_names">
-                    <a href="JavaScript:void(0)" onclick="open_new_window()" class="text-success">【私信】</a>
-                    <form id="" method="post" action="">
+                    <a href="JavaScript:void(0)" onclick="open_private_message_window()" class="text-success">【私信】</a>
+                    <form id="" method="post" action="" style="display: inline">
                         <input id="get_friend_name" type="textarea" name="friend_name" v-model="friends.friend_name" style="display:none">
                     </form>
                     <a v-bind:href="['home/' +  friends.friend_name]" class="get_friend_name" target="_blank">{{friends.friend_name}}</a>
@@ -293,13 +302,74 @@
 
   <script>
 
-function open_new_window(){
-        var friend_name =  document.getElementById("get_friend_name").value
-<!--         var friend_name =  document.getElementsByClassName("get_friend_name1").innerHTML-->
-        alert("这个就是我们测试的数据！")
-        alert(friend_name)
-        window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
+
+function approve_friend_message(){
+          var friend_name = document.getElementById('approve_friend_name').value
+          alert(friend_name)
+
+          var http = new XMLHttpRequest();
+          http.onreadystatechange = function() {}
+          http.open("POST", "approve_for_friend", true)
+          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          send_message = "friend_name="+friend_name
+          http.send(send_message);
 }
+
+function reject_friend_message(){
+          var friend_name = document.getElementById('reject_friend_name').value
+          alert(friend_name)
+
+          var http = new XMLHttpRequest();
+          http.onreadystatechange = function() {}
+          http.open("POST", "reject_for_friend", true)
+          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          send_message = "friend_name="+friend_name
+          http.send(send_message);
+}
+
+
+function add_friend_message(){
+          var result = prompt("请输入申请好友内容")
+          if(result){
+          var friend_name = document.getElementById('add_friend_name').value
+          var apply_friend_message = result
+          alert(friend_name)
+          alert(apply_friend_message)
+
+          var http = new XMLHttpRequest();
+          http.onreadystatechange = function() {}
+          http.open("POST", "apply_for_friend", true)
+          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+          send_message = "friend_name="+friend_name+"&apply_friend_message=" + apply_friend_message
+          http.send(send_message);
+          }
+}
+
+
+function open_private_message_window(){
+        var friend_name =  document.getElementById("get_friend_name").value
+        alert(friend_name)
+         window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
+}
+
+ new Vue({
+  el: '#get_apply_friend_message',
+  data () {
+    return {
+    apply_friend_names: null
+    }
+  },
+  mounted () {
+    axios.get('/get_apply_friend_message')
+      .then(response => (
+       this.apply_friend_names = response.data
+      ))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  },
+})
 
 
 

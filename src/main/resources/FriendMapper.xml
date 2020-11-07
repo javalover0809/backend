@@ -10,9 +10,38 @@
     <insert id="insertNewFriend">
         insert into user_friend(username,friend_name) value(#{0}, #{1})
     </insert>
+
+    <insert id="insertApproveFriendApply">
+        insert into user_friend(username,friend_name,is_accept) value(#{0}, #{1}, #{2})
+    </insert>
+
+    <insert id="insertNewFriendApply">
+        insert into user_friend(username,friend_name,apply_friend_message,is_friend) value(#{0}, #{1}, #{2}, #{3})
+    </insert>
     <delete id="deleteFriend">
         DELETE FROM user_friend WHERE username=#{0} and friend_name=#{1};
     </delete>
+
+    <select id="selectApplyFriend"  resultType="com.TTEnglish.backend.model.Friend">
+    select friend_name from user_friend
+        where is_friend = "0"
+        and coalesce(is_accept,0) != "1"
+        and username = #{0}
+        and friend_name not in
+        (
+        select friend_name
+        from user_friend
+        where username = #{0}
+        and is_accept = "1"
+        union all
+        select friend_name
+        from user_friend
+        where username = #{0}
+        and is_accept = "0"
+        )
+        order by user_create_time desc
+    </select>
+
     <select id="SelectRecommendFriendByUsername"  resultType="com.TTEnglish.backend.model.Friend">
         select
          #{0} as username

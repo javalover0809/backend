@@ -37,6 +37,11 @@ public class AllService {
         return content;
     }
 
+    public List<Friend> selectApplyFriend(ReqDto reqDto) throws IOException {
+        List<Friend> friends = manipulateMysql.selectApplyFriend(reqDto);
+        return friends;
+    }
+
     public List<Friend> selectRecommendFriend(ReqDto reqDto) throws IOException {
         List<Friend> friends = manipulateMysql.selectRecommendFriend(reqDto);
         return friends;
@@ -49,6 +54,14 @@ public class AllService {
     public void deleteFriend(ReqDto reqDto) throws IOException {
         manipulateMysql.deleteFriend(reqDto);
     }
+
+    public void insertApproveFriendApply(ReqDto reqDto) throws IOException {
+        manipulateMysql.insertApproveFriendApply(reqDto);
+    }
+    public void insertNewFriendApply(ReqDto reqDto) throws IOException {
+        manipulateMysql.insertNewFriendApply(reqDto);
+    }
+
     public void insertNewFriend(ReqDto reqDto) throws IOException {
         manipulateMysql.insertNewFriend(reqDto);
     }

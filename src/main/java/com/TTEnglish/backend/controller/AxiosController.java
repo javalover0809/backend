@@ -27,15 +27,24 @@ public class AxiosController {
 
 
     @GetMapping("/messages")
-    public List<PrivateMessage> getPrivateMessage(HttpSession session
-    , @RequestParam("friend_name") String friend_name) throws IOException {
+    public List<PrivateMessage> getPrivateMessage(HttpSession session) throws IOException {
         reqDto.setSession(session);
         reqDto.private_message_friend_name = session.getAttribute("friend_name").toString();
-        System.out.println("调用sprivate_messagefriend_nameDFFDAFAfriend_name2121"+friend_name);
+        System.out.println("调用sprivate_messagefriend_nameDFFDAFAfriend"+reqDto.private_message_friend_name);
         List<PrivateMessage> privateMessages= service.selectPrivateMessageContent(reqDto);
         return privateMessages;
     }
 
+
+    @GetMapping("/get_apply_friend_message")
+    public List<Friend> get_apply_friend_message(HttpSession session) throws IOException {
+        reqDto.setSession(session);
+        if(session.getAttribute("username")==null){
+            return null;
+        }
+        List<Friend> selectApplyFriend = service.selectApplyFriend(reqDto);
+        return selectApplyFriend;
+    }
 
     @GetMapping("/get_friend_recommend")
     public List<Friend> selectFriendRecommend(HttpSession session) throws IOException {

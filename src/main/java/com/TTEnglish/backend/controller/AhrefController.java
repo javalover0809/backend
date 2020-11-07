@@ -72,16 +72,7 @@ public class AhrefController {
 
     @GetMapping("/message")
     public String message(HttpSession session , @RequestParam("friend_name") String friend_name) throws IOException {
-        //前端发送资料请求，把profile_edit_flag设置为2，下一步到 /get_profile 中进行profile_edit_flag是否为2的判断
-//        System.out.println("调用s/private_message/{friend_name}DFFDAFA");
-//        System.out.println("调用s/private_message/{friend_name}DFFDAFAfriend_name"+friend_name);
-          session.setAttribute("friend_name",friend_name);
-//        reqDto.setSession(session);
-//        reqDto.private_message_friend_name = friend_name;
-//        List<PrivateMessage> privateMessages= service.selectPrivateMessageContent(reqDto);
-//        List<PrivateMessage> privateMessage= new AxiosController().getPrivateMessage(session,friend_name);
-//        model.addAttribute("msg","吾等为何而战");
-//        model.addAttribute("privateMessagesprivate",privateMessages);
+        session.setAttribute("friend_name",friend_name);
         return "message";
     }
 

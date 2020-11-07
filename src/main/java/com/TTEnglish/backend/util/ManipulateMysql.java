@@ -10,6 +10,17 @@ import java.util.List;
 
 public class ManipulateMysql {
 
+    public List<Friend> selectApplyFriend(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        List<Friend> friends = friendMapper.selectApplyFriend(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+
+        return friends;
+    }
+
     public List<Friend> selectRecommendFriend(ReqDto reqDto) throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
@@ -51,6 +62,31 @@ public class ManipulateMysql {
         SqlSession session = sqlSessionFactory.openSession();
         FriendMapper friendMapper = session.getMapper(FriendMapper.class);
         friendMapper.deleteFriend(reqDto.getSession().getAttribute("username").toString(),reqDto.delete_friend_name);
+        session.commit();
+        session.close();
+    }
+
+    public void insertApproveFriendApply(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        friendMapper.insertApproveFriendApply(reqDto.getSession().getAttribute("username").toString()
+                ,reqDto.recommend_friend_name
+                ,reqDto.is_accept);
+        session.commit();
+        session.close();
+    }
+
+    public void insertNewFriendApply(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        FriendMapper friendMapper = session.getMapper(FriendMapper.class);
+        friendMapper.insertNewFriendApply(reqDto.getSession().getAttribute("username").toString()
+                ,reqDto.recommend_friend_name
+                ,reqDto.apply_friend_message
+                ,reqDto.is_friend);
         session.commit();
         session.close();
     }

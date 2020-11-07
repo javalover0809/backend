@@ -48,6 +48,9 @@ public class ReqDto {
     public String from_message_content;
     public String private_message_show_flag;
     public String private_messages_input_value;
+    public String apply_friend_message;
+    public String is_friend;
+    public String is_accept;
 
 
 
