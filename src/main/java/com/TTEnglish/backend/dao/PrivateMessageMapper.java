@@ -5,6 +5,9 @@ import com.TTEnglish.backend.model.PrivateMessage;
 import java.util.List;
 
 public interface PrivateMessageMapper {
+   void updateReadMessage(String username
+                         ,String private_message_friend_name
+                         ,String is_read);
    void insertPrivateMessage(String username
                             ,String private_message_friend_name
                             ,String to_message_content

@@ -58,6 +58,10 @@ public class AllService {
     public void insertApproveFriendApply(ReqDto reqDto) throws IOException {
         manipulateMysql.insertApproveFriendApply(reqDto);
     }
+
+    public void updateReadMessage(ReqDto reqDto) throws IOException {
+        manipulateMysql.updateReadMessage(reqDto);
+    }
     public void insertNewFriendApply(ReqDto reqDto) throws IOException {
         manipulateMysql.insertNewFriendApply(reqDto);
     }

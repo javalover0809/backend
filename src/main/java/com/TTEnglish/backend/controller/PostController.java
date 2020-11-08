@@ -18,16 +18,17 @@ import java.io.IOException;
         private AllService service = new AllService();
         private VisitFlag visitFlag = new VisitFlag();
 
-//        @PostMapping("/get_fold_message")
-//        public String old_message(HttpSession session
-//                , @RequestParam("fname") String fname
-//                , @RequestParam("lname") String lname) throws IOException {
-//            System.out.println("这个是后端返回的测试历史聊天数据这是第三条数据");
-//            System.out.println("这个是后端返回的测试历史聊天数据这是第三条数据fname:"+fname);
-//            System.out.println("这个是后端返回的测试历史聊天数据这是第三条数据lname:"+lname);
-//
-//            return "这个是后端返回的测试历史聊天数据";
-//        }
+        @PostMapping("/close_message_alert")
+        public String close_message_alert(HttpSession session
+                , @RequestParam("friend_name") String friend_name) throws IOException {
+            reqDto.setSession(session);
+            //因为是对方发送来的信息，因为需要把对方设未username，方便在mysql进行，已读数据的update操作
+            reqDto.setUsername(friend_name);
+            reqDto.private_message_friend_name = session.getAttribute("username").toString();
+            reqDto.is_read = "1";;
+            service.updateReadMessage(reqDto);
+            return "这个是后端返回的测试历史聊天数据new_back";
+        }
 
         @PostMapping("/apply_for_friend")
         public String apply_for_friend(HttpSession session

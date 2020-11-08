@@ -76,6 +76,16 @@ public class ManipulateMysql {
         session.close();
     }
 
+    public void updateReadMessage(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        PrivateMessageMapper privateMessageMapper = session.getMapper(PrivateMessageMapper.class);
+        privateMessageMapper.updateReadMessage( reqDto.getUsername(),reqDto.private_message_friend_name,reqDto.is_read);
+        session.commit();
+        session.close();
+    }
+
     public void insertApproveFriendApply(ReqDto reqDto) throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();

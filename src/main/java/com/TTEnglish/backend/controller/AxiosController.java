@@ -35,6 +35,14 @@ public class AxiosController {
         return result;
     }
 
+    @GetMapping("/messages_send_to")
+    public String messages_send_to(HttpSession session) throws IOException {
+        reqDto.setSession(session);
+
+//        reqDto.private_message_friend_name = friend_name;
+        return session.getAttribute("friend_name").toString();
+    }
+
 
     @GetMapping("/messages")
     public List<PrivateMessage> getPrivateMessage(HttpSession session) throws IOException {

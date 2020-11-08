@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
   <title>TT英语角</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -43,11 +44,10 @@
               <button onclick="myFunction()" class="dropbtn">私信 {{private_message_total}}</button>
               <div id="myDropdown" class="dropdown-content">
                   <li v-for="privateMessage in privateMessages">
-                      <a href="JavaScript:void(0)" onclick="open_private_message_detail_window()">{{privateMessage.username}}:{{privateMessage.private_message_detail_num}}</a>
-                      <form id="get_private_name" method="post" action="" style="display: inline">
-                          <input id="get_private_username" type="textarea" name="friend_name" v-model="privateMessage.username" style="display:none">
-                      </form>
-
+                      <a href="JavaScript:void(0)" v-on:click="say(privateMessage.username)">{{privateMessage.username}}:{{privateMessage.private_message_detail_num}}</a>
+<!--                      <form id="get_private_name" method="post" action="" style="display: inline">-->
+<!--                          <input v-bind:id="privateMessage.username" class="get_private_class_name" type="textarea" name="friend_name" v-model="privateMessage.username" style="display:none">-->
+<!--                      </form>-->
                   </li>
 <!--                  <a href="#home">Home</a>-->
 <!--                  <a href="#about">About</a>-->
@@ -73,10 +73,6 @@
               </div>
           </div>
 
-<!--          <li id="get_friend_apps">-->
-<!--              <a href="JavaScript:void(0)" onclick="open_private_message_detail_window()" style="color:red">私信:{{private_message_detail}}</a>-->
-<!--          </li>-->
-<!--        <li><a href="login_out">退出</a></li>-->
       </ul>
     </div>
   </nav>
@@ -196,10 +192,9 @@
                 <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
                 <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
-
-
           </div>
         </form><hr>
+
         <div>
           <div class="front_content">
                <!-- post -->
@@ -309,10 +304,10 @@
             <h4>我的好友</h4>
           <div class="panel-body" id="get_friend_app">
                 <li  v-for="friends in friend_names">
-                    <a href="JavaScript:void(0)" onclick="open_private_message_window()" class="text-success">【私信】</a>
-                    <form id="" method="post" action="" style="display: inline">
-                        <input id="get_friend_name" type="textarea" name="friend_name" v-model="friends.friend_name" style="display:none">
-                    </form>
+                    <a href="JavaScript:void(0)" v-on:click="say_private(friends.friend_name)" class="text-success">【私信】</a>
+<!--                    <form id="" method="post" action="" style="display: inline">-->
+<!--                        <input id="get_friend_name" type="textarea" name="friend_name" v-model="friends.friend_name" style="display:none">-->
+<!--                    </form>-->
                     <a v-bind:href="['home/' +  friends.friend_name]" class="get_friend_name" target="_blank">{{friends.friend_name}}</a>
                     <a v-bind:href="['friend_delete/' +  friends.friend_name]" class="text-danger">【删除】</a>
                     <br>
@@ -358,7 +353,6 @@
   <script type="text/javascript" src="js/script.js"></script>
 
   <script>
-
 
 function myFunction6() {
     document.getElementById("myDropdown6").classList.toggle("show");
@@ -426,8 +420,8 @@ function add_friend_message(){
           http.send(send_message);
           }
 }
-function open_private_message_detail_window(){
-        var friend_name =  document.getElementById("get_private_username").value
+function open_private_message_detail_window(friend_name){
+<!--        var friend_name =  document.getElementsByClassName("get_private_class_name").value-->
         alert(friend_name)
         window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
 }
@@ -521,6 +515,19 @@ function open_private_message_window(){
         console.log(error);
       });
   },
+  methods: {
+    say: function (friend_name) {
+      alert(friend_name)
+      var http = new XMLHttpRequest();
+      http.onreadystatechange = function() {}
+      http.open("POST", "close_message_alert", true)
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      send_message = "friend_name="+friend_name
+      http.send(send_message);
+      window.open("message?friend_name="+friend_name ,"" ,"width=400,height=400")
+
+    }
+  }
 })
 
 
@@ -540,6 +547,13 @@ function open_private_message_window(){
         console.log(error);
       });
   },
+    methods: {
+    say_private: function (friend_name) {
+      alert(friend_name)
+      window.open("message?friend_name="+friend_name ,"" ,"width=400,height=400")
+
+    }
+  }
 })
 
 

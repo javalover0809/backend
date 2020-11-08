@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="say(name)">Say hi</button>
+    <button v-on:click="say('what')">Say what</button>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    name: '唐国洁，你一定可以改变世界！！！'
+  },
+  methods: {
+    say: function (message) {
+      alert(message)
+      window.open("message","" ,"width=400,height=400")
+    }
+  }
+})
+
+</script>
+</body>
+</html>

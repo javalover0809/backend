@@ -16,7 +16,7 @@
 </head>
 <body>
 <div style="background: white; height:100%; width: 100%;">
-    <form method="post" action="publish_private_message">
+
         <div  id="content_app">
                 <p v-for = "private_message in infos" >
                     <br>发送时间&nbsp{{ private_message.message_create_time }}</br>
@@ -24,18 +24,19 @@
                 </p>
         </div>
         <div style="background: white; height:20%; width: 100%; position:fixed;bottom:0;">
-<!--            v-model="private_message.private_message_friend_name"-->
-            <input class="form-control" type="textarea" name="private_message_friend_name" value="Elon Musk" size="80px" style="display:none">
-            <textarea rows="XX" cols="XX"  style="background: white; height:20%; width: 100%; position:fixed;bottom:10;" type="textarea" name="to_message_content" placeholder="私聊..."></textarea>
-            <input style="background: blue; height:5%; width: 100%; position:fixed;bottom:0;" type="submit" name="button" align="middle" value="发送"/>
-        </div>
-    </form>
+            <form method="post" action="publish_private_message">
+             <div  id="content_apps">
+             <input id="get_friend_name" type="textarea" name="private_message_friend_name" v-model="private_message_friend_name" style="display:none">
+             <textarea rows="XX" cols="XX"  style="background: white; height:20%; width: 100%; position:fixed;bottom:10;" type="textarea" name="to_message_content" placeholder="私聊..."></textarea>
+             <input style="background: blue; height:5%; width: 100%; position:fixed;bottom:0;" type="submit" name="button" align="middle" value="发送"/>
+             </div>
+          </form>
 </div>
 </body>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script>
-  new Vue({
+new Vue({
   el: '#content_app',
   data () {
     return {
@@ -46,6 +47,26 @@
     axios.get('/messages')
       .then(response => (
        this.infos = response.data
+      ))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+
+
+})
+
+  new Vue({
+  el: '#content_apps',
+  data () {
+    return {
+    private_message_friend_name:  null
+    }
+  },
+  mounted () {
+    axios.get('/messages_send_to')
+      .then(response => (
+       this.private_message_friend_name = response.data
       ))
       .catch(function (error) { // 请求失败处理
         console.log(error);
