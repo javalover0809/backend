@@ -10,6 +10,9 @@ public interface PrivateMessageMapper {
                             ,String to_message_content
                             ,String from_message_content
                             ,String private_message_show_flag
-                            ,String private_messages_input_value);
+                            ,String private_messages_input_value
+                            ,String is_read);
+
+   public List<PrivateMessage> SelectPrivateMessageAlert(String username);
    public List<PrivateMessage> selectPrivateMessageContent(String username, String private_message_friend_name);
 }

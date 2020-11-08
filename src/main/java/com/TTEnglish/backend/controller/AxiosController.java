@@ -18,6 +18,16 @@ public class AxiosController {
     private AllService service = new AllService();
     private VisitFlag visitFlag = new VisitFlag();
 
+
+    @GetMapping("/get_private_message_alert")
+    public List<PrivateMessage> SelectPrivateMessageAlert(HttpSession session) throws IOException {
+        reqDto.setSession(session);
+
+        List<PrivateMessage> privateMessages= service.SelectPrivateMessageAlert(reqDto);
+        return privateMessages;
+    }
+
+
     @GetMapping("/get_pattern_flag")
     public String get_pattern_flag(String result) throws IOException {
         System.out.println("这是第三条数据");
@@ -29,6 +39,8 @@ public class AxiosController {
     @GetMapping("/messages")
     public List<PrivateMessage> getPrivateMessage(HttpSession session) throws IOException {
         reqDto.setSession(session);
+
+//        reqDto.private_message_friend_name = friend_name;
         reqDto.private_message_friend_name = session.getAttribute("friend_name").toString();
         System.out.println("调用sprivate_messagefriend_nameDFFDAFAfriend"+reqDto.private_message_friend_name);
         List<PrivateMessage> privateMessages= service.selectPrivateMessageContent(reqDto);
@@ -125,4 +137,14 @@ public class AxiosController {
             return user;
         }
 
+    @GetMapping("/infos")
+    public User get_info(HttpSession session) throws IOException {
+        //用户没有登录，直接返回null
+        if(session.getAttribute("username")==null){
+            return null;
+        }
+        reqDto.setSession(session);
+        user = service.SelectInfo(reqDto);
+        return user;
+    }
 }

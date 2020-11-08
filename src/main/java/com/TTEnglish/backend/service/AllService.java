@@ -66,6 +66,11 @@ public class AllService {
         manipulateMysql.insertNewFriend(reqDto);
     }
 
+
+    public List<PrivateMessage> SelectPrivateMessageAlert(ReqDto reqDto) throws IOException {
+            return  manipulateMysql.SelectPrivateMessageAlert(reqDto);
+    }
+
     public List<PrivateMessage> selectPrivateMessageContent(ReqDto reqDto) throws IOException {
         if(reqDto.private_message_friend_name!=null){
             System.out.println("private_message_friend_name!=null" + reqDto.private_message_friend_name);
@@ -73,6 +78,11 @@ public class AllService {
         }
         System.out.println("private_message_friend_name的数据是" + reqDto.private_message_friend_name);
         return  null;
+    }
+
+    public User SelectInfo(ReqDto reqDto) throws IOException {
+
+        return  manipulateMysql.SelectInfo(reqDto);
     }
 
     public User SelectUser(ReqDto reqDto) throws IOException {

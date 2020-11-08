@@ -16,6 +16,7 @@
         ,from_message_content
         ,private_message_show_flag
         ,private_messages_input_value
+        ,is_read
         )
         value(
          #{0}
@@ -24,6 +25,7 @@
         ,#{3}
         ,#{4}
         ,#{5}
+        ,#{6}
         )
     </insert>
 
@@ -44,6 +46,32 @@
         and
         (private_message_friend_name = #{0} or private_message_friend_name = #{1} )
         order by message_create_time desc
+    </select>
+
+    <select id="SelectPrivateMessageAlert"  resultType="com.TTEnglish.backend.model.PrivateMessage">
+        select a.username
+              ,a.private_message_detail_num
+              ,b.private_message_total
+        from
+        (
+        select
+        username
+        ,count(*) as private_message_detail_num
+
+        from private_message
+        where private_message_friend_name = #{0}
+        and is_read = "0"
+        group by username
+        ) a
+        left join
+        (
+        select
+        count(*) as private_message_total
+
+        from private_message
+        where private_message_friend_name = #{0}
+        and is_read = "0"
+        ) b on 1=1
     </select>
 
 </mapper>

@@ -75,7 +75,6 @@ public class FormController {
         return "redirect:home";
     }
 
-
     @PostMapping("/publish_comment")
     public String PublishComment(HttpSession session, @RequestParam("id") String comment_content_id, @RequestParam("comment_content") String comment_content) throws IOException {
         reqDto.setSession(session);
@@ -115,10 +114,13 @@ public class FormController {
         reqDto.to_message_content = to_message_content;
         reqDto.from_message_content = "";
         reqDto.private_message_show_flag = "1";
+        reqDto.is_read = "0";
         reqDto.private_messages_input_value = "点击发送私信给" + private_message_friend_name;
         System.out.println("这里进行收到了post的数据");
+        System.out.println("这里进行收到了post的数据private_message_friend_name"+private_message_friend_name);
+        System.out.println("这里进行收到了post的数据pto_message_content"+to_message_content);
         String resPage = service.insertPrivateMessage(reqDto);
 
-        return "redirect:" + resPage;
+        return "message";
     }
 }

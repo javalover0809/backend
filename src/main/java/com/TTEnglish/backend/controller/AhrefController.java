@@ -52,7 +52,10 @@ public class AhrefController {
         service.deleteFriend(reqDto);
         return "home";
     }
-
+    @GetMapping(value = "/info")
+    public String openinfo(HttpSession session) throws IOException {
+        return "info";
+    }
 
     @GetMapping(value = "/private_message/{friend_name}")
     public String privatemessage(HttpSession session, @PathVariable("friend_name") String private_message_friend_name) throws IOException {

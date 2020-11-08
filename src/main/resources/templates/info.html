@@ -1,593 +1,83 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-  <title>TT英语角</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<!---->
+    <style type="text/css">
+        html,body {
+            height: 100%;
+            width:100%
+        }
+    </style>
 </head>
 <body>
-  <!-- nav -->
-  <nav class="navbar navbar-default" >
-    <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">TT英语角</a>
-        </div>
-
-
-
-
-      <ul class="nav navbar-nav navbar-right">
-<!--        <li><a href="home">首页</a></li>-->
-<!--        <li><a href="login">登陆</a></li>-->
-
-          <div class="dropdown">
-              <button onclick="myFunction()" class="dropbtn">首页</button>
-              <div id="myDropdown3" class="dropdown-content">
-                  <a href="#home">Home</a>
-                  <a href="#about">About</a>
-                  <a href="#contact">Contact</a>
-              </div>
-          </div>
-
-          <div class="dropdown">
-              <button onclick="myFunction6()" class="dropbtn">资料</button>
-              <div id="myDropdown6" class="dropdown-content">
-                  <a href="JavaScript:void(0)" onclick="open_modify_info_window()">修改个人资料</a>
-                  <a href="#about">隐藏</a>
-              </div>
-          </div>
-
-          <div class="dropdown" id="get_private_message_apps">
-              <button onclick="myFunction()" class="dropbtn">私信 {{private_message_total}}</button>
-              <div id="myDropdown" class="dropdown-content">
-                  <li v-for="privateMessage in privateMessages">
-                      <a href="JavaScript:void(0)" onclick="open_private_message_detail_window()">{{privateMessage.username}}:{{privateMessage.private_message_detail_num}}</a>
-                      <form id="get_private_name" method="post" action="" style="display: inline">
-                          <input id="get_private_username" type="textarea" name="friend_name" v-model="privateMessage.username" style="display:none">
-                      </form>
-
-                  </li>
-<!--                  <a href="#home">Home</a>-->
-<!--                  <a href="#about">About</a>-->
-              </div>
-          </div>
-
-          <div class="dropdown">
-              <a  href="login" class="dropbtn">登陆</a>
-<!--              <div id="myDropdown2" class="dropdown-content">-->
-<!--                  <a href="#home">Home</a>-->
-<!--                  <a href="#about">About</a>-->
-<!--                  <a href="#contact">Contact</a>-->
-<!--              </div>-->
-          </div>
-
-
-          <div class="dropdown">
-              <button onclick="myFunction()" class="dropbtn">退出</button>
-              <div id="myDropdown5" class="dropdown-content">
-                  <a href="#home">Home</a>
-                  <a href="#about">About</a>
-                  <a href="#contact">Contact</a>
-              </div>
-          </div>
-
-<!--          <li id="get_friend_apps">-->
-<!--              <a href="JavaScript:void(0)" onclick="open_private_message_detail_window()" style="color:red">私信:{{private_message_detail}}</a>-->
-<!--          </li>-->
-<!--        <li><a href="login_out">退出</a></li>-->
-      </ul>
-    </div>
-  </nav>
-  <!-- ./nav -->
-
-  <!-- main -->
-  <main class="container">
-    <div class="row">
-      <div class="col-md-3" id="profile_app">
-          <!-- profile brief -->
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4>连续登陆188天</h4>
-            </div>
-          </div>
-          <div class="panel panel-default"  v-if="profile_flag === '1'">
-              <div class="panel-body">
-                  <img src="" class="media-object" style="width: 128px; height: 128px;">
-
-                  <p>个人介绍：   {{ profile_infos.personal_intro       }}</p>
-                  <p>感情状态：   {{ profile_infos.love_status          }}</p>
-                  <p>职业：      {{ profile_infos.user_job             }}</p>
-                  <p>公司：      {{ profile_infos.user_company         }}</p>
-                  <p>国家：      {{ profile_infos.user_country         }}</p>
-                  <p>省份：      {{ profile_infos.user_province        }}</p>
-                  <p>城市：      {{ profile_infos.user_city            }}</p>
-                  <p>初中：      {{ profile_infos.user_junior_school   }}</p>
-                  <p>初中时间段： {{ profile_infos.user_junior_period   }}</p>
-                  <p>高中：      {{ profile_infos.user_senior_school   }}</p>
-                  <p>高中时间段： {{ profile_infos.user_senior_period   }}</p>
-                  <p>本科：      {{ profile_infos.user_bachelor_school }}</p>
-                  <p>本科时间段：{{ profile_infos.user_bachelor_period }}</p>
-                  <p>硕士：      {{ profile_infos.user_master_school   }}</p>
-                  <p>硕士时间段： {{ profile_infos.user_master_period   }}</p>
-                  <p>博士：      {{ profile_infos.user_phd_school      }}</p>
-                  <p>博士时间段： {{ profile_infos.user_phd_period      }}</p>
-                  <p>博士后：    {{ profile_infos.user_postphd_shcool  }}</p>
-                  <p>博士后时间：{{ profile_infos.user_postphd_period  }}</p>
-                  <a href="profile_edit">编辑</a>
-              </div>
-          </div>
-
-          <div class="panel panel-default"  v-if="profile_flag === '2'">
-              <form method="post" action="publish_profile">
-                  <div class="panel-body">
-<!--                 <div class="panel-body" contentEditable="true" id="test">-->
-                     <img src="D:/Downloads/自拍.jpg" class="media-object" style="width: 128px; height: 128px;">
-<!--                     <input class="btn btn-primary" type=button align="middle" onclick="add_profile_form()" value="新增">-->
-            <input class="form-control" type="textarea" name="personal_intro" v-model="profile_infos.personal_intro"  placeholder="个人介绍" size="80px">
-<input class="form-control" type="textarea" v-model=" profile_infos.love_status        " name="love_status" placeholder="感情状态" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_job            " name="user_job" placeholder="职业" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_company        " name="user_company" placeholder="公司" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_country        " name="user_country" placeholder="国家" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_province       " name="user_province" placeholder="省份" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_city           " name="user_city" placeholder="城市" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_junior_school  " name="user_junior_school" placeholder="初中" size="80px">
-<input class="form-control" type="textarea" v-model=" profile_infos.user_junior_period  " name="user_junior_period" placeholder="初中时间段" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_senior_school  " name="user_senior_school" placeholder="高中" size="80px">
-<input class="form-control" type="textarea" v-model=" profile_infos.user_senior_period  " name="user_senior_period" placeholder="高中时间段" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_bachelor_school" name="user_bachelor_school" placeholder="本科" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_bachelor_period " name="user_bachelor_period" placeholder="本科时间段" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_master_school  " name="user_master_school" placeholder="硕士" size="80px">
-<input class="form-control" type="textarea" v-model=" profile_infos.user_master_period  " name="user_master_period" placeholder="硕士时间段" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_phd_school     " name="user_phd_school" placeholder="博士" size="80px">
-<input class="form-control" type="textarea" v-model=" profile_infos.user_phd_period     " name="user_phd_period" placeholder="博士时间段" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_postphd_shcool " name="user_postphd_shcool" placeholder="博士后" size="80px">
-<input class="form-control" type="textarea" v-model="profile_infos.user_postphd_period  " name="user_postphd_period" placeholder="博士后时间" size="80px">
-<input class="btn btn-primary" type="submit" name="confirm" align="middle" style="background-color: red;" value="取消">
-                      <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                      <input class="btn btn-primary" type="submit" name="confirm" align="middle" value="确定">
-                 </div>
-              </form>
-          </div>
-
-
-        <!-- ./friend requests -->
-      </div>
-      <div class="col-md-6" id="content_app">
-          <div class="panel-body">
-
-              <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
-              <a  href="topic1" v-else >随机时段</a>
-
-              <a  href="topic2" style="background: lightgreen;" v-if="back_topic_id === '2'">固定时段</a>
-              <a  href="topic2" v-else>固定时段</a>
-
-              <a  href="topic3" style="background: lightgreen;" v-if="back_topic_id === '3'">口语角</a>
-              <a  href="topic3" v-else>口语角</a>
-
-              <a  href="topic4" style="background: lightgreen;" v-if="back_topic_id === '4'">立目标</a>
-              <a  href="topic4" v-else>立目标</a>
-
-              <a  href="topic5" style="background: lightgreen;" v-if="back_topic_id === '5'">好文章好句子</a>
-              <a  href="topic5" v-else>好文章好句子</a>
-
-              <a  href="topic6" style="background: lightgreen;" v-if="back_topic_id === '6'">单词速背</a>
-              <a  href="topic6" v-else>单词速背</a>
-
-              <a  href="topic0" style="background: lightgreen;" v-if="back_topic_id === '0'">新建主题</a>
-              <a  href="topic0" v-else>新建主题</a>
-
-          </div>
-        <form method="post" action="publish_content">
-            <div class="input-group">
-                <p  v-if="back_topic_id === '0'">创建新话题，管理员审核通过后，可以展示讨论</p>
-                <p  v-else style="display:none">创建新话题，管理员审核通过后，可以展示讨论</p>
-<!--                <input class="form-control" type="text" name="topic_id" placeholder="主题id...">-->
-              <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-if="back_topic_id === '0'" style="display:none">
-              <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-else  style="display:none">
-<!--                <input class="form-control" type="textarea" name="topic_name">-->
-              <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..."  v-if="back_topic_id === '0'">
-              <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..." v-model="back_topic_name"  v-else style="display:none">
-
-                <input class="form-control" type="text" name="title" placeholder="标题..." v-model="back_topic_id" v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none">
-                <input class="form-control" type="text" name="title" placeholder="标题..." v-else>
-
-                <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
-                <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
-
-
-          </div>
-        </form><hr>
-        <div>
-          <div class="front_content">
-               <!-- post -->
-               <div class="panel panel-default" v-for = "content in infos">
-                   <div class="panel-body" >
-<!--                     <div class="panel-footer" v-if="content.topic_id === '3'" style="display:none">-->
-<!--                     <div class="panel-footer" v-if="content.topic_id === '3'" style="display:none">-->
-                     <span>
-  <a v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none"> {{  content.title }}</a>
-  <a v-else style="color:red;font-weight:bold"> {{  content.title }}</a>
-                     </span>
-                     <pan class="pull-right"></pan>
-<!--                    </div>-->
-
-                   </div>
-                 <div class="panel-body">
-                   <p>    {{ content.content }}</p>
-                 </div>
-                   <div class="panel-footer">
-                       <span>
-                           <a  v-bind:href="['home/'+content.username]" target="_blank">  {{content.username}}</a>
-                          发布于 {{content.time }}</span>
-<!--                       <input  type="button" x style="display:none"/>-->
-<!--                       <input type="button" v-model="content.username" onclick="add()"/>-->
-                   <span class="pull-right"><a class="text-danger" href="#"></a></span>
-                   <br/><br/>
- <p v-for = "comment in content.comment"   onclick="add()">
-     <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
-
-                   <form method="post" action="publish_comment">
-                       <div class="input-group">
-                         <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
-                           <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px"><a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                         <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论"/>
-                       </div>
-                   </form>
-                 </div>
-               </div>
-
-          </div>
-          <div class="container large">
-            <div class="pagination">
-              <ul>
-                <li> <a href="javascript:void(0)"></a> </li>
-                <li> <a href="page1"></a> </li>
-                <li> <a href="page2"></a> </li>
-                <li> <a href="page3"></a> </li>
-                <li> <a href="page3"></a> </li>
-                <li> <a href="home5"></a> </li>
-                <li> <a href="home6"></a> </li>
-                <li> <a href="home7"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="C:/Users/Administrator/IdeaProjects/backend_csdn/src/main/resources/templates/home.html"></a> </li>
-                <li> <a href="javascript:void(0)"></a> </li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-        <!-- ./feed -->
-      </div>
-      <div class="col-md-3" >
-      <!-- add friend -->
-        <div class="panel panel-default" id="get_friend_recommend_app">
-            <h4>好友推荐</h4>
-              <li  v-for="friend_name_recommend in friend_name_recommends">
-                  <a href="javascript:void(0);" onclick="add_friend_message()" class="text-success">【添加】</a>
-                  <form id="add_friend" method="post" action="" style="display: inline">
-                      <input id="add_friend_name" type="textarea" name="friend_name" v-model="friend_name_recommend.friend_name" style="display:none">
-                  </form>
-
-
-
-                  <a  v-bind:href="['home/' + friend_name_recommend.friend_name]">{{friend_name_recommend.friend_name}}</a>
-                  <br>
-              </li>
-
-        </div>
-
-          <!-- friend requests -->
-          <div class="panel panel-default" id="get_apply_friend_message">
-              <div class="panel-body">
-                  <h4>好友请求</h4>
-                      <li v-for="apply_friend_name in apply_friend_names">
-                          <a href="javascript:void(0);" onclick="approve_friend_message()" class="text-success">【接收】</a>
-                          <form id="approve_friend" method="post" action="" style="display: inline">
-                              <input id="approve_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">
-                          </form>
-
-                          <a href="#">{{apply_friend_name.friend_name}}</a>
-                          <a href="javascript:void(0);" onclick="reject_friend_message()" class="text-danger">【拒绝】</a>
-                          <form id="reject_friend" method="post" action="" style="display: inline">
-                              <input id="reject_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">
-                          </form>
-                      </li>
-              </div>
-          </div>
-
-        <!-- ./add friend -->
-
-        <!-- friends -->
-
-        <div class="panel panel-default">
-            <h4>我的好友</h4>
-          <div class="panel-body" id="get_friend_app">
-                <li  v-for="friends in friend_names">
-                    <a href="JavaScript:void(0)" onclick="open_private_message_window()" class="text-success">【私信】</a>
-                    <form id="" method="post" action="" style="display: inline">
-                        <input id="get_friend_name" type="textarea" name="friend_name" v-model="friends.friend_name" style="display:none">
+<div style="background: white; height:100%; width: 100%;">
+        <div class="row">
+            <div class="col-md-3" id="profile_app">
+                    <form method="post" action="publish_profile">
+                        <div class="panel-body">
+                            <!--                 <div class="panel-body" contentEditable="true" id="test">-->
+<!--                            <img src="D:/Downloads/自拍.jpg" class="media-object" style="width: 128px; height: 128px;">-->
+                            <!--                     <input class="btn btn-primary" type=button align="middle" onclick="add_profile_form()" value="新增">-->
+                            <input class="form-control" type="textarea" name="personal_intro" v-model="profile_infos.personal_intro"  placeholder="个人介绍" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.love_status        " name="love_status" placeholder="感情状态" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_job            " name="user_job" placeholder="职业" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_company        " name="user_company" placeholder="公司" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_country        " name="user_country" placeholder="国家" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_province       " name="user_province" placeholder="省份" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_city           " name="user_city" placeholder="城市" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_junior_school  " name="user_junior_school" placeholder="初中" size="80px">
+                            <input class="form-control" type="textarea" v-model=" profile_infos.user_junior_period  " name="user_junior_period" placeholder="初中时间段" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_senior_school  " name="user_senior_school" placeholder="高中" size="80px">
+                            <input class="form-control" type="textarea" v-model=" profile_infos.user_senior_period  " name="user_senior_period" placeholder="高中时间段" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_bachelor_school" name="user_bachelor_school" placeholder="本科" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_bachelor_period " name="user_bachelor_period" placeholder="本科时间段" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_master_school  " name="user_master_school" placeholder="硕士" size="80px">
+                            <input class="form-control" type="textarea" v-model=" profile_infos.user_master_period  " name="user_master_period" placeholder="硕士时间段" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_phd_school     " name="user_phd_school" placeholder="博士" size="80px">
+                            <input class="form-control" type="textarea" v-model=" profile_infos.user_phd_period     " name="user_phd_period" placeholder="博士时间段" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_postphd_shcool " name="user_postphd_shcool" placeholder="博士后" size="80px">
+                            <input class="form-control" type="textarea" v-model="profile_infos.user_postphd_period  " name="user_postphd_period" placeholder="博士后时间" size="80px">
+                            <input class="btn btn-primary" type="submit" name="confirm" align="middle" style="background-color: red;" onclick="custom_close()" value="取消">
+                            <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                            <input class="btn btn-primary" type="submit" name="confirm" align="middle" value="确定" onclick="custom_close()">
+                        </div>
                     </form>
-                    <a v-bind:href="['home/' +  friends.friend_name]" class="get_friend_name" target="_blank">{{friends.friend_name}}</a>
-                    <a v-bind:href="['friend_delete/' +  friends.friend_name]" class="text-danger">【删除】</a>
-                    <br>
-                </li>
+                </div>
+            </div>
+</div>
+</body>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script>
 
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>最近访客</h4>
-              <li>
-                <a href="#">李彦宏</a>
-                  <br><a href="#">张朝阳</a>
-              </li>
-          </div>
-        </div>
-          <p class="panel panel-default" style="border:none">
-              <p class="panel-body" >
-                  <form method="post" action="publish_private_message">
-<!--                      <div class="input-group"   >-->
-<!--                      <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">-->
-                      <div class="input-group" id="get_private_message_app">
-                        <div v-for = "private_message in ListprivateMessage">
-                           <p v-if="private_message.private_message_show_flag === '1'">
-          {{ private_message.username }}：{{ private_message.to_message_content }} &nbsp&nbsp
-          <br>发送时间&nbsp{{ private_message.message_create_time }}</br>
-                          <input class="form-control" type="textarea" name="id" v-model="private_message.private_message_friend_name" size="80px" style="display:none">
-                          <input id="input_chat" class="form-control" type="textarea" name="to_message_content" placeholder="请输入私信内容..." size="80px">
-                          <input class="btn btn-primary" type="submit" name="login" align="middle" v-model="private_message.private_messages_input_value"/><a></a>
-                          </p>
-                        </p>
-                      </div>
-                  </form>
-              </div>
-          </div>
-        <!-- ./friends -->
-      </div>
-    </div>
-  </main>
-  <!-- ./main -->
-  <!-- ./footer -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/script.js"></script>
-
-  <script>
-
-
-function myFunction6() {
-    document.getElementById("myDropdown6").classList.toggle("show");
+function custom_close(){
+<!--    if(confirm("您确定要关闭本页吗？")){-->
+<!--        window.opener=null;-->
+<!--        window.open('','_self');-->
+        window.close();
+<!--    }-->
+<!--    else{-->
+<!--    }-->
 }
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// 点击下拉菜单意外区域隐藏
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-
-
-function approve_friend_message(){
-          var friend_name = document.getElementById('approve_friend_name').value
-          alert(friend_name)
-
-          var http = new XMLHttpRequest();
-          http.onreadystatechange = function() {}
-          http.open("POST", "approve_for_friend", true)
-          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          send_message = "friend_name="+friend_name
-          http.send(send_message);
-}
-
-function reject_friend_message(){
-          var friend_name = document.getElementById('reject_friend_name').value
-          alert(friend_name)
-
-          var http = new XMLHttpRequest();
-          http.onreadystatechange = function() {}
-          http.open("POST", "reject_for_friend", true)
-          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          send_message = "friend_name="+friend_name
-          http.send(send_message);
-}
-
-
-function add_friend_message(){
-          var result = prompt("请输入申请好友内容")
-          if(result){
-          var friend_name = document.getElementById('add_friend_name').value
-          var apply_friend_message = result
-          alert(friend_name)
-          alert(apply_friend_message)
-
-          var http = new XMLHttpRequest();
-          http.onreadystatechange = function() {}
-          http.open("POST", "apply_for_friend", true)
-          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-          send_message = "friend_name="+friend_name+"&apply_friend_message=" + apply_friend_message
-          http.send(send_message);
-          }
-}
-function open_private_message_detail_window(){
-        var friend_name =  document.getElementById("get_private_username").value
-        alert(friend_name)
-        window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
-}
-
-
-function open_modify_info_window(){
-        window.open("info"  ,"" ,"width=500,height=800")
-}
-
-function open_private_message_window(){
-        var friend_name =  document.getElementById("get_friend_name").value
-        alert(friend_name)
-        window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
-}
-
- new Vue({
-  el: '#get_apply_friend_message',
-  data () {
-    return {
-    apply_friend_names: null
-    }
-  },
-  mounted () {
-    axios.get('/get_apply_friend_message')
-      .then(response => (
-       this.apply_friend_names = response.data
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-})
-
-
-
-
- new Vue({
-  el: '#get_private_message_app',
-  data () {
-    return {
-    ListprivateMessage: null,
-    private_message_show_flag: "1",
-    private_messages_input_value: "发送数据给马云"
-    }
-  },
-  mounted () {
-    axios.get('/get_private_message')
-      .then(response => (
-       this.ListprivateMessage = response.data
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-})
-
-
- new Vue({
-  el: '#get_friend_recommend_app',
-  data () {
-    return {
-    friend_name_recommends: null
-    }
-  },
-  mounted () {
-    axios.get('/get_friend_recommend')
-      .then(response => (
-       this.friend_name_recommends = response.data
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-})
-
-  new Vue({
-  el: '#get_private_message_apps',
-  data () {
-    return {
-    privateMessages:null,
-    private_message_total: null
-    }
-  },
-  mounted () {
-    axios.get('/get_private_message_alert')
-      .then(response => (
-        this.privateMessages = response.data,
-        this.private_message_total = response.data[0].private_message_total
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-})
-
-
-  new Vue({
-  el: '#get_friend_app',
-  data () {
-    return {
-    friend_names: null
-    }
-  },
-  mounted () {
-    axios.get('/get_friend')
-      .then(response => (
-       this.friend_names = response.data
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-})
-
-
-
-
-
-  new Vue({
-  el: '#content_app',
-  data () {
-    return {
-    back_topic_id: null,
-    back_topic_name: null,
-    infos: null
-    }
-  },
-  mounted () {
-    axios.get('/get_content?visit_username=""')
-      .then(response => (
-       this.infos = response.data
-      ,this.back_topic_id   = response.data[0].topic_id
-      ,this.back_topic_name = response.data[0].topic_id
-
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-
-
-})
-
-
 
 
   new Vue({
   el: '#profile_app',
   data () {
     return {
-    profile_flag: null,
     profile_infos: null
     }
   },
   mounted () {
     axios
-      .get('/get_profile?visit_username=""')
+      .get('/infos')
       .then(response => (
-       this.profile_infos = response.data,
-       this.profile_flag = response.data.profile_flag
+       this.profile_infos = response.data
       ))
       .catch(function (error) { // 请求失败处理
         console.log(error);
@@ -595,73 +85,10 @@ function open_private_message_window(){
   },
 })
 
-var flag = true;
-function add() {
-
-            var x = document.getElementById("input_content").value;
-            var topic_id = document.getElementById("comment_username").innerHTML ;
-            var result = "@" + x + topic_id + ":"  ;
-
-            if (flag)
-             {
-                 document.getElementById("input_content").value = result;
-             }
-            flag = false;
-            }
-<!--function add_profile_form() {-->
-<!--var i=''-->
-<!--document.getElementById('test').insertAdjacentHTML('afterEnd','<input class="form-control" type="text" name="content" placeholder="自定义介绍" size="50px">')-->
-<!--}-->
 </script>
 
-  <style>
 
-
-.dropbtn {
-    background-color:rgb(59,89,152);
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-    background-color: red;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #f1f1f1}
-
-.show {display:block;}
-
-
-    </style>
-
-
-
-  <style>
+<style>
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -8084,5 +7511,4 @@ a {
 
 
 </style>
-</body>
 </html>

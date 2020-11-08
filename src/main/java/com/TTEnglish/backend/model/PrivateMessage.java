@@ -9,6 +9,9 @@ public class PrivateMessage {
 	private String private_message_show_flag;
 	private String private_messages_input_value;
 	private String message_create_time;
+	private String is_read;
+	private String private_message_total;
+	private String private_message_detail_num;
 
 
 	public String getId() {
@@ -73,5 +76,29 @@ public class PrivateMessage {
 
 	public void setMessage_create_time(String message_create_time) {
 		this.message_create_time = message_create_time;
+	}
+
+	public String getIs_read() {
+		return is_read;
+	}
+
+	public void setIs_read(String is_read) {
+		this.is_read = is_read;
+	}
+
+	public String getPrivate_message_total() {
+		return private_message_total;
+	}
+
+	public void setPrivate_message_total(String private_message_total) {
+		this.private_message_total = private_message_total;
+	}
+
+	public String getPrivate_message_detail_num() {
+		return private_message_detail_num;
+	}
+
+	public void setPrivate_message_detail_num(String private_message_detail_num) {
+		this.private_message_detail_num = private_message_detail_num;
 	}
 }

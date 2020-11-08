@@ -43,6 +43,16 @@ public class ManipulateMysql {
         return friends;
     }
 
+    public List<PrivateMessage> SelectPrivateMessageAlert(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        PrivateMessageMapper privateMessageMapper = session.getMapper(PrivateMessageMapper.class);
+        List<PrivateMessage> ListprivateMessage = privateMessageMapper.SelectPrivateMessageAlert(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+        return ListprivateMessage;
+    }
+
 
     public List<PrivateMessage> selectPrivateMessageContent(ReqDto reqDto) throws IOException {
 
@@ -142,7 +152,8 @@ public class ManipulateMysql {
                                                  ,reqDto.to_message_content
                                                  ,reqDto.from_message_content
                                                  ,reqDto.private_message_show_flag
-                                                 ,reqDto.private_messages_input_value);
+                                                 ,reqDto.private_messages_input_value
+                                                 ,reqDto.is_read);
         session.commit();
         session.close();
     }
@@ -205,6 +216,16 @@ public class ManipulateMysql {
         String  result = contentMapper.selectString();
         session.close();
         return result;
+    }
+
+    public User SelectInfo(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        User user = userMapper.getUserByUsername(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+        return user;
     }
 
     public User SelectUser(ReqDto reqDto) throws IOException {

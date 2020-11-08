@@ -15,22 +15,26 @@
     </style>
 </head>
 <body>
-<div style="background: white; height:100%; width: 100%;"  id="content_app">
-    <p>{{ infos.username }}</p>
-    <p>{{ infos.username }}</p>
-    <br>
-    <div  style="background: white; height:20%; width: 100%; position:fixed;bottom:0;">
-        <textarea rows="XX" cols="XX"  style="background: white; height:20%; width: 100%; position:fixed;bottom:10;" type="textarea" name="comment_content" placeholder="私聊..."></textarea>
-        <input style="background: blue; height:5%; width: 100%; position:fixed;bottom:0;" type="submit" name="button" align="middle" value="发送"/>
-    </div>
-
-
+<div style="background: white; height:100%; width: 100%;">
+    <form method="post" action="publish_private_message">
+        <div  id="content_app">
+                <p v-for = "private_message in infos" >
+                    <br>发送时间&nbsp{{ private_message.message_create_time }}</br>
+                    {{ private_message.username }}发送给:{{private_message.private_message_friend_name}}：{{private_message.to_message_content}}
+                </p>
+        </div>
+        <div style="background: white; height:20%; width: 100%; position:fixed;bottom:0;">
+<!--            v-model="private_message.private_message_friend_name"-->
+            <input class="form-control" type="textarea" name="private_message_friend_name" value="Elon Musk" size="80px" style="display:none">
+            <textarea rows="XX" cols="XX"  style="background: white; height:20%; width: 100%; position:fixed;bottom:10;" type="textarea" name="to_message_content" placeholder="私聊..."></textarea>
+            <input style="background: blue; height:5%; width: 100%; position:fixed;bottom:0;" type="submit" name="button" align="middle" value="发送"/>
+        </div>
+    </form>
 </div>
 </body>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script>
-
   new Vue({
   el: '#content_app',
   data () {
@@ -46,7 +50,9 @@
       .catch(function (error) { // 请求失败处理
         console.log(error);
       });
-  },
+  }
+
+
 })
 
 </script>

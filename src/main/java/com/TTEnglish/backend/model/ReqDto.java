@@ -51,6 +51,7 @@ public class ReqDto {
     public String apply_friend_message;
     public String is_friend;
     public String is_accept;
+    public String is_read;
 
 
 
