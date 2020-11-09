@@ -81,13 +81,13 @@
   <!-- main -->
   <main class="container">
     <div class="row">
-      <div class="col-md-3" id="profile_app">
+      <div class="col-md-3" id="profile_app" style="position:fixed;display:none">
           <!-- profile brief -->
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4>连续登陆188天</h4>
-            </div>
-          </div>
+<!--          <div class="panel panel-default">-->
+<!--            <div class="panel-body">-->
+<!--              <h4>连续登陆188天</h4>-->
+<!--            </div>-->
+<!--          </div>-->
           <div class="panel panel-default"  v-if="profile_flag === '1'">
               <div class="panel-body">
                   <img src="" class="media-object" style="width: 128px; height: 128px;">
@@ -107,10 +107,10 @@
                   <p>本科时间段：{{ profile_infos.user_bachelor_period }}</p>
                   <p>硕士：      {{ profile_infos.user_master_school   }}</p>
                   <p>硕士时间段： {{ profile_infos.user_master_period   }}</p>
-                  <p>博士：      {{ profile_infos.user_phd_school      }}</p>
-                  <p>博士时间段： {{ profile_infos.user_phd_period      }}</p>
-                  <p>博士后：    {{ profile_infos.user_postphd_shcool  }}</p>
-                  <p>博士后时间：{{ profile_infos.user_postphd_period  }}</p>
+<!--                  <p>博士：      {{ profile_infos.user_phd_school      }}</p>-->
+<!--                  <p>博士时间段： {{ profile_infos.user_phd_period      }}</p>-->
+<!--                  <p>博士后：    {{ profile_infos.user_postphd_shcool  }}</p>-->
+<!--                  <p>博士后时间：{{ profile_infos.user_postphd_period  }}</p>-->
                   <a href="profile_edit">编辑</a>
               </div>
           </div>
@@ -190,7 +190,7 @@
                 <input class="form-control" type="text" name="title" placeholder="标题..." v-else>
 
                 <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
-                <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
@@ -227,7 +227,8 @@
                    <form method="post" action="publish_comment">
                        <div class="input-group">
                          <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
-                           <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px"><a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                           <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
+                           <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                          <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论"/>
                        </div>
                    </form>
@@ -259,7 +260,7 @@
         </div>
         <!-- ./feed -->
       </div>
-      <div class="col-md-3" >
+      <div class="col-md-3">
       <!-- add friend -->
         <div class="panel panel-default" id="get_friend_recommend_app">
             <h4>好友推荐</h4>
@@ -278,29 +279,29 @@
         </div>
 
           <!-- friend requests -->
-          <div class="panel panel-default" id="get_apply_friend_message">
-              <div class="panel-body">
-                  <h4>好友请求</h4>
-                      <li v-for="apply_friend_name in apply_friend_names">
-                          <a href="javascript:void(0);" onclick="approve_friend_message()" class="text-success">【接收】</a>
-                          <form id="approve_friend" method="post" action="" style="display: inline">
-                              <input id="approve_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">
-                          </form>
-
-                          <a href="#">{{apply_friend_name.friend_name}}</a>
-                          <a href="javascript:void(0);" onclick="reject_friend_message()" class="text-danger">【拒绝】</a>
-                          <form id="reject_friend" method="post" action="" style="display: inline">
-                              <input id="reject_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">
-                          </form>
-                      </li>
-              </div>
-          </div>
+<!--          <div class="panel panel-default" id="get_apply_friend_message" style="position:fixed">-->
+<!--              <div class="panel-body">-->
+<!--                  <h4>好友请求</h4>-->
+<!--                      <li v-for="apply_friend_name in apply_friend_names">-->
+<!--                          <a href="javascript:void(0);" onclick="approve_friend_message()" class="text-success">【接收】</a>-->
+<!--                          <form id="approve_friend" method="post" action="" style="display: inline">-->
+<!--                              <input id="approve_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">-->
+<!--                          </form>-->
+<!--                          <a href="javascript:void(0);" onclick="reject_friend_message()" class="text-danger">【拒绝】</a>-->
+<!--                          <form id="reject_friend" method="post" action="" style="display: inline">-->
+<!--                              <input id="reject_friend_name" type="textarea" name="friend_name" v-model="apply_friend_name.friend_name" style="display:none">-->
+<!--                          </form>-->
+<!--                          <a href="#">{{apply_friend_name.friend_name}}</a>-->
+<!--                      </li>-->
+<!--              </div>-->
+<!--          </div>-->
 
         <!-- ./add friend -->
 
         <!-- friends -->
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="position:fixed">
+
             <h4>我的好友</h4>
           <div class="panel-body" id="get_friend_app">
                 <li  v-for="friends in friend_names">
@@ -315,15 +316,15 @@
 
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>最近访客</h4>
-              <li>
-                <a href="#">李彦宏</a>
-                  <br><a href="#">张朝阳</a>
-              </li>
-          </div>
-        </div>
+<!--        <div class="panel panel-default" style="position:fixed">-->
+<!--          <div class="panel-body">-->
+<!--            <h4>最近访客</h4>-->
+<!--              <li>-->
+<!--                <a href="#">李彦宏</a>-->
+<!--                  <br><a href="#">张朝阳</a>-->
+<!--              </li>-->
+<!--          </div>-->
+<!--        </div>-->
           <p class="panel panel-default" style="border:none">
               <p class="panel-body" >
                   <form method="post" action="publish_private_message">
@@ -2982,7 +2983,7 @@ pre code {
 	}
 
 	.col-md-6 {
-		width: 50%
+		width: 75%
 	}
 
 	.col-md-5 {
