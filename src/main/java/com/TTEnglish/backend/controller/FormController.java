@@ -123,4 +123,15 @@ public class FormController {
 
         return "message";
     }
+
+
+    @PostMapping("/search_content")
+    public String search_content(HttpSession session
+//            , @RequestParam("select_id") String select_id
+            , @RequestParam("content") String content) throws IOException {
+//        System.out.println("select_id的内容是："+select_id);
+        System.out.println("content的内容是："+content);
+        service.insertApproveFriendApply(reqDto);
+        return "home";
+    }
 }

@@ -20,8 +20,18 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-<!--        <li><a href="home">首页</a></li>-->
-<!--        <li><a href="login">登陆</a></li>-->
+          <div class="dropdown">
+              <form method="post" action="search_content">
+<!--                  <select id="select_id" style="width:100px;height:25px;" >-->
+<!--                      <option value="1">全站</option>-->
+<!--                      <option value="2">标题</option>-->
+<!--                      <option value="3">内容</option>-->
+<!--                      <option value="4">作者</option>-->
+<!--                      <option value="5">找人</option>-->
+                  <input type="textarea" name="content" placeholder="搜索..." size="30px">
+                  <input type="submit" name="login" align="right" value="搜索">
+              </form>
+          </div>
 
           <div class="dropdown">
               <button onclick="myFunction()" class="dropbtn">首页</button>
@@ -200,25 +210,20 @@
                <!-- post -->
                <div class="panel panel-default" v-for = "content in infos">
                    <div class="panel-body" >
-<!--                     <div class="panel-footer" v-if="content.topic_id === '3'" style="display:none">-->
-<!--                     <div class="panel-footer" v-if="content.topic_id === '3'" style="display:none">-->
                      <span>
   <a v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none"> {{  content.title }}</a>
   <a v-else style="color:red;font-weight:bold"> {{  content.title }}</a>
                      </span>
                      <pan class="pull-right"></pan>
-<!--                    </div>-->
 
                    </div>
-                 <div class="panel-body">
-                   <p>    {{ content.content }}</p>
-                 </div>
+                      <div class="panel-body">
+                        <p>    {{ content.content }}</p>
+                      </div>
                    <div class="panel-footer">
                        <span>
                            <a  v-bind:href="['home/'+content.username]" target="_blank">  {{content.username}}</a>
                           发布于 {{content.time }}</span>
-<!--                       <input  type="button" x style="display:none"/>-->
-<!--                       <input type="button" v-model="content.username" onclick="add()"/>-->
                    <span class="pull-right"><a class="text-danger" href="#"></a></span>
                    <br/><br/>
  <p v-for = "comment in content.comment"   onclick="add()">
