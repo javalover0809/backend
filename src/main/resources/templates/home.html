@@ -200,10 +200,6 @@
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
-          <div id="test">
-          </div>
-          <input type="button" onclick="createInput()" value="创建Input"/>
-
         <div>
           <div class="front_content">
                <!-- post -->
@@ -226,12 +222,14 @@
                    <span class="pull-right"><a class="text-danger" href="#"></a></span>
                    <br/>
                        <br/>
- <p v-for = "comment in content.comment"   onclick="add()">
+ <p v-for = "comment in content.comment" v-on:click="add(content.id, comment.comment_username)">
+<!--     <input id="comment_username_input"  type="textarea" name="comment_username" v-model="comment.comment_username" style="display:none">-->
      <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
                    <form method="post" action="publish_comment">
                        <div class="input-group">
-                         <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
-                           <input id="input_content" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
+
+                           <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
+                           <input v-bind:id="content.id" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
                            <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                          <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论"/>
                        </div>
@@ -593,6 +591,15 @@ function open_private_message_window(){
         console.log(error);
       });
   },
+
+    methods: {
+    add: function (topic_id, comment_username) {
+          var result = "@" + comment_username + ":"
+          if(result){
+           document.getElementById(topic_id).value = result
+           }
+    }
+  }
 
 
 })
