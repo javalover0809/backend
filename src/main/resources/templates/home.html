@@ -15,10 +15,6 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="index.html">TT英语角</a>
         </div>
-
-
-
-
       <ul class="nav navbar-nav navbar-right">
           <div class="dropdown">
               <form method="post" action="search_content">
@@ -204,6 +200,9 @@
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
+          <div id="test">
+          </div>
+          <input type="button" onclick="createInput()" value="创建Input"/>
 
         <div>
           <div class="front_content">
@@ -225,10 +224,10 @@
                            <a  v-bind:href="['home/'+content.username]" target="_blank">  {{content.username}}</a>
                           发布于 {{content.time }}</span>
                    <span class="pull-right"><a class="text-danger" href="#"></a></span>
-                   <br/><br/>
+                   <br/>
+                       <br/>
  <p v-for = "comment in content.comment"   onclick="add()">
      <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
-
                    <form method="post" action="publish_comment">
                        <div class="input-group">
                          <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
@@ -359,6 +358,13 @@
   <script type="text/javascript" src="js/script.js"></script>
 
   <script>
+
+
+  function createInput()
+{
+document.getElementById("test").innerHTML = "<form method='post' action='publish_comment'><input type='textarea' name='content' placeholder='评论...' size='30px'><input type='submit' name='login' align='right' value='评论'></form>"
+
+}
 
 function myFunction6() {
     document.getElementById("myDropdown6").classList.toggle("show");
