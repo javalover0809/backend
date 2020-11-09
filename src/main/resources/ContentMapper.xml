@@ -54,6 +54,7 @@
         on u.id = p.comment_content_id
         where topic_id = #{0}
         order by coalesce(p.comment_time ,u.time) desc
+        limit 10
     </select>
 
     <resultMap type="com.TTEnglish.backend.model.Content" id="getClassesMap">

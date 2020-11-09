@@ -46,6 +46,21 @@
               </div>
           </div>
 
+          <div class="dropdown" id="get_comment">
+              <button onclick="myFunction()" class="dropbtn">消息 </button>
+              <div id="myDropdown9" class="dropdown-content">
+                  <li v-for="privateMessage in privateMessages">
+                      <a href="JavaScript:void(0)" v-on:click="say(privateMessage.username)">{{privateMessage.username}}:{{privateMessage.private_message_detail_num}}</a>
+                      <!--                      <form id="get_private_name" method="post" action="" style="display: inline">-->
+                      <!--                          <input v-bind:id="privateMessage.username" class="get_private_class_name" type="textarea" name="friend_name" v-model="privateMessage.username" style="display:none">-->
+                      <!--                      </form>-->
+                  </li>
+                  <!--                  <a href="#home">Home</a>-->
+                  <!--                  <a href="#about">About</a>-->
+              </div>
+          </div>
+
+
           <div class="dropdown" id="get_private_message_apps">
               <button onclick="myFunction()" class="dropbtn">私信 {{private_message_total}}</button>
               <div id="myDropdown" class="dropdown-content">
@@ -200,13 +215,14 @@
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
+
         <div>
           <div class="front_content">
                <!-- post -->
                <div class="panel panel-default" v-for = "content in infos">
                    <div class="panel-body" >
-                     <span>
-  <a v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none"> {{  content.title }}</a>
+                     <span><a>赞 88 </a><a>踩 1 </a>
+  <a v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none">{{  content.title }}</a>
   <a v-else style="color:red;font-weight:bold"> {{  content.title }}</a>
                      </span>
                      <pan class="pull-right"></pan>
@@ -224,17 +240,16 @@
                        <br/>
  <p v-for = "comment in content.comment" v-on:click="add(content.id, comment.comment_username)">
 <!--     <input id="comment_username_input"  type="textarea" name="comment_username" v-model="comment.comment_username" style="display:none">-->
-     <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
+     <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank"><a>赞 68 </a><a>踩 1 </a>{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
                    <form method="post" action="publish_comment">
                        <div class="input-group">
-
                            <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
                            <input v-bind:id="content.id" class="form-control" type="textarea" name="comment_content" placeholder="评论..." size="80px">
                            <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                          <input class="btn btn-primary" type="submit" name="login" align="middle" value="评论"/>
                        </div>
                    </form>
-                 </div>
+                   </div>
                </div>
 
           </div>
@@ -304,7 +319,8 @@
 
         <div class="panel panel-default" style="position:fixed">
 
-            <h4>我的好友</h4>
+            <h4>我的好友我的好友我的好友我的好友我的好友我的好友我的好友
+            </h4>
           <div class="panel-body" id="get_friend_app">
                 <li  v-for="friends in friend_names">
                     <a href="JavaScript:void(0)" v-on:click="say_private(friends.friend_name)" class="text-success">【私信】</a>
@@ -527,7 +543,6 @@ function open_private_message_window(){
   },
   methods: {
     say: function (friend_name) {
-      alert(friend_name)
       var http = new XMLHttpRequest();
       http.onreadystatechange = function() {}
       http.open("POST", "close_message_alert", true)
@@ -559,7 +574,6 @@ function open_private_message_window(){
   },
     methods: {
     say_private: function (friend_name) {
-      alert(friend_name)
       window.open("message?friend_name="+friend_name ,"" ,"width=400,height=400")
 
     }
