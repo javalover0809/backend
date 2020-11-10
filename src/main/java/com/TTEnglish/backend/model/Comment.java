@@ -2,8 +2,12 @@ package com.TTEnglish.backend.model;
 
 public class Comment {
 	private String id;
+	private String comment_id;
 	private String comment_content_id;
     private String comment_username;
+	private String comment_content;
+	private String comment_time;
+
 
 	public String getId() {
 		return id;
@@ -11,6 +15,14 @@ public class Comment {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getComment_id() {
+		return comment_id;
+	}
+
+	public void setComment_id(String comment_id) {
+		this.comment_id = comment_id;
 	}
 
 	public String getComment_content_id() {
@@ -44,8 +56,4 @@ public class Comment {
 	public void setComment_time(String comment_time) {
 		this.comment_time = comment_time;
 	}
-
-	private String comment_content;
-	private String comment_time;
-
 }

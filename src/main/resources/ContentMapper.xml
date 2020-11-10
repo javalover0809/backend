@@ -44,13 +44,14 @@
         ,u.title
         ,u.content
         ,u.time
+        ,p.comment_id
         ,p.comment_content_id
         ,p.comment_username
         ,p.comment_content
         ,p.comment_time
 
         from publish_content u
-        left join publish_comment p
+        left join (select *,id as comment_id from publish_comment) p
         on u.id = p.comment_content_id
         where topic_id = #{0}
         order by coalesce(p.comment_time ,u.time) desc
@@ -65,6 +66,7 @@
         <result column="content" property="content"/>
         <result column="time" property="time"/>
         <collection property="comment" ofType="com.TTEnglish.backend.model.Comment">
+            <result column="comment_id" property="comment_id"/>
             <result column="comment_content_id" property="comment_content_id"/>
             <result column="comment_username" property="comment_username"/>
             <result column="comment_content" property="comment_content"/>

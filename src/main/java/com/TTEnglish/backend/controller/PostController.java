@@ -66,4 +66,14 @@ import java.io.IOException;
             service.insertApproveFriendApply(reqDto);
             return "这个是后端返回的测试历史聊天数据new_back";
         }
+
+        @PostMapping("/agree_comment")
+        public String agree_comment(HttpSession session
+                , @RequestParam("comment_id") String comment_id) throws IOException {
+            reqDto.setSession(session);
+            reqDto.comment_id = comment_id;
+            reqDto.is_accept = "0";
+            service.insertApproveFriendApply(reqDto);
+            return "这个是后端返回的测试历史聊天数据new_back";
+        }
     }

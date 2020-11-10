@@ -52,6 +52,7 @@ public class ReqDto {
     public String is_friend;
     public String is_accept;
     public String is_read;
+    public String comment_id;
 
 
 
