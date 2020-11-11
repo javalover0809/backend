@@ -46,11 +46,11 @@
               </div>
           </div>
 
-          <div class="dropdown" id="get_comment_message_apps">
-              <button onclick="myFunction()" class="dropbtn">消息 </button>
+          <div class="dropdown" id="get_comment_alert">
+              <button onclick="myFunction9()" class="dropbtn">消息 {{ comment_total_num }}</button>
               <div id="myDropdown9" class="dropdown-content">
-                  <li v-for="privateMessage in privateMessages">
-                      <a href="JavaScript:void(0)" v-on:click="say(privateMessage.username)">{{privateMessage.username}}:{{privateMessage.private_message_detail_num}}</a>
+                  <li v-for="alert in comment_alert">
+                      <a href="JavaScript:void(0)" v-on:click="say(alert.comment_content_id ,alert.comment_username)">{{alert.comment_username}}:{{alert.comment_num}}</a>
                   </li>
               </div>
           </div>
@@ -67,21 +67,11 @@
 
           <div class="dropdown">
               <a  href="login" class="dropbtn">登陆</a>
-<!--              <div id="myDropdown2" class="dropdown-content">-->
-<!--                  <a href="#home">Home</a>-->
-<!--                  <a href="#about">About</a>-->
-<!--                  <a href="#contact">Contact</a>-->
-<!--              </div>-->
           </div>
 
 
           <div class="dropdown">
-              <button onclick="myFunction()" class="dropbtn">退出</button>
-              <div id="myDropdown5" class="dropdown-content">
-                  <a href="#home">Home</a>
-                  <a href="#about">About</a>
-                  <a href="#contact">Contact</a>
-              </div>
+              <a  href="login_out" class="dropbtn">退出</a>
           </div>
 
       </ul>
@@ -125,7 +115,6 @@
                   <a href="profile_edit">编辑</a>
               </div>
           </div>
-
           <div class="panel panel-default"  v-if="profile_flag === '2'">
               <form method="post" action="publish_profile">
                   <div class="panel-body">
@@ -216,13 +205,12 @@
   <a v-else style="color:red;font-weight:bold"> {{  content.title }}</a>
                      </span>
                      <pan class="pull-right"></pan>
-
                    </div>
                       <div class="panel-body">
                         <p>    {{ content.content }}</p>
                       </div>
                    <div class="panel-footer">
-                       <span><a href="JavaScript:void(0)" v-on:click="agree_content(content.id)" class="text-success">赞 88 </a><a href="JavaScript:void(0)" v-on:click="disagree_content(content.id)" class="text-danger">踩 1 </a>
+                       <span><a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)" class="text-success">赞 {{content.agree_content_num}} </a><a href="JavaScript:void(0)" v-on:click="disagree_content(content.id,content.username)" class="text-danger">踩 {{content.disagree_content_num}} </a>
                            <a  v-bind:href="['home/'+content.username]" target="_blank">  {{content.username}}</a>
                           发布于 {{content.time }}</span>
                    <span class="pull-right"><a class="text-danger" href="#"></a></span>
@@ -230,7 +218,7 @@
                        <br/>
  <p v-for = "comment in content.comment" v-on:click="add_comment(content.id, comment.comment_username)">
 <!--     <input id="comment_username_input"  type="textarea" name="comment_username" v-model="comment.comment_username" style="display:none">-->
-     <a href="JavaScript:void(0)" v-on:click="agree_comment(comment.comment_id)" class="text-success">赞 68 </a><a href="JavaScript:void(0)" v-on:click="disagree_comment(comment.comment_id)" class="text-danger">踩 1 </a>  <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
+     <a href="JavaScript:void(0)" v-on:click="agree_comment(comment.comment_id,comment.comment_username)" class="text-success">赞 {{comment.agree_comment_num}} </a><a href="JavaScript:void(0)" v-on:click="disagree_comment(comment.comment_id,comment.comment_username)" class="text-danger">踩 {{comment.disagree_comment_num}} </a>  <a id="comment_username" v-bind:href="['home/'+comment.comment_username]" target="_blank">{{ comment.comment_username }}</a>  ：{{ comment.comment_content }} &nbsp&nbsp 发布于&nbsp{{ comment.comment_time }}</p>
                    <form method="post" action="publish_comment">
                        <div class="input-group">
                            <input class="form-control" type="textarea" name="id" v-model="content.id" size="80px" style="display:none">
@@ -308,20 +296,18 @@
         <!-- friends -->
 
         <div class="panel panel-default" style="position:fixed">
-
-            <h4>我的好友我的好友我的好友我的好友我的好友我的好友我的好友
+            <h4>我的好友
             </h4>
           <div class="panel-body" id="get_friend_app">
                 <li  v-for="friends in friend_names">
-                    <a href="JavaScript:void(0)" v-on:click="say_private(friends.friend_name)" class="text-success">【私信】</a>
+                    <a href="JavaScript:void(0)" v-on:click="say_private(friends.friend_name)"  class="text-success">【私信】</a>
+                    <a href="JavaScript:void(0)" v-on:click="friend_delete(friends.friend_name)" class="text-danger">【删除】</a>
 <!--                    <form id="" method="post" action="" style="display: inline">-->
 <!--                        <input id="get_friend_name" type="textarea" name="friend_name" v-model="friends.friend_name" style="display:none">-->
 <!--                    </form>-->
                     <a v-bind:href="['home/' +  friends.friend_name]" class="get_friend_name" target="_blank">{{friends.friend_name}}</a>
-                    <a v-bind:href="['friend_delete/' +  friends.friend_name]" class="text-danger">【删除】</a>
                     <br>
                 </li>
-
           </div>
         </div>
 <!--        <div class="panel panel-default" style="position:fixed">-->
@@ -369,7 +355,9 @@
 document.getElementById("test").innerHTML = "<form method='post' action='publish_comment'><input type='textarea' name='content' placeholder='评论...' size='30px'><input type='submit' name='login' align='right' value='评论'></form>"
 
 }
-
+function myFunction9() {
+    document.getElementById("myDropdown9").classList.toggle("show");
+}
 function myFunction6() {
     document.getElementById("myDropdown6").classList.toggle("show");
 }
@@ -437,8 +425,6 @@ function add_friend_message(){
           }
 }
 function open_private_message_detail_window(friend_name){
-<!--        var friend_name =  document.getElementsByClassName("get_private_class_name").value-->
-        alert(friend_name)
         window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
 }
 
@@ -452,6 +438,42 @@ function open_private_message_window(){
         alert(friend_name)
         window.open("message?friend_name="+friend_name,"" ,"width=400,height=400")
 }
+
+
+new Vue({
+  el: '#get_comment_alert',
+  data () {
+    return {
+    comment_alert: null,
+    comment_total_num: null
+    }
+  },
+  mounted () {
+      axios.get('/get_comment_alert')
+      .then(response => (
+       this.comment_alert = response.data,
+       this.comment_total_num = response.date[0].comment_total_num
+<!--       this.private_message_total = response.data[0].private_message_total-->
+      ))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  },
+    methods: {
+    say: function (comment_content_id ,comment_username) {
+      var http = new XMLHttpRequest();
+      http.onreadystatechange = function() {}
+      http.open("POST", "close_comment_alert", true)
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      send_message = "comment_content_id="+comment_content_id+"&comment_username="+comment_username
+      http.send(send_message);
+      window.open("home?comment_content_id="+comment_content_id+"&comment_username="+comment_username ,"" ,"width=2000,height=800")
+
+    }
+  }
+
+
+})
 
  new Vue({
   el: '#get_apply_friend_message',
@@ -602,8 +624,18 @@ function open_private_message_window(){
     methods: {
     say_private: function (friend_name) {
       window.open("message?friend_name="+friend_name ,"" ,"width=400,height=400")
+    },
+    friend_delete: function(friend_name){
 
+       var http = new XMLHttpRequest();
+       http.onreadystatechange = function() {}
+       http.open("POST", "friend_delete", true)
+
+       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       send_parameter = "friend_name="+friend_name
+       http.send(send_parameter);
     }
+
   }
 })
 
@@ -621,6 +653,11 @@ function open_private_message_window(){
     }
   },
   mounted () {
+        this.submit()
+  },
+
+    methods: {
+    submit(){
     axios.get('/get_content?visit_username=""')
       .then(response => (
        this.infos = response.data
@@ -631,41 +668,54 @@ function open_private_message_window(){
       .catch(function (error) { // 请求失败处理
         console.log(error);
       });
-  },
 
-    methods: {
+    },
     add_comment: function (topic_id, comment_username) {
           var result = "@" + comment_username + ":"
           if(result){
            document.getElementById(topic_id).value = result
            }
     },
-    agree_content: function(content_id){
-       alert("赞同的这条内容的的id是：")
-       alert(content_id)
+    agree_content: function(assess_id, assessed_username){
+
+       var http = new XMLHttpRequest();
+       http.onreadystatechange = function() {}
+       http.open("POST", "agree_content", true)
+       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       send_message = "assess_id="+assess_id+'&assessed_username='+assessed_username
+       http.send(send_message);
+
+
     },
-    disagree_content: function(content_id){
-       alert("反对的这条内容的的id是：")
-       alert(content_id)
+    disagree_content: function(assess_id, assessed_username){
+
+       var http = new XMLHttpRequest();
+       http.onreadystatechange = function() {}
+       http.open("POST", "disagree_content", true)
+       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       send_message = "assess_id="+assess_id+'&assessed_username='+assessed_username
+       http.send(send_message);
     },
 
-    agree_comment: function(comment_id){
-       alert("赞同的这条评论的的id是：")
-       alert(comment_id)
+    agree_comment: function(assess_id, assessed_username){
 
        var http = new XMLHttpRequest();
        http.onreadystatechange = function() {}
        http.open("POST", "agree_comment", true)
        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-       send_message = "comment_id="+comment_id
+       send_message = "assess_id="+assess_id+'&assessed_username='+assessed_username
        http.send(send_message);
-
-
-
     },
-    disagree_comment: function(comment_id){
-       alert("反对的这条评论的的id是：")
-       alert(comment_id)
+
+
+    disagree_comment: function(assess_id, assessed_username){
+
+       var http = new XMLHttpRequest();
+       http.onreadystatechange = function() {}
+       http.open("POST", "disagree_comment", true)
+       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       send_message = "assess_id="+assess_id+'&assessed_username='+assessed_username
+       http.send(send_message);
     }
 
 

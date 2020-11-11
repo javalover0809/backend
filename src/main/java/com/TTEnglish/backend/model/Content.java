@@ -13,6 +13,8 @@ public class Content {
 	private String  content;
 	private String  time;
 	private String  content_id;
+	private String  agree_content_num;
+	private String  disagree_content_num;
 	private List<Comment> comment = new ArrayList<Comment>();
 
 
@@ -78,6 +80,22 @@ public class Content {
 
 	public void setContent_id(String content_id) {
 		this.content_id = content_id;
+	}
+
+	public String getAgree_content_num() {
+		return agree_content_num;
+	}
+
+	public void setAgree_content_num(String agree_content_num) {
+		this.agree_content_num = agree_content_num;
+	}
+
+	public String getDisagree_content_num() {
+		return disagree_content_num;
+	}
+
+	public void setDisagree_content_num(String disagree_content_num) {
+		this.disagree_content_num = disagree_content_num;
 	}
 
 	public List<Comment> getComment() {

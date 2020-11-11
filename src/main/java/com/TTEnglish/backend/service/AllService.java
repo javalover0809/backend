@@ -9,13 +9,6 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * ProjectName: backend_csdn
- * User: quent
- * Date: 2018/11/29
- * Time: 10:24
- */
 @Service
 public class AllService {
 
@@ -59,11 +52,19 @@ public class AllService {
         manipulateMysql.insertApproveFriendApply(reqDto);
     }
 
+    public void updateReadCommentMessage(ReqDto reqDto) throws IOException {
+        manipulateMysql.updateReadCommentMessage(reqDto);
+    }
     public void updateReadMessage(ReqDto reqDto) throws IOException {
         manipulateMysql.updateReadMessage(reqDto);
     }
     public void insertNewFriendApply(ReqDto reqDto) throws IOException {
         manipulateMysql.insertNewFriendApply(reqDto);
+    }
+
+
+    public void insertAssessComment(ReqDto reqDto) throws IOException {
+        manipulateMysql.insertAssessComment(reqDto);
     }
 
     public void insertNewFriend(ReqDto reqDto) throws IOException {
@@ -92,6 +93,12 @@ public class AllService {
     public User SelectUser(ReqDto reqDto) throws IOException {
 
         return  manipulateMysql.SelectUser(reqDto);
+    }
+
+
+    public List<Comment> SelectCommentAlert(ReqDto reqDto) throws IOException {
+
+        return  manipulateMysql.SelectCommentAlert(reqDto);
     }
 
     public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
@@ -170,7 +177,7 @@ public class AllService {
             System.out.println("正在输入评论数据");
             System.out.println(reqDto.getComment_content_id());
             System.out.println(reqDto.getComment_content());
-            manipulateMysql.insert_comment(reqDto.getComment_content_id() ,comment_username,reqDto.getComment_content());
+            manipulateMysql.insert_comment(reqDto);
             return "home";
         }
         System.out.println("input the data two");

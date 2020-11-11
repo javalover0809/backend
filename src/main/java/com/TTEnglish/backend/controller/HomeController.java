@@ -16,4 +16,5 @@ public class HomeController {
     public String greethome(Model model) {
         return "home";
     }
+
 }

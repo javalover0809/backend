@@ -76,6 +76,18 @@ public class ManipulateMysql {
         session.close();
     }
 
+    public void updateReadCommentMessage(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        CommentMapper commentMapper = session.getMapper(CommentMapper.class);
+        commentMapper.updateReadCommentMessage(reqDto.getComment_content_id()
+                ,reqDto.comment_username
+                ,reqDto.is_read);
+        session.commit();
+        session.close();
+    }
+
     public void updateReadMessage(ReqDto reqDto) throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
@@ -121,6 +133,21 @@ public class ManipulateMysql {
         session.close();
     }
 
+    public void insertAssessComment(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        AssessMapper assessMapper = session.getMapper(AssessMapper.class);
+        assessMapper.insertAssessComment(
+                 reqDto.assess_id
+                ,reqDto.getSession().getAttribute("username").toString()
+                ,reqDto.assessed_username
+                ,reqDto.is_comment
+                ,reqDto.is_agree);
+        session.commit();
+        session.close();
+    }
+
 
     public String SelectMaxTopicId() throws IOException {
 
@@ -132,14 +159,6 @@ public class ManipulateMysql {
         session.close();
         return maxTopicId;
     }
-
-
-
-
-
-
-
-
 
     public void registerMysql(String username ,String password) throws IOException {
 
@@ -169,12 +188,16 @@ public class ManipulateMysql {
     }
 
 
-    public void insert_comment(String cotent_id ,String comment_username ,String comment_content) throws IOException {
+    public void insert_comment(ReqDto reqDto) throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         CommentMapper commentMapper = session.getMapper(CommentMapper.class);
-        commentMapper.insertComment(cotent_id,comment_username,comment_content);
+        commentMapper.insertComment(reqDto.getComment_content_id()
+                ,reqDto.getSession().getAttribute("username").toString()
+                ,reqDto.getComment_content()
+                ,reqDto.commented_username
+                ,reqDto.is_read);
         session.commit();
         session.close();
     }
@@ -257,6 +280,17 @@ public class ManipulateMysql {
         User user = userMapper.getUserByUsername(reqDto.getSession().getAttribute("username").toString());
         session.close();
         return user;
+    }
+
+
+    public List<Comment> SelectCommentAlert(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        CommentMapper contentMapper = session.getMapper(CommentMapper.class);
+        List<Comment> listcomment = contentMapper.SelectCommentAlert(reqDto.getSession().getAttribute("username").toString());
+        session.close();
+        return listcomment;
     }
 
 

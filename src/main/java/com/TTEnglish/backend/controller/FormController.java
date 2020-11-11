@@ -80,6 +80,8 @@ public class FormController {
         reqDto.setSession(session);
         reqDto.setComment_content_id(comment_content_id);
         reqDto.setComment_content(comment_content);
+        reqDto.commented_username = comment_content.split(":")[0].replace("@","");
+        reqDto.is_read="0";
         String resPage = service.insert_comment(reqDto);
         return "redirect:" + resPage;
     }
@@ -127,9 +129,7 @@ public class FormController {
 
     @PostMapping("/search_content")
     public String search_content(HttpSession session
-//            , @RequestParam("select_id") String select_id
             , @RequestParam("content") String content) throws IOException {
-//        Syspublish_commenttem.out.println("select_id的内容是："+select_id);
         System.out.println("content的内容是："+content);
         service.insertApproveFriendApply(reqDto);
         return "home";

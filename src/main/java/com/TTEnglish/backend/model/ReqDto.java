@@ -53,6 +53,12 @@ public class ReqDto {
     public String is_accept;
     public String is_read;
     public String comment_id;
+    public String is_comment;
+    public String assessed_username;
+    public String is_agree;
+    public String assess_id;
+    public String commented_username;
+    public String comment_username;
 
 
 

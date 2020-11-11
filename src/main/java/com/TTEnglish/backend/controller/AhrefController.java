@@ -44,14 +44,6 @@ public class AhrefController {
         return "home";
     }
 
-    @GetMapping(value = "/friend_delete/{friend_name}")
-    public String frienddelete(HttpSession session, @PathVariable("friend_name") String delete_friend_name) throws IOException {
-        reqDto.setSession(session);
-        reqDto.delete_friend_name = delete_friend_name;
-        System.out.println("前端的get方法的username是ss："+delete_friend_name);
-        service.deleteFriend(reqDto);
-        return "home";
-    }
     @GetMapping(value = "/info")
     public String openinfo(HttpSession session) throws IOException {
         return "info";
@@ -64,8 +56,6 @@ public class AhrefController {
         System.out.println("调用s/private_message/{friend_name}："+private_message_friend_name);
         return "home";
     }
-
-
     @GetMapping("/profile_edit")
     public String profile_edit(HttpSession session) throws IOException {
         //前端发送资料请求，把profile_edit_flag设置为2，下一步到 /get_profile 中进行profile_edit_flag是否为2的判断

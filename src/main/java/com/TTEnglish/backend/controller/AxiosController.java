@@ -91,7 +91,8 @@ public class AxiosController {
 
 
     @GetMapping("/get_content")
-    public List<Content> SelectCommentContent(HttpSession session, @RequestParam("visit_username") String visit_username) throws IOException {
+    public List<Content> SelectCommentContent(HttpSession session
+            , @RequestParam("visit_username") String visit_username) throws IOException {
         //all_content = 1 在后面sql中 if(#{0}=2, u.username=#{1} ,1=1) 表示看所有的数据
 //        reqDto.setContent_flag(visitFlag.all_content);
         reqDto.setSession(session);
@@ -107,6 +108,15 @@ public class AxiosController {
         System.out.println("首先方位get_content");
         return service.SelectCommentContent(reqDto);
     }
+
+    @GetMapping("/get_comment_alert")
+    public List<Comment> SelectCommentAlert(HttpSession session) throws IOException {
+        reqDto.setSession(session);
+        System.out.println("get_comment_alert调用这个钩子函数");
+        return service.SelectCommentAlert(reqDto);
+    }
+
+
 
     @GetMapping("/get_profile")
     public User get_profile(HttpSession session, @RequestParam("visit_username") String visit_username) throws IOException {

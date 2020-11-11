@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 1 接口的全类名,使得接口和配置文件绑定
+     2 以前我们是：dao -> daoImpl
+               现在我们采用面向接口编程：dao下的UserMapper.java对应配置一个UserMapperxml文件,
+           具体的实现放在UserMapperxml文件中-->
+<mapper namespace="com.TTEnglish.backend.dao.AssessMapper">
+    <insert id="insertAssessComment">
+        insert into publish_assess(assess_id ,assess_username ,assessed_username ,is_comment ,is_agree) value(#{0}, #{1}, #{2}, #{3}, #{4})
+    </insert>
+</mapper>

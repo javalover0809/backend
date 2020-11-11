@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+</head>
+<body>
+<div style="background: white; height:100%; width: 100%;">
+    <div id="content_app">
+        <a  href="#" v-if="back_topic_id === '1'" v-on:click="reload()">展示第一个</a>
+        <a  href="#" v-else v-on:click="reload()">展示第二个数</a>
+    </div>
+</div>
+</body>
+<script>
+
+new Vue({
+  el: '#content_app',
+  data () {
+    return {
+    isReloadData: "198",
+    back_topic_id: '1'
+    }
+  },
+  methods: {
+    // 刷新当前页面，在修改数据之后 this.reload 一下就可以完成刷新当前这个指定标签的刷新
+    reload: function() {
+        this.back_topic_id = '0'
+    }
+  }
+})
+</script>
+</html>

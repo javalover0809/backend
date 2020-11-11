@@ -60,7 +60,7 @@
         from
         (
         select
-        username
+         username
         ,count(*) as private_message_detail_num
 
         from private_message
