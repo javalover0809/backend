@@ -47,7 +47,7 @@
           </div>
 
           <div class="dropdown" id="get_comment_alert">
-              <button onclick="myFunction9()" class="dropbtn">消息 {{ comment_total_num }}</button>
+              <button onclick="myFunction9()" class="dropbtn">消息 {{comment_total_num}}</button>
               <div id="myDropdown9" class="dropdown-content">
                   <li v-for="alert in comment_alert">
                       <a href="JavaScript:void(0)" v-on:click="say(alert.comment_content_id ,alert.comment_username)">{{alert.comment_username}}:{{alert.comment_num}}</a>
@@ -194,6 +194,7 @@
                 <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
+          <button onclick="Mixins.say_test()">测试点击</button>
 
         <div>
           <div class="front_content">
@@ -440,40 +441,12 @@ function open_private_message_window(){
 }
 
 
-new Vue({
-  el: '#get_comment_alert',
-  data () {
-    return {
-    comment_alert: null,
-    comment_total_num: null
-    }
-  },
-  mounted () {
-      axios.get('/get_comment_alert')
-      .then(response => (
-       this.comment_alert = response.data,
-       this.comment_total_num = response.date[0].comment_total_num
-<!--       this.private_message_total = response.data[0].private_message_total-->
-      ))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
-  },
-    methods: {
-    say: function (comment_content_id ,comment_username) {
-      var http = new XMLHttpRequest();
-      http.onreadystatechange = function() {}
-      http.open("POST", "close_comment_alert", true)
-      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      send_message = "comment_content_id="+comment_content_id+"&comment_username="+comment_username
-      http.send(send_message);
-      window.open("home?comment_content_id="+comment_content_id+"&comment_username="+comment_username ,"" ,"width=2000,height=800")
-
-    }
-  }
 
 
-})
+
+<!--vue实体-->
+
+
 
  new Vue({
   el: '#get_apply_friend_message',
@@ -640,29 +613,94 @@ new Vue({
 })
 
 
-
-
-
-  new Vue({
-  el: '#content_app',
-  data () {
+new Vue({
+  el: '#get_comment_alert',
+   data () {
     return {
-    back_topic_id: null,
-    back_topic_name: null,
-    infos: null
+    comment_alert:null,
+    comment_total_num:null
     }
   },
-  mounted () {
+    mounted () {
         this.submit()
   },
 
     methods: {
     submit(){
-    axios.get('/get_content?visit_username=""')
+    axios.get('/get_comment_alert')
+      .then(response => (
+       this.comment_alert = response.data,
+       this.comment_total_num = response.date[0].comment_total_num
+      ))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+    },
+    say: function (comment_content_id ,comment_username) {
+      alert("调用了混入的方法")
+      var http = new XMLHttpRequest();
+      http.onreadystatechange = function() {}
+      http.open("POST", "close_comment_alert", true)
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      send_message = "comment_content_id="+comment_content_id+'&comment_username='+comment_username
+      http.send(send_message);
+      window.open("home?comment_content_id="+comment_content_id+"&comment_username="+comment_username ,"" ,"width=2000,height=800")
+    }
+  }
+})
+
+var Mixins = {
+        data: {
+            visit_alert: 'testname'
+        },
+        say_test(comment_content_id, comment_username) {
+          location.reload();
+          visit_alert=comment_username
+          alert(comment_username)
+          alert("调用了混入的方法")
+          var http = new XMLHttpRequest();
+          http.onreadystatechange = function() {}
+          http.open("POST", "close_comment_alert", true)
+          http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          send_message = "comment_content_id="+comment_content_id+'&comment_username='+comment_username
+          http.send(send_message);
+          window.open("home?comment_content_id="+comment_content_id+"&comment_username="+comment_username ,"" ,"width=2000,height=800")
+        }
+
+
+}
+
+new Vue({
+  mixins: [Mixins],
+  el: '#content_app',
+  data () {
+    return {
+    back_topic_id: null,
+    back_topic_name: null,
+    infos: null,
+    vis_name:null
+    }
+  },
+  mounted () {
+        this.submit()
+  },
+    methods: {
+    submit(){
+    let visit_name=this.visit_alert
+<!--    let str = location.href-->
+
+<!--    var new_str = str.split("?")[1].split("=")[1]-->
+<!--    visit_name = new_str-->
+<!--&lt;!&ndash;    if(localStorage.getItem('vis_name')){&ndash;&gt;-->
+<!--&lt;!&ndash;       visit_name = localStorage.getItem('vis_name')&ndash;&gt;-->
+<!--&lt;!&ndash;    }&ndash;&gt;-->
+
+    axios.get('/get_content?visit_username='+visit_name)
       .then(response => (
        this.infos = response.data
       ,this.back_topic_id   = response.data[0].topic_id
       ,this.back_topic_name = response.data[0].topic_id
+      ,localStorage.setItem('vis_name',"唐国洁")
 
       ))
       .catch(function (error) { // 请求失败处理
@@ -717,16 +755,8 @@ new Vue({
        send_message = "assess_id="+assess_id+'&assessed_username='+assessed_username
        http.send(send_message);
     }
-
-
-
   }
-
-
 })
-
-
-
 
   new Vue({
   el: '#profile_app',
@@ -809,8 +839,6 @@ function add() {
 .dropdown a:hover {background-color: #f1f1f1}
 
 .show {display:block;}
-
-
     </style>
 
 

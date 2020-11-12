@@ -7,8 +7,7 @@ import java.util.List;
 public interface CommentMapper {
 
     void updateReadCommentMessage(String comment_content_id
-            ,String comment_username
-            ,String is_read);
+            ,String comment_username);
     void insertComment(String comment_cotent_id
             , String comment_username
             , String comment_content

@@ -2,6 +2,7 @@ package com.TTEnglish.backend;
 
 import com.TTEnglish.backend.controller.AxiosController;
 import com.TTEnglish.backend.controller.FormController;
+import com.TTEnglish.backend.dao.CommentMapper;
 import com.TTEnglish.backend.dao.FriendMapper;
 import com.TTEnglish.backend.dao.PrivateMessageMapper;
 import com.TTEnglish.backend.dao.UserMapper;
@@ -32,6 +33,19 @@ public class BackendApplicationTests {
 	private AllService service = new AllService();
 	private ReqDto reqDto = new ReqDto();
 	private AxiosController AxiosController = new AxiosController();
+
+	@Test
+	public void setcommentisread() throws IOException {
+		SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+		SqlSession session = sqlSessionFactory.openSession();
+		CommentMapper commentMapper = session.getMapper(CommentMapper.class);
+		commentMapper.updateReadCommentMessage("238"
+				,"唐国洁");
+		session.commit();
+		session.close();
+
+	}
+
 
  	@Test
 	public void seletprivatemessage() throws IOException {

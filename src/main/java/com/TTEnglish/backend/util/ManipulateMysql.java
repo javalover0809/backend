@@ -82,8 +82,7 @@ public class ManipulateMysql {
         SqlSession session = sqlSessionFactory.openSession();
         CommentMapper commentMapper = session.getMapper(CommentMapper.class);
         commentMapper.updateReadCommentMessage(reqDto.getComment_content_id()
-                ,reqDto.comment_username
-                ,reqDto.is_read);
+                ,reqDto.comment_username);
         session.commit();
         session.close();
     }

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.TTEnglish.backend.dao.CommentMapper">
     <update id="updateReadCommentMessage">
-        UPDATE public_comment SET is_read='1' WHERE comment_content_id=#{0} and comment_username=#{1};
+        UPDATE publish_comment SET is_read='1' WHERE comment_content_id=#{0} and comment_username=#{1};
     </update>
     <insert id="insertComment">
         insert into publish_comment(comment_content_id,comment_username,comment_content,commented_username,is_read)

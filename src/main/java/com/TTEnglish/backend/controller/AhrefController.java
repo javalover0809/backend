@@ -65,7 +65,6 @@ public class AhrefController {
 
     @GetMapping("/message")
     public String message(HttpSession session , @RequestParam("friend_name") String friend_name) throws IOException {
-        session.setAttribute("friend_name",friend_name);
         return "message";
     }
 

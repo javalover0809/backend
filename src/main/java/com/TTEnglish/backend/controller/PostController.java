@@ -25,8 +25,9 @@ import java.io.IOException;
             //因为是对方发送来的信息，因为需要把对方设未username，方便在mysql进行，已读数据的update操作
             reqDto.setComment_content_id(comment_content_id);
             reqDto.comment_username  =comment_username;
-            reqDto.is_read = "1";;
             service.updateReadCommentMessage(reqDto);
+            System.out.println("comment_username这里的数据是："+comment_username);
+            System.out.println("comment_content_id这里的数据是："+comment_content_id);
             return "new_back";
         }
 

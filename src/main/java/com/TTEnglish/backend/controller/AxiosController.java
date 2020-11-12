@@ -36,21 +36,19 @@ public class AxiosController {
     }
 
     @GetMapping("/messages_send_to")
-    public String messages_send_to(HttpSession session) throws IOException {
-        reqDto.setSession(session);
-
-//        reqDto.private_message_friend_name = friend_name;
-        return session.getAttribute("friend_name").toString();
+    public String messages_send_to(HttpSession session
+    ,@RequestParam("private_message_friend_name") String private_message_friend_name) throws IOException {
+        System.out.println("调用sprivate_messagefriend_:d"+private_message_friend_name);
+        return private_message_friend_name;
     }
 
-
     @GetMapping("/messages")
-    public List<PrivateMessage> getPrivateMessage(HttpSession session) throws IOException {
+    public List<PrivateMessage> getPrivateMessage(HttpSession session
+            , @RequestParam("friend_name") String friend_name) throws IOException {
         reqDto.setSession(session);
 
-//        reqDto.private_message_friend_name = friend_name;
-        reqDto.private_message_friend_name = session.getAttribute("friend_name").toString();
-        System.out.println("调用sprivate_messagefriend_nameDFFDAFAfriend"+reqDto.private_message_friend_name);
+        reqDto.private_message_friend_name = friend_name;
+        System.out.println("调用sprivate_messagefriend_nameDFFDAFAfriend"+friend_name);
         List<PrivateMessage> privateMessages= service.selectPrivateMessageContent(reqDto);
         return privateMessages;
     }
@@ -105,7 +103,7 @@ public class AxiosController {
         catch (Exception e){
             System.out.println("session.get(visit_username)数据异常");
         }
-        System.out.println("首先方位get_content");
+        System.out.println("reqDto.visit_username"+reqDto.visit_username);
         return service.SelectCommentContent(reqDto);
     }
 
