@@ -48,7 +48,8 @@ public class ManipulateMysql {
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         PrivateMessageMapper privateMessageMapper = session.getMapper(PrivateMessageMapper.class);
-        List<PrivateMessage> ListprivateMessage = privateMessageMapper.SelectPrivateMessageAlert(reqDto.getSession().getAttribute("username").toString());
+        List<PrivateMessage> ListprivateMessage = privateMessageMapper
+                .SelectPrivateMessageAlert(reqDto.session.getAttribute("username").toString());
         session.close();
         return ListprivateMessage;
     }
@@ -147,6 +148,25 @@ public class ManipulateMysql {
         session.close();
     }
 
+    public List<Content> SelectTopicId(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
+        List<Content> listcontent = contentMapper.SelectTopicId();
+        session.close();
+        return listcontent;
+    }
+
+    public List<Content> SelectUserTopicId(ReqDto reqDto) throws IOException {
+
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
+        List<Content> listcontent = contentMapper.SelectUserTopicId(reqDto.session.getAttribute("username").toString());
+        session.close();
+        return listcontent;
+    }
 
     public String SelectMaxTopicId() throws IOException {
 
@@ -230,12 +250,16 @@ public class ManipulateMysql {
         session.close();
     }
 
-    public void insert(ReqDto reqDto) throws IOException {
+    public void insert_content(ReqDto reqDto) throws IOException {
 
             SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
             SqlSession session = sqlSessionFactory.openSession();
             ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-            contentMapper.inputContent(reqDto.getTopic_id(),reqDto.getTopic_name(),reqDto.getSession().getAttribute("username").toString() ,reqDto.getTitle() ,reqDto.getContent());
+            contentMapper.inputContent(reqDto.topic_id
+                                      ,reqDto.topic_name
+                                      ,reqDto.session.getAttribute("username").toString()
+                                      ,reqDto.title
+                                      ,reqDto.content);
             session.commit();
             session.close();
     }
@@ -275,7 +299,6 @@ public class ManipulateMysql {
             session.close();
             return user;
         }
-
         User user = userMapper.getUserByUsername(reqDto.getSession().getAttribute("username").toString());
         session.close();
         return user;
@@ -287,31 +310,26 @@ public class ManipulateMysql {
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         CommentMapper contentMapper = session.getMapper(CommentMapper.class);
-        List<Comment> listcomment = contentMapper.SelectCommentAlert(reqDto.getSession().getAttribute("username").toString());
+        List<Comment> listcomment = contentMapper.SelectCommentAlert(reqDto.session.getAttribute("username").toString());
         session.close();
         return listcomment;
     }
+    public List<Content> SelectProfileContent(ReqDto reqDto) throws IOException {
 
+        SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
+        SqlSession session = sqlSessionFactory.openSession();
+        ContentMapper contentMapper = session.getMapper(ContentMapper.class);
+        List<Content> listcontent = contentMapper.SelectProfileContent(reqDto.visit_username, reqDto.topic_id);
+        session.close();
+        return listcontent;
+    }
 
     public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
 
         SqlSessionFactory sqlSessionFactory = new MySessionFactory().getSqlSessionFactory();
         SqlSession session = sqlSessionFactory.openSession();
         ContentMapper contentMapper = session.getMapper(ContentMapper.class);
-        //reqDto.visit_username!=null 表示获取 访问人发布的信息
-        if(reqDto.visit_username!=null){
-            System.out.println("最终进入到这里，访问人的数据是："+reqDto.visit_username);
-            System.out.println("reqDto.getContent_flag()，访问人的数据是："+reqDto.getContent_flag());
-            List<Content> listcontent = contentMapper.SelectProfileContent(reqDto.visit_username, reqDto.getSession().getAttribute("topic_id").toString());
-            session.close();
-            //每次访问完之后，清除此字段
-            reqDto.getSession().removeAttribute("visit_username");
-            reqDto.visit_username = null;
-
-            return listcontent;
-        }
-        List<Content> listcontent = contentMapper.SelectCommentContent(reqDto.getSession().getAttribute("topic_id").toString());
-
+        List<Content> listcontent = contentMapper.SelectCommentContent(reqDto.topic_id);
         session.close();
         return listcontent;
     }

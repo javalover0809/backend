@@ -7,7 +7,24 @@
     <select id="SelectContent"  resultType="com.TTEnglish.backend.model.Content">
        select al.topic_id  from ( select (max(topic_id)+1)  as topic_id from publish_content ) al
     </select>
-
+    <select id="SelectUserTopicId"  resultType="com.TTEnglish.backend.model.Content">
+        select
+         topic_id
+        ,topic_name
+        from publish_content
+        where username = #{0}
+        group by topic_id
+                ,topic_name
+    </select>
+    <select id="SelectTopicId"  resultType="com.TTEnglish.backend.model.Content">
+        select
+        topic_id
+        ,topic_name
+        from publish_content
+        where topic_name!=''
+        group by topic_id
+        ,topic_name
+    </select>
 
 
     <insert id="inputContent">
@@ -17,8 +34,9 @@
 
     <select id="SelectProfileContent" resultMap="getClassesMap">
         select
-        u.id
+         u.id
         ,u.topic_id
+        ,u.topic_name
         ,u.username
         ,u.title
         ,u.content
@@ -38,8 +56,9 @@
 
     <select id="SelectCommentContent" resultMap="getClassesMap">
         select
-        u.id
+         u.id
         ,u.topic_id
+        ,u.topic_name
         ,u.username
         ,u.title
         ,u.content

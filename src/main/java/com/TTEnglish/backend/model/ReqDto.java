@@ -3,20 +3,20 @@ package com.TTEnglish.backend.model;
 import javax.servlet.http.HttpSession;
 
 public class ReqDto {
-    private HttpSession session;
-    private String content_id;
-    private String username;
-    private String password;
-    private String title;
-    private String content;
-    private String time;
-    private String comment_content_id;
-    private String comment_content;
-    private String content_flag;
-    private String topic_id;
-    private String topic_name;
-    private String newtopic;
-    private String tempvalue;
+    public HttpSession session;
+    public String content_id;
+    public String username;
+    public String password;
+    public String title;
+    public String content;
+    public String time;
+    public String comment_content_id;
+    public String comment_content;
+    public String content_flag;
+    public String topic_id;
+    public String topic_name;
+    public String newtopic;
+    public String tempvalue;
 
     public String personal_intro;
     public String love_status;

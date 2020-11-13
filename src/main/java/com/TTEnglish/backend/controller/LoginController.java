@@ -29,17 +29,14 @@ public class LoginController {
     public ReqDto reqDto = new ReqDto();
 
     @PostMapping("/login_verify")
-    public String LoginVerify(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
+    public String LoginVerify(HttpSession session
+            , @RequestParam("username") String username
+            , @RequestParam("password") String password) throws IOException {
         session.setAttribute("username", username);
         session.setAttribute("password", password);
-        System.out.println("登陆的权限是: " + permission.check(username, password));
         if(permission.check(username, password)){
-            return "redirect:home";
+            return "redirect:home?username="+username;
         }
-        System.out.println("storedName_is");
-        System.out.println("login_verify number");
-        System.out.println(username);
-        System.out.println(password);
         return "redirect:login";
         }
 

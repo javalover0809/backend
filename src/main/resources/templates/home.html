@@ -147,54 +147,35 @@
               </form>
           </div>
 
-
-        <!-- ./friend requests -->
       </div>
       <div class="col-md-6" id="content_app">
           <div class="panel-body">
 
-              <a  href="topic1" style="background: lightgreen;" v-if="back_topic_id === '1'">随机时段</a>
-              <a  href="topic1" v-else >随机时段</a>
-
-              <a  href="topic2" style="background: lightgreen;" v-if="back_topic_id === '2'">固定时段</a>
-              <a  href="topic2" v-else>固定时段</a>
-
-              <a  href="topic3" style="background: lightgreen;" v-if="back_topic_id === '3'">口语角</a>
-              <a  href="topic3" v-else>口语角</a>
-
-              <a  href="topic4" style="background: lightgreen;" v-if="back_topic_id === '4'">立目标</a>
-              <a  href="topic4" v-else>立目标</a>
-
-              <a  href="topic5" style="background: lightgreen;" v-if="back_topic_id === '5'">好文章好句子</a>
-              <a  href="topic5" v-else>好文章好句子</a>
-
-              <a  href="topic6" style="background: lightgreen;" v-if="back_topic_id === '6'">单词速背</a>
-              <a  href="topic6" v-else>单词速背</a>
-
-              <a  href="topic0" style="background: lightgreen;" v-if="back_topic_id === '0'">新建主题</a>
-              <a  href="topic0" v-else>新建主题</a>
-
+              <li  v-for=" content in topic_ids ">
+                  <a  v-bind:href="getHref(content.topic_id)">{{ content.topic_name }}</a>&nbsp&nbsp
+              </li>
           </div>
-        <form method="post" action="publish_content">
+        <form method="get" action="publish_content">
             <div class="input-group">
-                <p  v-if="back_topic_id === '0'">创建新话题，管理员审核通过后，可以展示讨论</p>
-                <p  v-else style="display:none">创建新话题，管理员审核通过后，可以展示讨论</p>
-<!--                <input class="form-control" type="text" name="topic_id" placeholder="主题id...">-->
-              <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-if="back_topic_id === '0'" style="display:none">
-              <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-else  style="display:none">
-<!--                <input class="form-control" type="textarea" name="topic_name">-->
-              <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..."  v-if="back_topic_id === '0'">
-              <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..." v-model="back_topic_name"  v-else style="display:none">
 
-                <input class="form-control" type="text" name="title" placeholder="标题..." v-model="back_topic_id" v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none">
-                <input class="form-control" type="text" name="title" placeholder="标题..." v-else>
+               <p  v-if="back_topic_id === '0'">创建新话题，管理员审核通过后，可以展示讨论</p>
+               <p  v-else style="display:none">创建新话题，管理员审核通过后，可以展示讨论</p>
 
-                <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
-                <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
+               <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-if="back_topic_id === '0'" style="display:none">
+               <input class="form-control" type="text" name="topic_id" placeholder="主题id..." v-model="back_topic_id" v-else  style="display:none">
+
+               <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..."  v-if="back_topic_id === '0'">
+               <input class="form-control" type="textarea" name="topic_name" placeholder="主题名称..." v-model="back_topic_name"  v-else style="display:none">
+
+               <input class="form-control" type="text" name="title" placeholder="标题..." v-model="back_topic_id" v-if="back_topic_id === '3'||back_topic_id === '4'||back_topic_id === '5'||back_topic_id === '6'" style="display:none">
+               <input class="form-control" type="text" name="title" placeholder="标题..." v-else>
+
+               <input class="form-control" type="textarea" name="content" placeholder="内容..." size="80px">
+               <a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+               <input class="btn btn-primary" type="submit" name="login" align="middle" value="发布">
           </div>
         </form><hr>
-          <button onclick="Mixins.say_test()">测试点击</button>
+<!--          <button onclick="Mixins.say_test()">测试点击</button>-->
 
         <div>
           <div class="front_content">
@@ -380,8 +361,6 @@ window.onclick = function(event) {
     }
   }
 }
-
-
 
 function approve_friend_message(){
           var friend_name = document.getElementById('approve_friend_name').value
@@ -651,13 +630,11 @@ new Vue({
 
 var Mixins = {
         data: {
-            visit_alert: 'testname'
+            visit_alert: '唐国洁'
         },
         say_test(comment_content_id, comment_username) {
           location.reload();
           visit_alert=comment_username
-          alert(comment_username)
-          alert("调用了混入的方法")
           var http = new XMLHttpRequest();
           http.onreadystatechange = function() {}
           http.open("POST", "close_comment_alert", true)
@@ -666,8 +643,6 @@ var Mixins = {
           http.send(send_message);
           window.open("home?comment_content_id="+comment_content_id+"&comment_username="+comment_username ,"" ,"width=2000,height=800")
         }
-
-
 }
 
 new Vue({
@@ -678,35 +653,38 @@ new Vue({
     back_topic_id: null,
     back_topic_name: null,
     infos: null,
-    vis_name:null
+    vis_name: null,
+    topic_ids: null
     }
   },
   mounted () {
         this.submit()
   },
     methods: {
+
+    getHref:function(topic_id){
+                let username = this.getQueryVariable("username")
+                return 'http://localhost:8080/home?topic_id=' + topic_id + '&username=' + username
+     },
+
     submit(){
-    let visit_name=this.visit_alert
-<!--    let str = location.href-->
+    let topic_id = '1'
+    if(this.getQueryVariable("topic_id")){
+       topic_id = this.getQueryVariable("topic_id")
+    }
+    let  username = this.getQueryVariable("username")
+    let  visit_username = this.getQueryVariable("visit_username")
 
-<!--    var new_str = str.split("?")[1].split("=")[1]-->
-<!--    visit_name = new_str-->
-<!--&lt;!&ndash;    if(localStorage.getItem('vis_name')){&ndash;&gt;-->
-<!--&lt;!&ndash;       visit_name = localStorage.getItem('vis_name')&ndash;&gt;-->
-<!--&lt;!&ndash;    }&ndash;&gt;-->
-
-    axios.get('/get_content?visit_username='+visit_name)
+    axios.get('/get_content?visit_username='+visit_username+'&topic_id='+topic_id+'&username='+username)
       .then(response => (
-       this.infos = response.data
-      ,this.back_topic_id   = response.data[0].topic_id
-      ,this.back_topic_name = response.data[0].topic_id
-      ,localStorage.setItem('vis_name',"唐国洁")
-
+       this.infos = response.data[1]
+      ,this.topic_ids = response.data[0]
+      ,this.back_topic_id   = response.data[1][0].topic_id
+      ,this.back_topic_name = response.data[1][0].topic_name
       ))
       .catch(function (error) { // 请求失败处理
         console.log(error);
       });
-
     },
     add_comment: function (topic_id, comment_username) {
           var result = "@" + comment_username + ":"
@@ -754,7 +732,22 @@ new Vue({
        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
        send_message = "assess_id="+assess_id+'&assessed_username='+assessed_username
        http.send(send_message);
+    },
+
+    getQueryVariable: function (variable){
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
     }
+
+
+
+
+
   }
 })
 

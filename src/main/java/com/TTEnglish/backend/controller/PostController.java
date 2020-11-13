@@ -32,6 +32,8 @@ import java.io.IOException;
         }
 
 
+
+
         @PostMapping("/close_message_alert")
         public String close_message_alert(HttpSession session
                 , @RequestParam("friend_name") String friend_name) throws IOException {

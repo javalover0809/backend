@@ -101,14 +101,17 @@ public class AllService {
         return  manipulateMysql.SelectCommentAlert(reqDto);
     }
 
-    public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
-        if(reqDto.getSession().getAttribute("username")==null){
-            reqDto.getSession().setAttribute("username","supermanager");
-        }
-        if(reqDto.getSession().getAttribute("topic_id")==null){
-            reqDto.getSession().setAttribute("topic_id","1");
-        }
+    public List<Content> SelectTopicId(ReqDto reqDto) throws IOException {
+        return  manipulateMysql.SelectTopicId(reqDto);
+    }
+    public List<Content> SelectUserTopicId(ReqDto reqDto) throws IOException {
+        return  manipulateMysql.SelectUserTopicId(reqDto);
+    }
 
+    public List<Content> SelectProfileContent(ReqDto reqDto) throws IOException {
+        return  manipulateMysql.SelectProfileContent(reqDto);
+    }
+    public List<Content> SelectCommentContent(ReqDto reqDto) throws IOException {
         return  manipulateMysql.SelectCommentContent(reqDto);
     }
 
@@ -134,33 +137,12 @@ public class AllService {
     }
 
 
-    public String insert_content(ReqDto reqDto) throws IOException {
-        if(reqDto.getSession().getAttribute("username")==null||reqDto.getSession().getAttribute("password")==null){
-            System.out.println("please login in");
-            return "login";
-
+    public void insert_content(ReqDto reqDto) throws IOException {
+        //如果新建主题，从数据库读取最新的topic_id，在这里添加上
+        if(reqDto.topic_id!=null&&reqDto.topic_id=="0"){
+            reqDto.topic_id=manipulateMysql.SelectMaxTopicId();
         }
-        if(reqDto.getSession().getAttribute("username")!=null&&reqDto.getTitle()==""||reqDto.getContent()==""){
-            System.out.println("这里进行数据的写入工作3");
-            return "redirect:home";
-        }
-        String username=reqDto.getSession().getAttribute("username").toString();
-        String password=reqDto.getSession().getAttribute("password").toString();
-        if(permission.check(username,password)){
-            System.out.println("input the data");
-
-            //如果新建主题，从数据库读取最新的topic_id，在这里添加上
-            if(reqDto.getTopic_id()!=null&&reqDto.getTopic_id().equals("0")){
-                System.out.println("这里进行数据的写入工作5");
-                reqDto.setTopic_id(manipulateMysql.SelectMaxTopicId());
-            }
-            manipulateMysql.insert(reqDto);
-
-            return "home";
-        }
-        System.out.println("input the data two");
-        String resPage = "home";
-        return resPage;
+        manipulateMysql.insert_content(reqDto);
     }
 
     public String insert_comment(ReqDto reqDto) throws IOException {

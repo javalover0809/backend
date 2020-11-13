@@ -77,7 +77,9 @@ public class FormController {
     }
 
     @PostMapping("/publish_comment")
-    public String PublishComment(HttpSession session, @RequestParam("id") String comment_content_id, @RequestParam("comment_content") String comment_content) throws IOException {
+    public String PublishComment(HttpSession session
+            , @RequestParam("id") String comment_content_id
+            , @RequestParam("comment_content") String comment_content) throws IOException {
         reqDto.setSession(session);
         reqDto.setComment_content_id(comment_content_id);
         reqDto.setComment_content(comment_content);
@@ -87,22 +89,26 @@ public class FormController {
         return "redirect:" + resPage;
     }
 
-    @PostMapping("/publish_content")
+    @GetMapping("/publish_content")
     public String PublishContent(HttpSession session
             ,@RequestParam("topic_id") String topic_id
             ,@RequestParam("topic_name") String topic_name
             ,@RequestParam("title") String title
             ,@RequestParam("content") String content) throws IOException {
-        reqDto.setSession(session);
-        reqDto.setTopic_id(topic_id);
-        reqDto.setTopic_name(topic_name);
-        reqDto.setTitle(title);
-        reqDto.setContent(content);
+        reqDto.session=session;
+        reqDto.topic_id=topic_id;
+        reqDto.topic_name=topic_name;
+        reqDto.title=title;
+        reqDto.content=content;
         reqDto.is_publishcontent = "1";
-        System.out.println("这里进行数据的写入工作");
-        String resPage = service.insert_content(reqDto);
-        System.out.println("这里进行数据的写入工作2");
-        return "redirect:" + resPage;
+        if(permission.checkSession(session)){
+            return "login";
+        }
+        if(reqDto.title==""||reqDto.content==""){
+            return "redirect:home?username="+session.getAttribute("username");
+        }
+        service.insert_content(reqDto);
+        return "redirect:home?username="+session.getAttribute("username");
     }
 
 

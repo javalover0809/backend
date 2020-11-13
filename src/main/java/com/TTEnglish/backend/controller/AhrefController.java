@@ -30,7 +30,13 @@ public class AhrefController {
     public String visit_profile(HttpSession session, @PathVariable("username") String username) throws IOException {
         session.setAttribute("visit_username",username);
         System.out.println("前端的get方法的username是："+username);
+        return "home";
+    }
 
+    @GetMapping("/home/{topic_id}")
+    public String home(HttpSession session
+            , @PathVariable("topic_id") String topic_id) throws IOException {
+        System.out.println("前端的get方法的topic_id是："+topic_id);
         return "home";
     }
 
