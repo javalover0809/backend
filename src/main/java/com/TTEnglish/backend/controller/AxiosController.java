@@ -95,8 +95,8 @@ public class AxiosController {
         reqDto.topic_id = topic_id;
         reqDto.visit_username = visit_username;
         reqDto.username = username;
-        System.out.println("reqDto.visit_username:"+reqDto.visit_username);
-        System.out.println("reqDto.visit_username==null:"+reqDto.visit_username.equals("false"));
+        System.out.println("reqDto.visit_username:" + reqDto.visit_username);
+        System.out.println("reqDto.visit_username==null:" + reqDto.visit_username.equals("false"));
         if(reqDto.visit_username.equals("false")){
             List<Content> listcontent = service.SelectProfileContent(reqDto);
             List<Content> contentTopicId = service.SelectTopicId(reqDto);
