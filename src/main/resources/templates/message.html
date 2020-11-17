@@ -11,72 +11,86 @@
 </head>
 <body>
     <div style="background: rgb(59,89,152); height:8%; width: 100%;">
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">TT英语角</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div style="position:relative;display: inline-block; float:right;">
+         <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">退出</button>
+        </div>
+
+
+
+        <div style="float:right;position:relative;display: inline-block;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">
+            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">登陆</button>
+        </div>
+
+        <div style="position:relative;display: inline-block; float:right;">
+            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">好友</button>
+        </div>
+
+        <div style="position:relative;display: inline-block; float:right;">
+            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">私信</button>
+        </div>
+        <div style="position:relative;display: inline-block;float:right;">
+            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">消息</button>
+        </div>
+        <div style="position:relative;display: inline-block;float:right;">
+            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">个人资料</button>
+        </div>
+
+        <div style="position:relative;display:inline-block;float:right;">
+            <br>
+                           <form method="post" action="search_content">
+                               <input type="textarea" name="content" placeholder="搜索..." size="30px">
+                               <input type="submit" name="search"  value="搜索">
+                           </form>
+        </div>
         <div style="position:relative;display: inline-block;">
-            <form method="post" action="search_content">
-                <input type="textarea" name="content" placeholder="搜索..." size="30px">
-                <input type="submit" name="login" align="right" value="搜索">
-            </form>
+            <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">TT英语角</button>
         </div>
-        <div style="position:relative;display: inline-block;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">
-            <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">新建社区</button>
-        </div>
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">好友</button>
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">个人信息</button>
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">消息</button>
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">私信</button>
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">登陆</button>
-        <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">退出</button>
     </div>
 
-    <div style="background-color:white;width:75%;height:200px; float:left;">
-
+    <div style="background-color:white;width:75%;height:auto;float:left;">
+        <div style="background-color:white;width:100%;height:auto;float:left;text-align:center">
                 <form method="get" action="publish_content">
-                    <br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                   <input type="textarea" name="content" placeholder="内容..." size="100px" style="width:1000px;height:100px;">-->
-                    <textarea rows="XX" cols="XX"  style="background: white;width:1000px;height:100px;" type="textarea" name="to_message_content" placeholder="内容..."></textarea>
-                    <br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" name="publish_content" style="background: rgb(59,89,152);color:rgb(255,255,255);font-size: 20px;"  value="发布">
+                        <br>
+                        <textarea style="background: white;width:68%;height:100px;font-size:18px;resize: none;" type="textarea" name="to_message_content" placeholder="内容..."></textarea>
+                        <br>
+                        <div style="background-color:white;width:100%;height:auto;position:relative;left:360px;">
+                        <input type="submit" name="publish_content" style="background: rgb(59,89,152);color:rgb(255,255,255);font-size: 20px;" value="发布">
+                        </div>
                 </form>
-
-
-
-
+        </div>
         <div style="background-color:white;width:100%;height:auto; float:left;">
 
             <div style="background-color:white;width:10%;height:auto; float:left;">
                 <p align="middle">Elon Musk</p>
                 <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 100px; height: 100px;">
                 <p style="font-size:10px" align="middle">11月17日 11:21</p>
-                <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)" style="color: #3c763d; display: inline;text-decoration:none;">赞 99</a>
-                <a href="JavaScript:void(0)" v-on:click="disagree_content(content.id,content.username)" style="color: #a94442; display:inline;display: inline;text-decoration:none;">踩 1</a>
             </div>
 
             <div style="background-color:white;width:90%;height:auto; float:left;">
                 <!--内容-->
+                <div style="background-color:white;width:95%;height:auto;">
+                    <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(255,255,255);width:20px;height:15px;color:rgb(0,0,0);">∨</button>
+                </div>
                 <div style="background-color:white;width:95%;min-height:0px;height:auto;">
-                    <p style="text-indent:2em;">这是第一段内容US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
+                    <p>US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
                     </p>
+                </div>
+                <div style="background-color:white;width:95%;height:auto;">
+                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                       style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                        收藏
+                    </a>
+                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                       style="font-size:10px; display:inline;position:relative;left:800px;text-decoration:none;">
+                        转发
+                    </a>
+                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                       style="font-size:10px; display:inline;position:relative;left:850px;text-decoration:none;">
+                        评论
+                    </a>
+                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:900px;">赞 99
+                    </a>
                 </div>
 
 
@@ -89,288 +103,66 @@
                         <div style="background-color:white;width:auto;height:auto; float:up;">
                             <p align="middle">Elon Musk</p>
                         </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
                     </div>
                     <div style="background-color:white;width:95%;height:auto;">
                         <div style="background-color:white;width:95%;height:auto;">
-                        <p style="text-indent:2em;">
+                        <p>
                         这是评论的地方！！
                         </p>
                         </div>
 
+                        <!--评论底部-->
                         <div style="background-color:white;width:95%;height:auto;">
-                            <p style="font-size:10px; ">
+                            <p style="font-size:10px; display:inline;position:relative;left:5px;">
                                 2020年11月17日 11:21
                             </p>
-                            <p style="font-size:10px;">
+                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                               style="font-size:10px; display:inline;position:relative;left:650px;text-decoration:none;">
                                 回复
+                            </a>
+                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:660px;">赞 99
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!--评论-->
+                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                    <div style="background-color:white;width: 30px;height:auto; float:left;">
+                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
+                    </div>
+                    <div style="background-color:white;width:auto;height:auto; float:left;">
+                        <div style="background-color:white;width:auto;height:auto; float:up;">
+                            <p align="middle">Elon Musk</p>
+                        </div>
+                    </div>
+                    <div style="background-color:white;width:95%;height:auto;">
+                        <div style="background-color:white;width:95%;height:auto;">
+                            <p>
+                                这是评论的地方！！
                             </p>
                         </div>
-                    </div>
-                </div>
-                <hr>
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p align="middle">Elon Musk</p>
+
+                        <!--评论底部-->
+                        <div style="background-color:white;width:95%;height:auto;">
+                            <p style="font-size:10px; display:inline;position:relative;left:5px;">
+                                2020年11月17日 11:21
+                            </p>
+                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                               style="font-size:10px; display:inline;position:relative;left:650px;text-decoration:none;">
+                                回复
+                            </a>
+                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:660px;">赞 99
+                            </a>
                         </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <p style="text-indent:2em;">
-                            这是第二条评论区，评论的内容就是这些呢
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p align="middle">Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <p style="text-indent:2em;">
-                            这是第二条评论区，评论的内容就是这些呢
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p align="middle">Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <p style="text-indent:2em;">
-                            这是第二条评论区，评论的内容就是这些呢
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p align="middle">Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <p style="text-indent:2em;">
-                            这是第二条评论区，评论的内容就是这些呢
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p align="middle">Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <p style="text-indent:2em;">
-                            这是第二条评论区，评论的内容就是这些呢
-                        </p>
                     </div>
                 </div>
                 <hr>
             </div>
         </div>
 
-        <div style="background-color:white;width:100%;height:auto; float:left;">
-
-            <div style="background-color:white;width:10%;height:auto; float:left;">
-                <p>Elon Musk</p>
-                <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 100px; height: 100px;">
-                <p style="font-size:10px">11月17日 11:21</p>
-            </div>
-
-            <div style="background-color:white;width:90%;height:auto; float:left;">
-                <div style="background-color:white;width:90%;min-height:0px;height:auto;">
-                    <p style="text-indent:2em;">这是第一段内容US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
-                    </p>
-                </div>
-                <div style="background-color:white;width:100%;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p>Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:90%;height:auto;">
-                        <p style="text-indent:2em;">这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要
-                            的事情吧!
-                        </p>
-                    </div><br>
-                </div>
-            </div>
-        </div>
-
-        <div style="background-color:white;width:100%;height:auto; float:left;">
-
-            <div style="background-color:white;width:10%;height:auto; float:left;">
-                <p>Elon Musk</p>
-                <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 100px; height: 100px;">
-                <p style="font-size:10px">11月17日 11:21</p>
-            </div>
-
-            <div style="background-color:white;width:90%;height:auto; float:left;">
-                <div style="background-color:white;width:90%;min-height:0px;height:auto;">
-                    <p style="text-indent:2em;">这是第一段内容US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
-                    </p>
-                </div>
-                <div style="background-color:white;width:100%;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p>Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:90%;height:auto;">
-                        <p style="text-indent:2em;">这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要
-                            的事情吧!
-                        </p>
-                    </div><br>
-                </div>
-            </div>
-        </div>
-        <div style="background-color:white;width:100%;height:auto; float:left;">
-
-            <div style="background-color:white;width:10%;height:auto; float:left;">
-                <p>Elon Musk</p>
-                <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 100px; height: 100px;">
-                <p style="font-size:10px">11月17日 11:21</p>
-            </div>
-
-            <div style="background-color:white;width:90%;height:auto; float:left;">
-                <div style="background-color:white;width:90%;min-height:0px;height:auto;">
-                    <p style="text-indent:2em;">这是第一段内容US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
-                    </p>
-                </div>
-                <div style="background-color:white;width:100%;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p>Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:90%;height:auto;">
-                        <p style="text-indent:2em;">这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要
-                            的事情吧!
-                        </p>
-                    </div><br>
-                </div>
-            </div>
-        </div>
-        <div style="background-color:white;width:100%;height:auto; float:left;">
-
-            <div style="background-color:white;width:10%;height:auto; float:left;">
-                <p>Elon Musk</p>
-                <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 100px; height: 100px;">
-                <p style="font-size:10px">11月17日 11:21</p>
-            </div>
-
-            <div style="background-color:white;width:90%;height:auto; float:left;">
-                <div style="background-color:white;width:90%;min-height:0px;height:auto;">
-                    <p style="text-indent:2em;">这是第一段内容US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
-                    </p>
-                </div>
-                <div style="background-color:white;width:100%;height:auto;">
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <p><img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;"></p>
-                    </div>
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        <div style="background-color:white;width:auto;height:auto; float:up;">
-                            <p>Elon Musk</p>
-                        </div>
-                        <div style="background-color:white;width:auto;height:auto; float:down;">
-                            <p style="font-size:10px">2020年11月17日 11:21</p>
-                        </div>
-                    </div>
-                    <div style="background-color:white;width:90%;height:auto;">
-                        <p style="text-indent:2em;">这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！
-                            这里是评论区，评论一些重要的内容！这里是评论区，评论一些重要的内容！这里是评论区,我们还可以选择去
-                            或许有那么一些重要
-                            的事情吧!
-                        </p>
-                    </div><br>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div style="background-color:white;width:25%;height:600px;float:left;position:fixed;left:1135px;">
