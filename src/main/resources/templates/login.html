@@ -6,77 +6,29 @@
 </head>
 <body>
 <div style="background: rgb(59,89,152);width:100%;height:auto;">
-    <div style="position:relative;display: inline-block; float:right;">
-        <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">退出</button>
-    </div>
-    <div style="float:right;position:relative;display: inline-block;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">
-        <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">登陆</button>
-    </div>
-
-    <div style="position:relative;display: inline-block; float:right;">
-        <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">好友</button>
-    </div>
-
-    <div style="position:relative;display: inline-block; float:right;">
-        <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">私信</button>
-    </div>
-    <div style="position:relative;display: inline-block;float:right;">
-        <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">消息</button>
-    </div>
-    <div style="position:relative;display: inline-block;float:right;">
-        <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">个人信息</button>
-    </div>
-
-    <div style="position:relative;display:inline-block;float:right;">
-        <br>
-        <form method="post" action="search_content">
-            <input type="textarea" name="content" placeholder="搜索..." size="30px">
-            <input type="submit" name="search"  value="搜索">
-        </form>
-    </div>
     <div style="position:relative;display: inline-block;">
         <button onclick="myFunction()" class="dropbtn" style="border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">校园微话</button>
     </div>
 </div>
 
-<div style="background-color:white;width:75%;height:auto;float:left;">
+<div style="background-color:white;width:100%;height:auto;float:left;">
 
     <!--登陆界面-->
-    <div style="width:600px;height:600px;border:1px solid #666;margin:1px auto 0;background:rgb(59,89,152);text-align:center;">
-        <div id="words" style="width:580px;height:auto;border:1px solid #666;background:#fff;margin:10px auto 0;overflow:auto;position:relative;top:130px;">
-            <h4>登陆开始校园微话之旅吧！</h4>
+    <div style="width:100%;height:600px;border:1px solid #666;margin:0px auto 0;background:rgb(59,89,152);text-align:center;">
+        <div style="width:580px;height:200px;border:1px solid #666;background:#fff;margin:10px auto 0;overflow:auto;position:relative;top:130px;">
+            <h4>登陆校园微话,开启奇妙之旅吧！</h4>
             <form method="post" action="login_verify">
                     <input class="form-control" type="text" name="username" placeholder="账号">
                     <br>
                     <input class="form-control" type="password" name="password" placeholder="密码">
                     <br>
-                    <input class="btn btn-primary" type="submit" name="login" value="忘记密码" style="position:relative;left:25px;background:rgb(59,89,152);color: rgb(255,255,255);">
-                    <input class="btn btn-primary" type="submit" name="login" value="登陆" style="position:relative;left:25px;background:rgb(59,89,152);color: rgb(255,255,255);">
+                <input class="btn btn-primary" type="submit" name="register" value="注册" style="position:relative;left:0px;background:rgb(59,89,152);color: rgb(255,255,255);">
+                    <input class="btn btn-primary" type="submit" name="login" value="忘记密码" style="position:relative;left:0px;background:rgb(59,89,152);color: rgb(255,255,255);">
+                    <input class="btn btn-primary" type="submit" name="login" value="登陆" style="position:relative;left:0px;background:rgb(59,89,152);color: rgb(255,255,255);">
             </form>
-
-            <h4>还没有账号？注册！</h4>
-            <form method="post" action="register">
-                     <input class="form-control" type="text" name="username" placeholder="账号">
-                     <br>
-                     <input class="form-control" type="password" name="password" placeholder="密码">
-                     <br>
-                     <input class="form-control" type="text" name="mai_address" placeholder="邮箱">
-                     <br>
-                    <input type="submit" name="register" value="注册" style="position:relative;left:60px;background:rgb(59,89,152);color: rgb(255,255,255);">
-
-            </form>
+            <p>校园微话是首款大学生实名制注册的高质量内容分享与交友平台</p>
         </div>
     </div>
-        </div>
-    </div>
-
-</div>
-
-<div style="background-color:white;width:25%;height:600px;float:left;position:fixed;left:1135px;">
-    <p align="middle"><font size="20">热门内容</font></p>
-    <p align="middle"> #四级考试# </p>
-    <p align="middle"> #交友# </p>
-    <p align="middle"> #社团活动# </p>
 </div>
 </div>
 </body>
