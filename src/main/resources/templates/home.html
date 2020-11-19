@@ -30,7 +30,7 @@
             <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">消息</button>
         </div>
         <div style="position:relative;display: inline-block;float:right;">
-            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">个人资料</button>
+            <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(59,89,152);width:100px;height:55px;color:rgb(255,255,255);font-weight: bold;font-size: 20px;">个人信息</button>
         </div>
 
         <div style="position:relative;display:inline-block;float:right;">
@@ -46,6 +46,7 @@
     </div>
 
     <div style="background-color:white;width:75%;height:auto;float:left;">
+        <!--发布信息-->
         <div style="background-color:white;width:100%;height:auto;float:left;text-align:center">
                 <form method="get" action="publish_content">
                         <br>
@@ -60,7 +61,9 @@
                         </div>
                 </form>
         </div>
-        <div style="background-color:white;width:100%;height:auto; float:left;">
+
+        <!--正文-->
+        <div style="background-color:white;width:80%;height:auto; float:left;position:relative;left:50px;">
 
             <div style="background-color:white;width:10%;height:auto; float:left;">
                 <p align="middle">Elon Musk</p>
@@ -68,36 +71,36 @@
                 <p style="font-size:10px" align="middle">11月17日 11:21</p>
             </div>
 
-            <div style="background-color:white;width:90%;height:auto; float:left;">
+            <div style="background-color:white;width:90%;height:auto;float:left;">
                 <!--内容-->
                 <div style="background-color:white;width:95%;height:auto;">
                     <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(255,255,255);width:20px;height:15px;color:rgb(0,0,0);">∨</button>
                 </div>
-                <div style="background-color:white;width:95%;min-height:0px;height:auto;">
+                <div style="background-color:white;width:95%;min-height:0px;height:auto; position:relative;left:10px;">
                     <p>US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
                     </p>
                 </div>
                 <div style="background-color:white;width:95%;height:auto;">
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         收藏
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:800px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         转发
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:850px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         评论
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:900px;">赞 99
+                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:700px;">赞 99
                     </a>
                 </div>
 
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto; position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -116,18 +119,18 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;">
+                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -147,11 +150,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                             <!--子评论-->
                             <div style="background-color:rgb(234,234,236);width:85%;min-height:70px;height:auto;float:right;">
@@ -174,11 +177,11 @@
                                     <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
                                         <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="font-size:10px; display:inline;position:relative;left:500px;text-decoration:none;">
+                                           style="font-size:10px; display:inline;position:relative;left:400px;text-decoration:none;">
                                             回复
                                         </a>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:550px;">赞 99
+                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:400px;">赞 99
                                         </a>
                                     </div>
                                 </div>
@@ -189,7 +192,7 @@
                 <hr>
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -208,11 +211,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
@@ -221,7 +224,8 @@
             </div>
         </div>
 
-        <div style="background-color:white;width:100%;height:auto; float:left;">
+        <!--正文-->
+        <div style="background-color:white;width:80%;height:auto; float:left;position:relative;left:50px;">
 
             <div style="background-color:white;width:10%;height:auto; float:left;">
                 <p align="middle">Elon Musk</p>
@@ -234,31 +238,31 @@
                 <div style="background-color:white;width:95%;height:auto;">
                     <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(255,255,255);width:20px;height:15px;color:rgb(0,0,0);">∨</button>
                 </div>
-                <div style="background-color:white;width:95%;min-height:0px;height:auto;">
+                <div style="background-color:white;width:95%;min-height:0px;height:auto; position:relative;left:10px;">
                     <p>US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
                     </p>
                 </div>
                 <div style="background-color:white;width:95%;height:auto;">
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         收藏
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:800px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         转发
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:850px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         评论
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:900px;">赞 99
+                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:700px;">赞 99
                     </a>
                 </div>
 
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto; position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -277,18 +281,18 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;">
+                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -308,11 +312,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                             <!--子评论-->
                             <div style="background-color:rgb(234,234,236);width:85%;min-height:70px;height:auto;float:right;">
@@ -335,11 +339,11 @@
                                     <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
                                         <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="font-size:10px; display:inline;position:relative;left:500px;text-decoration:none;">
+                                           style="font-size:10px; display:inline;position:relative;left:400px;text-decoration:none;">
                                             回复
                                         </a>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:550px;">赞 99
+                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:400px;">赞 99
                                         </a>
                                     </div>
                                 </div>
@@ -350,7 +354,7 @@
                 <hr>
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -369,11 +373,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
@@ -382,7 +386,8 @@
             </div>
         </div>
 
-        <div style="background-color:white;width:100%;height:auto; float:left;">
+        <!--正文-->
+        <div style="background-color:white;width:80%;height:auto; float:left;position:relative;left:50px;">
 
             <div style="background-color:white;width:10%;height:auto; float:left;">
                 <p align="middle">Elon Musk</p>
@@ -395,31 +400,31 @@
                 <div style="background-color:white;width:95%;height:auto;">
                     <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(255,255,255);width:20px;height:15px;color:rgb(0,0,0);">∨</button>
                 </div>
-                <div style="background-color:white;width:95%;min-height:0px;height:auto;">
+                <div style="background-color:white;width:95%;min-height:0px;height:auto; position:relative;left:10px;">
                     <p>US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
                     </p>
                 </div>
                 <div style="background-color:white;width:95%;height:auto;">
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         收藏
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:800px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         转发
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:850px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         评论
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:900px;">赞 99
+                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:700px;">赞 99
                     </a>
                 </div>
 
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto; position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -438,18 +443,18 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;">
+                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -469,11 +474,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                             <!--子评论-->
                             <div style="background-color:rgb(234,234,236);width:85%;min-height:70px;height:auto;float:right;">
@@ -496,11 +501,11 @@
                                     <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
                                         <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="font-size:10px; display:inline;position:relative;left:500px;text-decoration:none;">
+                                           style="font-size:10px; display:inline;position:relative;left:400px;text-decoration:none;">
                                             回复
                                         </a>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:550px;">赞 99
+                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:400px;">赞 99
                                         </a>
                                     </div>
                                 </div>
@@ -511,7 +516,7 @@
                 <hr>
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -530,11 +535,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
@@ -543,7 +548,8 @@
             </div>
         </div>
 
-        <div style="background-color:white;width:100%;height:auto; float:left;">
+        <!--正文-->
+        <div style="background-color:white;width:80%;height:auto; float:left;position:relative;left:50px;">
 
             <div style="background-color:white;width:10%;height:auto; float:left;">
                 <p align="middle">Elon Musk</p>
@@ -556,31 +562,31 @@
                 <div style="background-color:white;width:95%;height:auto;">
                     <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(255,255,255);width:20px;height:15px;color:rgb(0,0,0);">∨</button>
                 </div>
-                <div style="background-color:white;width:95%;min-height:0px;height:auto;">
+                <div style="background-color:white;width:95%;min-height:0px;height:auto; position:relative;left:10px;">
                     <p>US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
                     </p>
                 </div>
                 <div style="background-color:white;width:95%;height:auto;">
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         收藏
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:800px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         转发
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:850px;text-decoration:none;">
+                       style="font-size:10px; display:inline;position:relative;left:700px;text-decoration:none;">
                         评论
                     </a>
                     <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:900px;">赞 99
+                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:700px;">赞 99
                     </a>
                 </div>
 
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto; position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -599,18 +605,18 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;">
+                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -630,11 +636,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                             <!--子评论-->
                             <div style="background-color:rgb(234,234,236);width:85%;min-height:70px;height:auto;float:right;">
@@ -657,11 +663,11 @@
                                     <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
                                         <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="font-size:10px; display:inline;position:relative;left:500px;text-decoration:none;">
+                                           style="font-size:10px; display:inline;position:relative;left:400px;text-decoration:none;">
                                             回复
                                         </a>
                                         <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:550px;">赞 99
+                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:400px;">赞 99
                                         </a>
                                     </div>
                                 </div>
@@ -672,7 +678,7 @@
                 <hr>
 
                 <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
+                <div style="background-color:white;width:100%;min-height:70px;height:auto;position:relative;left:10px;">
                     <!--评论头像-->
                     <div style="background-color:white;width: 30px;height:auto; float:left;">
                         <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
@@ -691,11 +697,11 @@
                         <div style="background-color:white;width:95%;height:auto;">
                             <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
+                               style="font-size:10px; display:inline;position:relative;left:580px;text-decoration:none;">
                                 回复
                             </a>
                             <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
+                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:580px;">赞 99
                             </a>
                         </div>
                     </div>
@@ -704,168 +710,8 @@
             </div>
         </div>
 
-        <div style="background-color:white;width:100%;height:auto; float:left;">
-
-            <div style="background-color:white;width:10%;height:auto; float:left;">
-                <p align="middle">Elon Musk</p>
-                <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 100px; height: 100px;">
-                <p style="font-size:10px" align="middle">11月17日 11:21</p>
-            </div>
-
-            <div style="background-color:white;width:90%;height:auto; float:left;">
-                <!--内容-->
-                <div style="background-color:white;width:95%;height:auto;">
-                    <button onclick="myFunction()" class="dropbtn" style="float:right;border:0px;background-color:rgb(255,255,255);width:20px;height:15px;color:rgb(0,0,0);">∨</button>
-                </div>
-                <div style="background-color:white;width:95%;min-height:0px;height:auto;">
-                    <p>US President-elect Joe Biden has said many more Americans are at the risk of dying from coronavirus, if he and incumbent President Donald Trump do not coordinate on tackling the virus outbreak.
-                    </p>
-                </div>
-                <div style="background-color:white;width:95%;height:auto;">
-                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
-                        收藏
-                    </a>
-                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:800px;text-decoration:none;">
-                        转发
-                    </a>
-                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="font-size:10px; display:inline;position:relative;left:850px;text-decoration:none;">
-                        评论
-                    </a>
-                    <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                       style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:900px;">赞 99
-                    </a>
-                </div>
-
-
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <!--评论头像-->
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
-                    </div>
-                    <!--评论用户名-->
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        Elon Musk:
-                    </div>
-                    <!--评论内容-->
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <div style="background-color:white;width:95%;height:auto;">
-                            这是评论的地方！！
-                        </div>
-
-                        <!--评论底部-->
-                        <div style="background-color:white;width:95%;height:auto;">
-                            <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
-                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
-                                回复
-                            </a>
-                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:120px;height:height:auto;">
-                    <!--评论头像-->
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
-                    </div>
-                    <!--评论用户名-->
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        Elon Musk:
-                    </div>
-                    <!--评论内容-->
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <!--评论正文-->
-                        <div style="background-color:white;width:95%;height:auto;">
-                            这是评论的地方！！
-                        </div>
-
-                        <!--评论底部-->
-                        <div style="background-color:white;width:95%;height:auto;">
-                            <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
-                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
-                                回复
-                            </a>
-                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
-                            </a>
-                            <!--子评论-->
-                            <div style="background-color:rgb(234,234,236);width:85%;min-height:70px;height:auto;float:right;">
-                                <!--子评论头像-->
-                                <div style="background-color:rgb(234,234,236);width: 30px;height:auto; float:left;">
-                                    <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
-                                </div>
-                                <!--子评论用户名-->
-                                <div style="background-color:rgb(234,234,236);width:auto;height:auto; float:left;">
-                                    Elon Musk:
-                                </div>
-                                <!--子评论内容-->
-                                <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
-                                    <!--子评论正文-->
-                                    <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
-                                        这是评论的地方！！
-                                    </div>
-
-                                    <!--子评论底部-->
-                                    <div style="background-color:rgb(234,234,236);width:95%;height:auto;">
-                                        <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
-                                        <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="font-size:10px; display:inline;position:relative;left:500px;text-decoration:none;">
-                                            回复
-                                        </a>
-                                        <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                                           style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:550px;">赞 99
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-
-                <!--评论-->
-                <div style="background-color:white;width:100%;min-height:70px;height:auto;">
-                    <!--评论头像-->
-                    <div style="background-color:white;width: 30px;height:auto; float:left;">
-                        <img src="C:\Users\Administrator\Desktop\课程表\elon.jpg" style="width: 30px; height: 30px;">
-                    </div>
-                    <!--评论用户名-->
-                    <div style="background-color:white;width:auto;height:auto; float:left;">
-                        Elon Musk:
-                    </div>
-                    <!--评论内容-->
-                    <div style="background-color:white;width:95%;height:auto;">
-                        <div style="background-color:white;width:95%;height:auto;">
-                            这是评论的地方！！
-                        </div>
-
-                        <!--评论底部-->
-                        <div style="background-color:white;width:95%;height:auto;">
-                            <p style="font-size:10px; display:inline;position:relative;left:0px;">2020年11月17日 11:21</p>
-                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="font-size:10px; display:inline;position:relative;left:750px;text-decoration:none;">
-                                回复
-                            </a>
-                            <a href="JavaScript:void(0)" v-on:click="agree_content(content.id,content.username)"
-                               style="color: #3c763d; display: inline;text-decoration:none;font-size:10px;position:relative;left:780px;">赞 99
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            </div>
-        </div>
-
-        <div align="middle">
+        <!--分页-->
+        <div align="middle" style="background-color:white;width:80%;height:auto; float:left;position:relative;left:50px;">
 
             <span>上一页</span>
             <a href="#" style="text-decoration:none;">1</a>
@@ -877,10 +723,11 @@
             <span>下一页</span>
         </div>
         <br>
-        <div align="middle">
+        <div align="middle" style="background-color:white;width:80%;height:auto; float:left;position:relative;left:50px;">
             Powered By Student Of BeiJing JiaoTong University
         </div>
     </div>
+
     <div style="background-color:white;width:25%;height:600px;float:left;position:fixed;left:1135px;">
         <p align="middle"><font size="20">热门内容</font></p>
         <p align="middle"> #四级考试# </p>
